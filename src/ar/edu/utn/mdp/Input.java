@@ -20,9 +20,9 @@ public class Input implements KeyListener, MouseListener {
         LEFT = keys[KeyEvent.VK_LEFT];
     }
 
-    /*public boolean[] getKeys(int keyCode) {
-        return new boolean[5];
-    }*/
+    public boolean getKey(int keyCode) {
+        return keys[keyCode];
+    }
 
 
     @Override
