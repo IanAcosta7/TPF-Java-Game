@@ -30,6 +30,8 @@ public class Game extends JPanel {
     public void paintComponent(Graphics g)
     {
         //g.fillRect(100, 100, 30, 30);
+        g.drawImage(loader.getSprites().get("autoN1"),(width/2)-50/2,(height/2)-50/2,50,50,null);
+        g.drawImage(loader.getSprites().get("autoN2"),(width/4)-50/2,(height/4)-50/2,50,50,null);
     }
 
     public void setWidth(int width)
