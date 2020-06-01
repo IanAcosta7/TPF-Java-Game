@@ -9,6 +9,7 @@ public class Application {
 
     Game game;
     JFrame frame;
+    private Input input;
 
     public Application () {
         frame = new JFrame();
@@ -17,6 +18,7 @@ public class Application {
     public void init() {
         //Thread game = new Thread(new Game(height, width));
         game = new Game(width, height);
+        input = new Input();
 
         frame.setTitle("Game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,13 +31,16 @@ public class Application {
 
         frame.setVisible(true);
 
+        game.addKeyListener(input);
+
         update();
     }
 
     public void update() {
-        //running = true;
+        input.update();
 
-        while (true) {
+        running = true;
+        while (running) {
             frame.repaint();
         }
     }
