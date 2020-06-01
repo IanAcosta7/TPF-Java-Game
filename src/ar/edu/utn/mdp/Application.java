@@ -39,9 +39,9 @@ public class Application {
     public void update() {
         input.update();
 
-        //running = true;
-        /*while (true) {
-            frame.repaint();*/
+        running = true;
+        while (running) {
+            frame.repaint();
         }
     }
 
