@@ -10,5 +10,5 @@ public class Loader{
         this.sprites = new ArrayList<>();
     }
 
-    private BufferedImage loadImage(){}
+    private BufferedImage loadImage(){ return null; }
 }

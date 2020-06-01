@@ -3,24 +3,28 @@ package ar.edu.utn.mdp;
 import javax.swing.*;
 import java.awt.*;
 
-public class Game extends JPanel implements Runnable{
+public class Game extends JPanel {
+
     private int width;
     private int height;
-    private int maxFrameRate;
+    private int maxFrameRate = 60;
     //private Loader loader;
     private boolean running;
 
+    public Game (int width, int height) {
+        this.width = width;
+        this.height = height;
+
+    }
+
     private void draw()
     {
-
+        //newImage("player", 10, 2, 2)
     }
+
     public void paintComponent(Graphics g)
     {
-
-    }
-    public void run()
-    {
-
+        g.fillRect(100, 100, 30, 30);
     }
 
     public void setWidth(int width)
@@ -40,9 +44,6 @@ public class Game extends JPanel implements Runnable{
 
     public int getHeight()
     {
-
         return height;
     }
-
-
 }

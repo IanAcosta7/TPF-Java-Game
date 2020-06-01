@@ -13,7 +13,7 @@ public class Input implements KeyListener, MouseListener {
     }
 
     public boolean[] getKeys(int keyCode) {
-        return false;
+        return new boolean[5];
     }
 
     @Override
