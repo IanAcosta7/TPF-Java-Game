@@ -16,7 +16,7 @@ public class Application {
 
     public void init() {
         //Thread game = new Thread(new Game(height, width));
-        game = new Game(height, width);
+        game = new Game(width, height);
 
         frame.setTitle("Game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
