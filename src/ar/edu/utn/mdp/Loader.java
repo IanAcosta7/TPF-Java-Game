@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Loader{
-    private HashMap<String, BufferedImage> sprites;
+    private static HashMap<String, BufferedImage> sprites;
 
     public Loader()
     {
@@ -48,7 +48,7 @@ public class Loader{
         }
     }
 
-    public HashMap<String, BufferedImage> getSprites() {
+    public static HashMap<String, BufferedImage> getSprites() {
         return sprites;
     }
 

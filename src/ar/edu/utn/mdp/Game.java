@@ -2,6 +2,10 @@ package ar.edu.utn.mdp;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 public class Game extends JPanel {
 
@@ -10,39 +14,49 @@ public class Game extends JPanel {
     private int maxFrameRate = 60;
     private Loader loader;
     private boolean running;
+    private HashMap<String, Component> components;
 
     public Game (int width, int height) {
         this.width = width;
         this.height = height;
         this.loader = new Loader();
+        this.components = new HashMap<>();
         init();
     }
 
     public void init() {
         setSize(width, height);
+        setup();
+    }
+
+    private void setup() {
+        components.put("Player", new Sprite(width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1"));
     }
 
     private void draw()
     {
-        //newImage("player", 10, 2, 2)
+        if(Input.getKey(37))
+            components.get("Player").setX(components.get("Player").getX() - 1);
+        if(Input.getKey(39))
+            components.get("Player").setX(components.get("Player").getX() + 1);
     }
-    int x=width/2;
+
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-        if(Input.getKey(37))
-        {
-            x--;
+
+        Set<Map.Entry<String, Component>> entry = components.entrySet();
+        Iterator<Map.Entry<String, Component>> iterator = entry.iterator();
+
+        while (iterator.hasNext()) {
+            Component component = iterator.next().getValue();
+
+            if (component instanceof Sprite) {
+                Sprite sprite = (Sprite) component;
+
+                g.drawImage(sprite.getImage(), sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), null);
+            }
         }
-        if(Input.getKey(39))
-        {
-            x++;
-        }
-
-
-        //g.fillRect(100, 100, 30, 30);
-        g.drawImage(loader.getSprites().get("autoN1"),x,height/2-50/2,50,50,null);
-
     }
 
     public void start() {
