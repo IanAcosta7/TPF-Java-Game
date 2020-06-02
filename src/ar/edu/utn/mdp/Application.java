@@ -7,7 +7,7 @@ public class Application {
     private int width = 800;
     private int height = 600;
 
-    Game game;
+    private Game game;
     private JFrame frame;
     private Input input;
 
@@ -28,16 +28,13 @@ public class Application {
         frame.getContentPane().add(game);
         frame.addKeyListener(input);
         frame.addMouseListener(input);
-
         frame.setVisible(true);
-
 
         update();
     }
 
     public void update() {
         input.update();
-
 
         while (true) {
             frame.repaint();
