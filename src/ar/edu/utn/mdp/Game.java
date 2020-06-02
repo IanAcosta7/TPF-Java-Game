@@ -26,6 +26,7 @@ public class Game extends JPanel {
 
     public void init() {
         setSize(width, height);
+        setBackground(Color.BLACK);
         setup();
     }
 
@@ -33,16 +34,15 @@ public class Game extends JPanel {
         components.put("Player", new Sprite(width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1"));
     }
 
-    private void draw()
-    {
+    private void draw() {
+        components.get("Player").setDrawn(true);
         if(Input.getKey(37))
             components.get("Player").setX(components.get("Player").getX() - 1);
         if(Input.getKey(39))
             components.get("Player").setX(components.get("Player").getX() + 1);
     }
 
-    public void paintComponent(Graphics g)
-    {
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         Set<Map.Entry<String, Component>> entry = components.entrySet();
@@ -51,10 +51,12 @@ public class Game extends JPanel {
         while (iterator.hasNext()) {
             Component component = iterator.next().getValue();
 
-            if (component instanceof Sprite) {
-                Sprite sprite = (Sprite) component;
+            if (component.isDrawn()){
+                if (component instanceof Sprite) {
+                    Sprite sprite = (Sprite) component;
 
-                g.drawImage(sprite.getImage(), sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), null);
+                    g.drawImage(sprite.getImage(), sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), null);
+                }
             }
         }
     }

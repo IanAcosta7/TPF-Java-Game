@@ -7,6 +7,7 @@ public abstract class Component
     private int rotation;
     private int width;
     private int height;
+    private boolean drawn;
 
     public Component(int x, int y, int rotation, int width, int height) {
         this.x = x;
@@ -14,6 +15,7 @@ public abstract class Component
         this.rotation = rotation;
         this.width = width;
         this.height = height;
+        this.drawn = false;
     }
 
     public void setX(int x) {
@@ -22,6 +24,14 @@ public abstract class Component
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public void setDrawn(boolean drawn) {
+        this.drawn = drawn;
+    }
+
+    public boolean isDrawn() {
+        return drawn;
     }
 
     public void setRotation(int rotation) {
