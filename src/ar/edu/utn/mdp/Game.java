@@ -9,7 +9,6 @@ public class Game extends JPanel {
     private int height;
     private int maxFrameRate = 60;
     private Loader loader;
-    private Input input;
     private boolean running;
 
     public Game (int width, int height) {
