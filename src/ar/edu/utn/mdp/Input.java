@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class Input implements KeyListener, MouseListener {
-    private boolean[] keys= new boolean[256];
+    private static boolean[] keys= new boolean[256];
 
     public static boolean RIGHT, LEFT;
 
@@ -20,18 +20,21 @@ public class Input implements KeyListener, MouseListener {
         LEFT = keys[KeyEvent.VK_LEFT];
     }
 
-    public boolean getKey(int keyCode) {
+    public static boolean getKey(int keyCode)
+    {
         return keys[keyCode];
     }
 
 
     @Override
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(KeyEvent e)
+    {
         keys[e.getKeyCode()] = true;
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
+    public void keyReleased(KeyEvent e)
+    {
         keys[e.getKeyCode()] = false;
 
     }
