@@ -26,12 +26,22 @@ public class Game extends JPanel {
     {
         //newImage("player", 10, 2, 2)
     }
-
+    int x=width/2;
     public void paintComponent(Graphics g)
     {
+        if(Input.getKey(37))
+        {
+            x--;
+        }
+        if(Input.getKey(39))
+        {
+            x++;
+        }
+
+
         //g.fillRect(100, 100, 30, 30);
-        g.drawImage(loader.getSprites().get("autoN1"),(width/2)-50/2,(height/2)-50/2,50,50,null);
-        g.drawImage(loader.getSprites().get("autoN2"),(width/4)-50/2,(height/4)-50/2,50,50,null);
+        g.drawImage(loader.getSprites().get("autoN1"),x,height/2-50/2,50,50,null);
+
     }
 
     public void setWidth(int width)
