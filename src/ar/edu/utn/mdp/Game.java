@@ -29,6 +29,7 @@ public class Game extends JPanel {
     int x=width/2;
     public void paintComponent(Graphics g)
     {
+        super.paintComponent(g);
         if(Input.getKey(37))
         {
             x--;
@@ -42,6 +43,22 @@ public class Game extends JPanel {
         //g.fillRect(100, 100, 30, 30);
         g.drawImage(loader.getSprites().get("autoN1"),x,height/2-50/2,50,50,null);
 
+    }
+
+    public void start() {
+        running = true;
+
+        long actualTime = System.nanoTime(); // Tiempo actual
+        long nextTime = actualTime + 1000000000 / maxFrameRate; // 1 Seg dividido en N cuadros
+
+        while (running) {
+            if (actualTime >= nextTime) {
+                draw();
+                repaint();
+                nextTime = actualTime + 1000000000 / maxFrameRate;
+            }
+            actualTime = System.nanoTime();
+        }
     }
 
     public void setWidth(int width)

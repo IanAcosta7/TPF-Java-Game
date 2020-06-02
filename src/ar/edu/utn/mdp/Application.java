@@ -30,15 +30,7 @@ public class Application {
         frame.addMouseListener(input);
         frame.setVisible(true);
 
-        update();
-    }
-
-    public void update() {
-        input.update();
-
-        while (true) {
-            frame.repaint();
-        }
+        game.start();
     }
 
     public int getWidth() {
