@@ -42,12 +42,10 @@ public class Game extends JPanel {
                 String key = Integer.toString(i) + Integer.toString(j);
 
                 components.put(key, tile);
-                components.get(key).setDrawn(true);
             }
         }
 
         components.put("Player", new Sprite(width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1"));
-        components.get("Player").setDrawn(true);
     }
 
     private void draw() {
