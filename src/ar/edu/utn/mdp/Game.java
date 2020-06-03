@@ -45,7 +45,7 @@ public class Game extends JPanel {
             }
         }
 
-        components.put("Player", new Sprite(width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1"));
+        components.put("Player", new Sprite("Player", width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1"));
     }
 
     private void draw() {

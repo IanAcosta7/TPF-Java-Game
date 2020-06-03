@@ -6,15 +6,15 @@ public class Sprite extends Component
 {
     private BufferedImage image;
 
-    public Sprite(int x, int y, int rotation, int width, int height, String image)
+    public Sprite(String name, int x, int y, int rotation, int width, int height, String image)
     {
-        super(x, y, rotation, width, height);
+        super(name, x, y, rotation, width, height);
         this.image = Loader.getSprites().get(image);
     }
 
-    public Sprite(int x, int y, int rotation, int width, int height)
+    public Sprite(String name, int x, int y, int rotation, int width, int height)
     {
-        super(x, y, rotation, width, height);
+        super(name, x, y, rotation, width, height);
         this.image = null;
     }
 
