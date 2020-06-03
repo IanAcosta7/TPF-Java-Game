@@ -11,13 +11,13 @@ public class Game extends JPanel {
     private int maxFrameRate = 60;
     private Loader loader;
     private boolean running;
-    private HashMap<String, Component> components;
+    private ArrayList<Component> components;
 
     public Game (int width, int height) {
         this.width = width;
         this.height = height;
         this.loader = new Loader();
-        this.components = new HashMap<>();
+        this.components = new ArrayList<>();
         init();
     }
 
@@ -41,28 +41,27 @@ public class Game extends JPanel {
 
                 String key = Integer.toString(i) + Integer.toString(j);
 
-                components.put(key, tile);
+                components.add(tile);
             }
         }
 
-        components.put("Player", new Sprite("Player", width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1"));
+        components.add(new Sprite("Player", width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1"));
     }
 
     private void draw() {
         if(Input.getKey(37))
-            components.get("Player").setX(components.get("Player").getX() - 1);
+            components.get(components.size() - 1).setX(components.get(components.size() - 1).getX() - 1);
         if(Input.getKey(39))
-            components.get("Player").setX(components.get("Player").getX() + 1);
+            components.get(components.size() - 1).setX(components.get(components.size() - 1).getX() + 1);
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        Set<Map.Entry<String, Component>> entry = components.entrySet();
-        Iterator<Map.Entry<String, Component>> iterator = entry.iterator();
+        Iterator iterator = components.iterator();
 
         while (iterator.hasNext()) {
-            Component component = iterator.next().getValue();
+            Component component = (Component) iterator.next();
 
             if (component.isDrawn()){
                 if (component instanceof Sprite) {
