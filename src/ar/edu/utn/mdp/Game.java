@@ -28,6 +28,7 @@ public class Game extends JPanel {
     }
 
     private void setup() {
+        // GRID
         Grid grid = new Grid(0, 0, 50, 10, 10);
 
         for (ArrayList<Sprite> tiles : grid.getTiles())
@@ -44,7 +45,17 @@ public class Game extends JPanel {
                 components.add(tile);
             }
         }
+      
+        //TEXTOS
+        components.add(new Text("PlayerNombre", width-width/5, height/6, 0, 80, 40,"PLAYER ONE" ));
+        components.add(new Text("combustible", width-width/5, height/4, 0, 80, 40,"COMBUSTIBLE:" ));
+        components.add(new Text("NumCombustible", (width-width/5) + 90, height/4, 0, 80, 40,"1000"));
+        components.add(new Text("score", width-width/5,height/2-40, 0, 80, 40,"SCORE:" ));
+        components.add(new Text("NumScore", (width-width/5) + 50, height/2 - 40, 0, 80, 40,"500"));
+        components.add(new Text("velocidad", width-width/5, height-height/3, 0, 80, 40,"VELOCIDAD:"));
+        components.add(new Text("NumVelocidad", (width-width/5) + 75, height-height/3, 0, 80, 40,"500"));
 
+        // PLAYER
         components.add(new Sprite("Player", width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1"));
     }
 
@@ -53,10 +64,14 @@ public class Game extends JPanel {
             components.get(components.size() - 1).setX(components.get(components.size() - 1).getX() - 1);
         if(Input.getKey(39))
             components.get(components.size() - 1).setX(components.get(components.size() - 1).getX() + 1);
+        
+        Text text=(Text)components.get(components.size() - 6);
+        //text.setTexto(Integer.toString(sumador));
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        g.setColor(Color.WHITE);
 
         Iterator iterator = components.iterator();
 
@@ -68,6 +83,11 @@ public class Game extends JPanel {
                     Sprite sprite = (Sprite) component;
 
                     g.drawImage(sprite.getImage(), sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), null);
+                }
+                if(component  instanceof Text)
+                {
+                    Text text =(Text)component;
+                    g.drawString(text.getTexto(), text.getX(), text.getY());
                 }
             }
         }
