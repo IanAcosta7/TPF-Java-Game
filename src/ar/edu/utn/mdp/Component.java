@@ -2,12 +2,12 @@ package ar.edu.utn.mdp;
 
 public abstract class Component
 {
-    private int x;
-    private int y;
-    private int rotation;
-    private int width;
-    private int height;
-    private boolean drawn;
+    protected int x;
+    protected int y;
+    protected int rotation;
+    protected int width;
+    protected int height;
+    protected boolean drawn;
 
     public Component(int x, int y, int rotation, int width, int height) {
         this.x = x;

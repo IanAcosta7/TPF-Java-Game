@@ -31,7 +31,8 @@ public class Game extends JPanel {
     }
 
     private void setup() {
-        components.put("Player", new Sprite(width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1"));
+        components.put("Player", new Car(width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1", new HitBox(width/2 - 50/2 + 50/3,height/2 - 50/2, 0, 50/3,50)));
+
     }
 
     private void draw() {
