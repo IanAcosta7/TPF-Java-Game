@@ -32,6 +32,16 @@ public class Game extends JPanel {
 
     private void setup() {
         components.put("Player", new Sprite(width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1"));
+
+        //TEXTOS
+        components.put("PlayerNombre", new Text((width-width/5),height/6, 0, 80, 40,"PLAYER ONE" ));
+        components.put("combustible", new Text((width-width/5),height/4, 0, 80, 40,"COMBUSTIBLE:" ));
+        components.put("NumCombustible", new Text((width-width/5)+90,height/4, 0, 80, 40,"1000"));
+        components.put("score", new Text((width-width/5),height/2-40, 0, 80, 40,"SCORE:" ));
+        components.put("NumScore", new Text((width-width/5)+50,height/2-40, 0, 80, 40,"500"));
+        components.put("velocidad", new Text((width-width/5),(height-height/3), 0, 80, 40,"VELOCIDAD:"));
+        components.put("NumVelocidad", new Text((width-width/5)+75,(height-height/3), 0, 80, 40,"500"));
+
     }
 
     private void draw() {
@@ -40,10 +50,25 @@ public class Game extends JPanel {
             components.get("Player").setX(components.get("Player").getX() - 1);
         if(Input.getKey(39))
             components.get("Player").setX(components.get("Player").getX() + 1);
+
+        components.get("combustible").setDrawn(true);
+        components.get("NumCombustible").setDrawn(true);
+        components.get("score").setDrawn(true);
+        components.get("NumScore").setDrawn(true);
+        components.get("velocidad").setDrawn(true);
+        components.get("NumVelocidad").setDrawn(true);
+        components.get("PlayerNombre").setDrawn(true);
+
+
+        Text text=(Text)components.get("NumCombustible");
+        //text.setTexto(Integer.toString(sumador));
+
+
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        g.setColor(Color.WHITE);
 
         Set<Map.Entry<String, Component>> entry = components.entrySet();
         Iterator<Map.Entry<String, Component>> iterator = entry.iterator();
@@ -56,6 +81,11 @@ public class Game extends JPanel {
                     Sprite sprite = (Sprite) component;
 
                     g.drawImage(sprite.getImage(), sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), null);
+                }
+                if(component  instanceof Text)
+                {
+                    Text text =(Text)component;
+                    g.drawString(text.getTexto(), text.getX(), text.getY());
                 }
             }
         }
