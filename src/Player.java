@@ -1,3 +1,5 @@
+import ar.edu.utn.mdp.Component;
+
 public class Player {
 
     private int speed;
