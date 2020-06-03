@@ -56,7 +56,9 @@ public class Game extends JPanel {
         components.add(new Text("NumVelocidad", (width-width/5) + 75, height-height/3, 0, 80, 40,"500"));
 
         // PLAYER
-        components.add(new Car("Player", width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1", new HitBox("Player", width/2 - 50/2 + 50/3,height/2 - 50/2, 0, 50/3,50)));
+        //components.add(new Car("Player", width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1", new HitBox("Player", width/2 - 50/2 + 50/3,height/2 - 50/2, 0, 50/3,50)));
+        components.add(new Player("Player", width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1", new HitBox("Player", width/2 - 50/2 + 50/3,height/2 - 50/2, 0, 50/3,50), 0, 50, 0));
+
     }
 
     private void draw() {
