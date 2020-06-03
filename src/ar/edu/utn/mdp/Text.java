@@ -5,9 +5,9 @@ public class Text extends Component
     private String texto;
 
 
-    public Text(int x, int y, int rotation, int width, int height, String texto)
+    public Text(String name, int x, int y, int rotation, int width, int height, String texto)
     {
-        super(x, y, rotation, width, height);
+        super(name, x, y, rotation, width, height);
         this.texto = texto;
 
     }
