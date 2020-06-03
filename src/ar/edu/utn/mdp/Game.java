@@ -56,7 +56,7 @@ public class Game extends JPanel {
         components.add(new Text("NumVelocidad", (width-width/5) + 75, height-height/3, 0, 80, 40,"500"));
 
         // PLAYER
-        components.add(new Sprite("Player", width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1"));
+        components.add(new Sprite("ar.edu.utn.mdp.Player", width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1"));
     }
 
     private void draw() {

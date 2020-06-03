@@ -1,3 +1,5 @@
+package ar.edu.utn.mdp;
+
 import ar.edu.utn.mdp.Component;
 
 public class Player {
