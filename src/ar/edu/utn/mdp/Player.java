@@ -2,16 +2,20 @@ package ar.edu.utn.mdp;
 
 import ar.edu.utn.mdp.Component;
 
-public class Player {
+public class Player extends Car {
 
     private int speed;
     private int fuel;
+    private int score;
 
-    //************************constructor****************************************
+    //*************************constructor***************************************
 
-    public Player(int speed, int fuel) {
+
+    public Player(String name, int x, int y, int rotation, int width, int height, String image, HitBox hitBox, int speed, int fuel, int score) {
+        super(name, x, y, rotation, width, height, image, hitBox);
         this.speed = speed;
         this.fuel = fuel;
+        this.score = score;
     }
 
     //**************************GetsAndSets**************************************
@@ -32,14 +36,21 @@ public class Player {
         this.fuel = fuel;
     }
 
+    public int getScore() { return score; }
+
+    public void setScore(int score) { this.score = score; }
+
     //***************************Metods******************************************
 
     public void editSpeed(){
 
-
     }
 
     public void editFuel(){
+
+    }
+
+    public void editScore(){
 
     }
 
