@@ -20,7 +20,7 @@ public class Grid {
         for (int i = 0; i < tileAmountX; i++) {
             tiles.add(new ArrayList<>());
             for (int j = 0; j < tileAmountY; j++) {
-                tiles.get(i).add(new Sprite(x + i * tileSize, y + j * tileSize, 0, tileSize, tileSize));
+                tiles.get(i).add(new Sprite(Integer.toString(i) + Integer.toString(j), x + i * tileSize, y + j * tileSize, 0, tileSize, tileSize));
             }
         }
     }
