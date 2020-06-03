@@ -2,6 +2,7 @@ package ar.edu.utn.mdp;
 
 public abstract class Component
 {
+    protected String name;
     protected int x;
     protected int y;
     protected int rotation;
@@ -9,13 +10,14 @@ public abstract class Component
     protected int height;
     protected boolean drawn;
 
-    public Component(int x, int y, int rotation, int width, int height) {
+    public Component(String name, int x, int y, int rotation, int width, int height) {
+        this.name = name;
         this.x = x;
         this.y = y;
         this.rotation = rotation;
         this.width = width;
         this.height = height;
-        this.drawn = false;
+        this.drawn = true;
     }
 
     public void setX(int x) {
