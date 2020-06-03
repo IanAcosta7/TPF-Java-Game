@@ -63,11 +63,10 @@ public class Game extends JPanel {
         if(Input.getKey(37))
             components.get(components.size() - 1).setX(components.get(components.size() - 1).getX() - 1);
         if(Input.getKey(39))
-
+            components.get(components.size() - 1).setX(components.get(components.size() - 1).getX() + 1);
+        
         Text text=(Text)components.get(components.size() - 6);
         //text.setTexto(Integer.toString(sumador));
-
-        components.get(components.size() - 1).setX(components.get(components.size() - 1).getX() + 1);
     }
 
     public void paintComponent(Graphics g) {
