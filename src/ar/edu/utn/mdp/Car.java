@@ -3,8 +3,8 @@ package ar.edu.utn.mdp;
 public class Car extends Sprite{
     private HitBox hitBox;
 
-    public Car(int x, int y, int rotation, int width, int height, String image, HitBox hitBox) {
-        super(x, y, rotation, width, height, image);
+    public Car(String name, int x, int y, int rotation, int width, int height, String image, HitBox hitBox) {
+        super(name, x, y, rotation, width, height, image);
         this.hitBox = hitBox;
     }
 
