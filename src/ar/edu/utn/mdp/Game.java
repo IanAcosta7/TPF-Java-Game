@@ -2,10 +2,7 @@ package ar.edu.utn.mdp;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Game extends JPanel {
 
@@ -31,11 +28,27 @@ public class Game extends JPanel {
     }
 
     private void setup() {
+        Grid grid = new Grid(0, 0, 50, 10, 10);
+
+        for (ArrayList<Sprite> tiles : grid.getTiles())
+            tiles.forEach((Sprite tile)-> tile.setImage(Loader.getSprites().get("pastoFinal")));
+
+        for (int i = 0; i < grid.getTiles().size(); i++) {
+            ArrayList<Sprite> tiles = grid.getTiles().get(i);
+
+            for (int j = 0; j < tiles.size(); j++) {
+                Sprite tile = tiles.get(j);
+
+                String key = Integer.toString(i) + Integer.toString(j);
+
+                components.put(key, tile);
+            }
+        }
+
         components.put("Player", new Sprite(width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1"));
     }
 
     private void draw() {
-        components.get("Player").setDrawn(true);
         if(Input.getKey(37))
             components.get("Player").setX(components.get("Player").getX() - 1);
         if(Input.getKey(39))

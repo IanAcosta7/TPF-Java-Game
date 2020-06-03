@@ -12,8 +12,18 @@ public class Sprite extends Component
         this.image = Loader.getSprites().get(image);
     }
 
+    public Sprite(int x, int y, int rotation, int width, int height)
+    {
+        super(x, y, rotation, width, height);
+        this.image = null;
+    }
+
     public BufferedImage getImage()
     {
         return image;
+    }
+
+    public void setImage(BufferedImage img) {
+        this.image = img;
     }
 }

@@ -15,7 +15,7 @@ public abstract class Component
         this.rotation = rotation;
         this.width = width;
         this.height = height;
-        this.drawn = false;
+        this.drawn = true;
     }
 
     public void setX(int x) {
