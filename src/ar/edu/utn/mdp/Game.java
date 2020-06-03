@@ -2,10 +2,7 @@ package ar.edu.utn.mdp;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Game extends JPanel {
 
@@ -14,13 +11,13 @@ public class Game extends JPanel {
     private int maxFrameRate = 60;
     private Loader loader;
     private boolean running;
-    private HashMap<String, Component> components;
+    private ArrayList<Component> components;
 
     public Game (int width, int height) {
         this.width = width;
         this.height = height;
         this.loader = new Loader();
-        this.components = new HashMap<>();
+        this.components = new ArrayList<>();
         init();
     }
 
@@ -31,50 +28,56 @@ public class Game extends JPanel {
     }
 
     private void setup() {
-        components.put("Player", new Sprite(width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1"));
+        // GRID
+        Grid grid = new Grid(0, 0, 50, 10, 10);
 
+        for (ArrayList<Sprite> tiles : grid.getTiles())
+            tiles.forEach((Sprite tile)-> tile.setImage(Loader.getSprites().get("pastoFinal")));
+
+        for (int i = 0; i < grid.getTiles().size(); i++) {
+            ArrayList<Sprite> tiles = grid.getTiles().get(i);
+
+            for (int j = 0; j < tiles.size(); j++) {
+                Sprite tile = tiles.get(j);
+
+                String key = Integer.toString(i) + Integer.toString(j);
+
+                components.add(tile);
+            }
+        }
+      
         //TEXTOS
-        components.put("PlayerNombre", new Text((width-width/5),height/6, 0, 80, 40,"PLAYER ONE" ));
-        components.put("combustible", new Text((width-width/5),height/4, 0, 80, 40,"COMBUSTIBLE:" ));
-        components.put("NumCombustible", new Text((width-width/5)+90,height/4, 0, 80, 40,"1000"));
-        components.put("score", new Text((width-width/5),height/2-40, 0, 80, 40,"SCORE:" ));
-        components.put("NumScore", new Text((width-width/5)+50,height/2-40, 0, 80, 40,"500"));
-        components.put("velocidad", new Text((width-width/5),(height-height/3), 0, 80, 40,"VELOCIDAD:"));
-        components.put("NumVelocidad", new Text((width-width/5)+75,(height-height/3), 0, 80, 40,"500"));
+        components.add(new Text("PlayerNombre", width-width/5, height/6, 0, 80, 40,"PLAYER ONE" ));
+        components.add(new Text("combustible", width-width/5, height/4, 0, 80, 40,"COMBUSTIBLE:" ));
+        components.add(new Text("NumCombustible", (width-width/5) + 90, height/4, 0, 80, 40,"1000"));
+        components.add(new Text("score", width-width/5,height/2-40, 0, 80, 40,"SCORE:" ));
+        components.add(new Text("NumScore", (width-width/5) + 50, height/2 - 40, 0, 80, 40,"500"));
+        components.add(new Text("velocidad", width-width/5, height-height/3, 0, 80, 40,"VELOCIDAD:"));
+        components.add(new Text("NumVelocidad", (width-width/5) + 75, height-height/3, 0, 80, 40,"500"));
 
+        // PLAYER
+        components.add(new Sprite("Player", width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1"));
     }
 
     private void draw() {
-        components.get("Player").setDrawn(true);
         if(Input.getKey(37))
-            components.get("Player").setX(components.get("Player").getX() - 1);
+            components.get(components.size() - 1).setX(components.get(components.size() - 1).getX() - 1);
         if(Input.getKey(39))
-            components.get("Player").setX(components.get("Player").getX() + 1);
 
-        components.get("combustible").setDrawn(true);
-        components.get("NumCombustible").setDrawn(true);
-        components.get("score").setDrawn(true);
-        components.get("NumScore").setDrawn(true);
-        components.get("velocidad").setDrawn(true);
-        components.get("NumVelocidad").setDrawn(true);
-        components.get("PlayerNombre").setDrawn(true);
-
-
-        Text text=(Text)components.get("NumCombustible");
+        Text text=(Text)components.get(components.size() - 6);
         //text.setTexto(Integer.toString(sumador));
 
-
+        components.get(components.size() - 1).setX(components.get(components.size() - 1).getX() + 1);
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.WHITE);
 
-        Set<Map.Entry<String, Component>> entry = components.entrySet();
-        Iterator<Map.Entry<String, Component>> iterator = entry.iterator();
+        Iterator iterator = components.iterator();
 
         while (iterator.hasNext()) {
-            Component component = iterator.next().getValue();
+            Component component = (Component) iterator.next();
 
             if (component.isDrawn()){
                 if (component instanceof Sprite) {

@@ -22,6 +22,7 @@ public class Loader{
         paths.add("autoN3");
         paths.add("autoN4");
         paths.add("autoN5");
+        paths.add("pastoFinal");
         //paths.add("");
 
         for(String path: paths)
