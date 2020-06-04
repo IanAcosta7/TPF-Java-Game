@@ -13,7 +13,7 @@ public class Player extends Car {
 
     public Player(String name, int x, int y, int rotation, int width, int height, String image, HitBox hitBox, double speed, double fuel, double score) {
         super(name, x, y, rotation, width, height, image, hitBox);
-        this.speed = 1;
+        this.speed = speed;
         this.fuel = fuel;
         this.score = score;
     }
