@@ -5,7 +5,6 @@ import ar.edu.utn.mdp.utils.Loader;
 import ar.edu.utn.mdp.content.component.*;
 import ar.edu.utn.mdp.content.component.Component;
 
-import javax.imageio.IIOException;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
@@ -18,13 +17,13 @@ public class Game extends JPanel {
     private int maxFrameRate = 60;
     private Loader loader;
     private boolean running;
-    private ArrayList<ar.edu.utn.mdp.content.component.Component> components;
+    private ComponentCollection<Component> components;
 
     public Game (int width, int height) {
         this.width = width;
         this.height = height;
         this.loader = new Loader();
-        this.components = new ArrayList<>();
+        this.components = new ComponentCollection<>();
         init();
     }
 
@@ -49,40 +48,39 @@ public class Game extends JPanel {
 
                 String key = Integer.toString(i) + Integer.toString(j);
 
-                components.add(tile);
+                components.set(tile);
             }
         }
 
         //TEXTOS
-        components.add(new Text("PlayerNombre", width-width/5, height/6, 0, 80, 40,"PLAYER ONE" ));
-        components.add(new Text("combustible", width-width/5, height/4, 0, 80, 40,"COMBUSTIBLE:" ));
-        components.add(new Text("NumCombustible", (width-width/5) + 90, (height/4)+20, 0, 80, 40,""));
-        components.add(new Text("score", width-width/5,height/2-40, 0, 80, 40,"SCORE:" ));
-        components.add(new Text("NumScore", (width-width/5) + 50, (height/2)+20 - 40, 0, 80, 40,"500"));
-        components.add(new Text("velocidad", width-width/5, height-height/3, 0, 80, 40,"VELOCIDAD:"));
-        components.add(new Text("NumVelocidad", (width-width/5) + 75, (height-height/3)+20, 0, 80, 40,"500"));
+        components.set(new Text("PlayerNombre", width-width/5, height/6, 0, 80, 40,"PLAYER ONE" ));
+        components.set(new Text("combustible", width-width/5, height/4, 0, 80, 40,"COMBUSTIBLE:" ));
+        components.set(new Text("NumCombustible", (width-width/5) + 90, (height/4)+20, 0, 80, 40,""));
+        components.set(new Text("score", width-width/5,height/2-40, 0, 80, 40,"SCORE:" ));
+        components.set(new Text("NumScore", (width-width/5) + 50, (height/2)+20 - 40, 0, 80, 40,"500"));
+        components.set(new Text("velocidad", width-width/5, height-height/3, 0, 80, 40,"VELOCIDAD:"));
+        components.set(new Text("NumVelocidad", (width-width/5) + 75, (height-height/3)+20, 0, 80, 40,"500"));
 
         // PLAYER
-        components.add(new Car("Car1", width/3 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1", new HitBox("Car1", width/3 - 50/2 + 50/4,height/2 - 50/2, 0, 50/2,50)));
-        components.add(new Player("Player", width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1", new HitBox("Player", width/2 - 50/2 + 50/4,height/2 - 50/2, 0, 50/2,50), 0, 50, 0));
-
+        components.set(new Car("Car", width/3 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1", new HitBox("Car", width/3 - 50/2 + 50/4,height/2 - 50/2, 0, 50/2,50)));
+        components.set(new Player("Player", width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1", new HitBox("Player", width/2 - 50/2 + 50/4,height/2 - 50/2, 0, 50/2,50), 0, 50, 0));
     }
 
 
     private void draw() {
-        HitBox.hitboxCollision(((Player)components.get(components.size() - 1)).getHitBox(), ((Car)components.get(components.size() - 2)).getHitBox());
-        if(!((Player) components.get(components.size() - 1)).getHitBox().isCollision()){
-            ((Player) components.get(components.size() - 1)).move();
+        HitBox.hitboxCollision(((Player)components.get("Player")).getHitBox(), ((Car)components.get("Car")).getHitBox());
+        if(!((Player) components.get("Player")).getHitBox().isCollision()){
+            ((Player) components.get("Player")).move();
         }
-        ((Player) components.get(components.size() - 1)).fuelConsumed();
-        ((Player) components.get(components.size() - 1)).scoreCounter();
+        ((Player) components.get("Player")).fuelConsumed();
+        ((Player) components.get("Player")).scoreCounter();
 
-        Text textFuel=(Text)components.get(components.size() - 7);
-        textFuel.setTexto(Integer.toString(((int)((Player)components.get(components.size()-1)).getFuel())));
-        Text textScore=(Text)components.get(components.size() - 5);
-        textScore.setTexto(Integer.toString(((int)((Player)components.get(components.size()-1)).getScore()))) ;
-        Text textSpeed=(Text)components.get(components.size() - 3);
-        textSpeed.setTexto(Integer.toString(((int)((Player)components.get(components.size()-1)).getSpeed())));
+        Text textFuel=(Text)components.get("NumCombustible");
+        textFuel.setTexto(Integer.toString(((int)((Player)components.get("Player")).getFuel())));
+        Text textScore=(Text)components.get("NumScore");
+        textScore.setTexto(Integer.toString(((int)((Player)components.get("Player")).getScore()))) ;
+        Text textSpeed=(Text)components.get("NumVelocidad");
+        textSpeed.setTexto(Integer.toString(((int)((Player)components.get("Player")).getSpeed())));
     }
 
     public void paintComponent(Graphics g) {
@@ -98,28 +96,7 @@ public class Game extends JPanel {
             exception.printStackTrace();
         }
 
-        Iterator iterator = components.iterator();
-
-        while (iterator.hasNext()) {
-            ar.edu.utn.mdp.content.component.Component component = (Component) iterator.next();
-
-            if (component.isDrawn()){
-                if (component instanceof Sprite) {
-                    Sprite sprite = (Sprite) component;
-
-                    g.drawImage(sprite.getImage(), sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), null);
-                }
-                if(component  instanceof Text)
-                {
-                    Text text =(Text)component;
-                    g.drawString(text.getTexto(), text.getX(), text.getY());
-                }
-            }
-        }
-
-        // Ver hitbox del player
-        //g.drawRect(((Player)components.get(components.size() - 1)).getHitBox().getX(), ((Player)components.get(components.size() - 1)).getHitBox().getY(), ((Player)components.get(components.size() - 1)).getHitBox().getWidth(), ((Player)components.get(components.size() - 1)).getHitBox().getHeight());
-
+        components.drawAll(g);
     }
 
 

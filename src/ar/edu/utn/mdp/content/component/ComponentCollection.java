@@ -1,5 +1,6 @@
 package ar.edu.utn.mdp.content.component;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -8,7 +9,7 @@ public class ComponentCollection <T extends Component> {
     private ArrayList<T> components;
 
     public ComponentCollection() {
-
+        components = new ArrayList<>();
     }
 
     public Component get(String name) {
@@ -26,9 +27,11 @@ public class ComponentCollection <T extends Component> {
         return found;
     }
 
-    public void set(String name, T component) {
-        if (indexOf(name) >= 0) {
-            components.set(indexOf(name), component);
+    public void set(T component) {
+        if (indexOf(component.getName()) >= 0) {
+            components.set(indexOf(component.getName()), component);
+        } else {
+            components.add(component);
         }
     }
 
@@ -47,6 +50,31 @@ public class ComponentCollection <T extends Component> {
         }
 
         return val;
+    }
+
+    public void drawAll(Graphics g) {
+        Iterator iterator = components.iterator();
+
+        while (iterator.hasNext()) {
+            ar.edu.utn.mdp.content.component.Component component = (Component) iterator.next();
+
+            if (component.isDrawn()){
+                if (component instanceof Sprite) {
+                    Sprite sprite = (Sprite) component;
+
+                    g.drawImage(sprite.getImage(), sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), null);
+                }
+                if(component  instanceof Text)
+                {
+                    Text text =(Text)component;
+                    g.drawString(text.getTexto(), text.getX(), text.getY());
+                }
+            }
+        }
+
+        // Ver hitbox del player
+        //g.drawRect(((Player)components.get(components.size() - 1)).getHitBox().getX(), ((Player)components.get(components.size() - 1)).getHitBox().getY(), ((Player)components.get(components.size() - 1)).getHitBox().getWidth(), ((Player)components.get(components.size() - 1)).getHitBox().getHeight());
+
     }
 
 }
