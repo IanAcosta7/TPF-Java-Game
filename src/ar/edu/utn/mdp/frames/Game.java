@@ -14,7 +14,7 @@ public class Game extends JPanel {
 
     private int width;
     private int height;
-    private int maxFrameRate = 60;
+    private final int maxFrameRate = 60;
     private Loader loader;
     private boolean running;
     private ComponentCollection<Component> components;
@@ -43,13 +43,8 @@ public class Game extends JPanel {
         for (int i = 0; i < grid.getTiles().size(); i++) {
             ArrayList<Sprite> tiles = grid.getTiles().get(i);
 
-            for (int j = 0; j < tiles.size(); j++) {
-                Sprite tile = tiles.get(j);
-
-                String key = Integer.toString(i) + Integer.toString(j);
-
+            for (Sprite tile : tiles)
                 components.set(tile);
-            }
         }
 
         //TEXTOS
@@ -68,19 +63,24 @@ public class Game extends JPanel {
 
 
     private void draw() {
-        HitBox.hitboxCollision(((Player)components.get("Player")).getHitBox(), ((Car)components.get("Car")).getHitBox());
-        if(!((Player) components.get("Player")).getHitBox().isCollision()){
-            ((Player) components.get("Player")).move();
-        }
-        ((Player) components.get("Player")).fuelConsumed();
-        ((Player) components.get("Player")).scoreCounter();
+        Player player = (Player)components.get("Player");
 
-        Text textFuel=(Text)components.get("NumCombustible");
-        textFuel.setTexto(Integer.toString(((int)((Player)components.get("Player")).getFuel())));
-        Text textScore=(Text)components.get("NumScore");
-        textScore.setTexto(Integer.toString(((int)((Player)components.get("Player")).getScore()))) ;
-        Text textSpeed=(Text)components.get("NumVelocidad");
-        textSpeed.setTexto(Integer.toString(((int)((Player)components.get("Player")).getSpeed())));
+        HitBox.hitboxCollision(player.getHitBox(), ((Car)components.get("Car")).getHitBox());
+
+        if(!player.getHitBox().isCollision()){
+            player.move();
+        }
+
+        player.fuelConsumed();
+        player.scoreCounter();
+
+        Text textFuel = (Text)components.get("NumCombustible");
+        Text textScore = (Text)components.get("NumScore");
+        Text textSpeed = (Text)components.get("NumVelocidad");
+
+        textFuel.setTexto(Integer.toString((int)player.getFuel()));
+        textScore.setTexto(Integer.toString((int)player.getScore()));
+        textSpeed.setTexto(Integer.toString((int)player.getSpeed()));
     }
 
     public void paintComponent(Graphics g) {
@@ -89,7 +89,6 @@ public class Game extends JPanel {
         try
         {
             g.setFont(Font.createFont(Font.TRUETYPE_FONT, new File("assets\\game_over.ttf")).deriveFont(50f));
-            //g.setFont(new Font("Arial", Font.PLAIN,10));
         }
         catch (Exception exception)
         {
@@ -98,8 +97,6 @@ public class Game extends JPanel {
 
         components.drawAll(g);
     }
-
-
 
     public void start() {
         running = true;
@@ -117,23 +114,19 @@ public class Game extends JPanel {
         }
     }
 
-    public void setWidth(int width)
-    {
+    public void setWidth(int width) {
         this.width = width;
     }
 
-    public void setHeight(int height)
-    {
+    public void setHeight(int height) {
         this.height = height;
     }
 
-    public int getWidth()
-    {
+    public int getWidth() {
         return width;
     }
 
-    public int getHeight()
-    {
+    public int getHeight() {
         return height;
     }
 }
