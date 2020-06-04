@@ -4,14 +4,14 @@ import ar.edu.utn.mdp.utils.Input;
 
 public class Player extends Car {
 
-    private int speed;
-    private int fuel;
-    private int score;
+    private double speed;
+    private double fuel;
+    private double score;
 
     //*************************constructor***************************************
 
 
-    public Player(String name, int x, int y, int rotation, int width, int height, String image, HitBox hitBox, int speed, int fuel, int score) {
+    public Player(String name, int x, int y, int rotation, int width, int height, String image, HitBox hitBox, double speed, double fuel, double score) {
         super(name, x, y, rotation, width, height, image, hitBox);
         this.speed = speed;
         this.fuel = fuel;
@@ -20,25 +20,25 @@ public class Player extends Car {
 
     //**************************GetsAndSets**************************************
 
-    public int getSpeed() {
+    public double getSpeed() {
         return speed;
     }
 
-    public void setSpeed(int speed) {
+    public void setSpeed(double speed) {
         this.speed = speed;
     }
 
-    public int getFuel() {
+    public double getFuel() {
         return fuel;
     }
 
-    public void setFuel(int fuel) {
+    public void setFuel(double fuel) {
         this.fuel = fuel;
     }
 
-    public int getScore() { return score; }
+    public double getScore() { return score; }
 
-    public void setScore(int score) { this.score = score; }
+    public void setScore(double score) { this.score = score; }
 
     @Override
     public HitBox getHitBox() {
@@ -46,18 +46,45 @@ public class Player extends Car {
     }
 
     //***************************Metods******************************************
+    public void scoreCounter()
+    {
+        if(speed>0)
+        {
+            setScore(score+(speed*0.0005));
+        }
+    }
+
+    public void fuelConsumed()
+    {
+        if(speed>0 && fuel>0)
+        {
+            setFuel(getFuel()-0.05);
+        }
+    }
+
     public void move()
     {
-        if(Input.getKey(37))
-            setX(getX() - 1);
-        if(Input.getKey(39))
-            setX(getX() + 1);
-        if(Input.getKey(38) && (speed<400))
-            setSpeed(getSpeed()+1);
-        else if(speed>300)
-            setSpeed(getSpeed()-1);
-        if(Input.getKey(40) && (speed>100))
-            setSpeed(getSpeed()-1);
+        if(fuel>0)
+        {
+            if (Input.getKey(37))
+                setX(getX() - 1);
+            if (Input.getKey(39))
+                setX(getX() + 1);
+            if (Input.getKey(38) && (speed < 400))
+                setSpeed(getSpeed() + 0.5);
+            else if (speed > 300)
+                setSpeed(getSpeed() - 1);
+            if (Input.getKey(40) && (speed > 100))
+                setSpeed(getSpeed() - 0.75);
+        }
+        else if(speed>=1)
+        {
+            setSpeed(speed-(speed/60));
+        }
+        else
+        {
+            speed=0;
+        }
 
     }
 
