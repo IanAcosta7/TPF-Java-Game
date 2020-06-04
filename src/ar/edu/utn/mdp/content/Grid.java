@@ -41,7 +41,6 @@ public class Grid {
         }
 
         counter += speed;
-        System.out.println((int)speed);
     }
 
     private void moveTiles() {
@@ -60,15 +59,14 @@ public class Grid {
 
     private void generateNewSprites() {
         String[] spriteNames = {
-                "pastoFinal",
+                "PastoParejo",
                 "PastoAlter",
-                "PastoAlter2",
                 "PastoFlorAmarilla",
                 "PastoFlorRoja"
         };
 
         for (int i = 0; i < tiles.size(); i++) {
-            tiles.get(i).get(0).setImage(Loader.getSprites().get(spriteNames[(int)(Math.random() * 5)]));
+            tiles.get(i).get(0).setImage(Loader.getSprites().get(spriteNames[(int)(Math.random() * 4)]));
         }
     }
 

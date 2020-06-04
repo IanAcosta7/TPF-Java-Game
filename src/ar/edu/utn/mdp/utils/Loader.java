@@ -27,6 +27,7 @@ public class Loader{
         paths.add("PastoAlter2");
         paths.add("PastoFlorAmarilla");
         paths.add("PastoFlorRoja");
+        paths.add("PastoParejo");
 
         for(String path: paths)
         {
