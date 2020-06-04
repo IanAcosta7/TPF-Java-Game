@@ -8,6 +8,10 @@ public class HitBox extends Component {
         this.collision = false;
     }
 
+    public void setCollision(boolean collision) {
+        this.collision = collision;
+    }
+
     public boolean isCollision() {
         return collision;
     }

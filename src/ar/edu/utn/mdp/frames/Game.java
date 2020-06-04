@@ -69,7 +69,7 @@ public class Game extends JPanel {
 
         // PLAYER
         components.set(new Car("Car", width/3 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1", new HitBox("Car", width/3 - 50/2 + 50/4,height/2 - 50/2, 0, 50/2,50)));
-        components.set(new Player("Player", width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1", new HitBox("Player", width/2 - 50/2 + 50/4,height/2 - 50/2, 0, 50/2,50), 0, 50, 0));
+        components.set(new Player("Player", width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1", new HitBox("Player", width/2 - 50/2 + 50/4,height/2 - 50/2, 0, 50/2,50), 0, 1000, 0));
     }
 
 
@@ -78,9 +78,9 @@ public class Game extends JPanel {
 
         HitBox.hitboxCollision(player.getHitBox(), ((Car)components.get("Car")).getHitBox());
 
-        if(!player.getHitBox().isCollision()){
-            player.move();
-        }
+        player.move();
+
+        player.editSpeedCollision();
 
         player.fuelConsumed();
         player.scoreCounter();
