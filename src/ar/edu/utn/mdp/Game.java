@@ -56,15 +56,17 @@ public class Game extends JPanel {
         components.add(new Text("NumVelocidad", (width-width/5) + 75, height-height/3, 0, 80, 40,"500"));
 
         // PLAYER
-        //components.add(new Car("Player", width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1", new HitBox("Player", width/2 - 50/2 + 50/3,height/2 - 50/2, 0, 50/3,50)));
-        components.add(new Player("Player", width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1", new HitBox("Player", width/2 - 50/2 + 50/3,height/2 - 50/2, 0, 50/3,50), 0, 50, 0));
+        components.add(new Car("Car1", width/3 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1", new HitBox("Car1", width/3 - 50/2 + 50/4,height/2 - 50/2, 0, 50/2,50)));
+        components.add(new Player("Player", width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1", new HitBox("Player", width/2 - 50/2 + 50/4,height/2 - 50/2, 0, 50/2,50), 0, 50, 0));
 
     }
 
-    private void draw()
-    {
-        ((Player) components.get(components.size() - 1)).move();
 
+    private void draw() {
+        HitBox.hitboxCollision(((Player)components.get(components.size() - 1)).getHitBox(), ((Car)components.get(components.size() - 2)).getHitBox());
+        if(!((Player) components.get(components.size() - 1)).getHitBox().isCollision()){
+            ((Player) components.get(components.size() - 1)).move();
+        }
 
         Text textFuel=(Text)components.get(components.size() - 6);
         textFuel.setTexto(Integer.toString(((Player)components.get(components.size()-1)).getFuel()));
@@ -72,7 +74,6 @@ public class Game extends JPanel {
         textScore.setTexto(Integer.toString(((Player)components.get(components.size()-1)).getScore()));
         Text textSpeed=(Text)components.get(components.size() - 2);
         textSpeed.setTexto(Integer.toString(((Player)components.get(components.size()-1)).getSpeed()));
-
     }
 
     public void paintComponent(Graphics g) {
@@ -97,6 +98,10 @@ public class Game extends JPanel {
                 }
             }
         }
+
+        // Ver hitbox del player
+        //g.drawRect(((Player)components.get(components.size() - 1)).getHitBox().getX(), ((Player)components.get(components.size() - 1)).getHitBox().getY(), ((Player)components.get(components.size() - 1)).getHitBox().getWidth(), ((Player)components.get(components.size() - 1)).getHitBox().getHeight());
+
     }
 
 
