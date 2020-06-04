@@ -1,6 +1,6 @@
-package ar.edu.utn.mdp;
+package ar.edu.utn.mdp.content.component;
 
-import ar.edu.utn.mdp.Component;
+import ar.edu.utn.mdp.utils.Input;
 
 public class Player extends Car {
 

@@ -1,6 +1,6 @@
-package ar.edu.utn.mdp;
+package ar.edu.utn.mdp.content.component;
 
-public class Car extends Sprite{
+public class Car extends Sprite {
     private HitBox hitBox;
 
     public Car(String name, int x, int y, int rotation, int width, int height, String image, HitBox hitBox) {

@@ -1,4 +1,4 @@
-package ar.edu.utn.mdp;
+package ar.edu.utn.mdp.utils;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

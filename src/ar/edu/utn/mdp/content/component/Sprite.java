@@ -1,4 +1,6 @@
-package ar.edu.utn.mdp;
+package ar.edu.utn.mdp.content.component;
+
+import ar.edu.utn.mdp.utils.Loader;
 
 import java.awt.image.BufferedImage;
 

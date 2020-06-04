@@ -1,4 +1,9 @@
-package ar.edu.utn.mdp;
+package ar.edu.utn.mdp.frames;
+
+import ar.edu.utn.mdp.content.Grid;
+import ar.edu.utn.mdp.utils.Loader;
+import ar.edu.utn.mdp.content.component.*;
+import ar.edu.utn.mdp.content.component.Component;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +16,7 @@ public class Game extends JPanel {
     private int maxFrameRate = 60;
     private Loader loader;
     private boolean running;
-    private ArrayList<Component> components;
+    private ArrayList<ar.edu.utn.mdp.content.component.Component> components;
 
     public Game (int width, int height) {
         this.width = width;
@@ -83,7 +88,7 @@ public class Game extends JPanel {
         Iterator iterator = components.iterator();
 
         while (iterator.hasNext()) {
-            Component component = (Component) iterator.next();
+            ar.edu.utn.mdp.content.component.Component component = (Component) iterator.next();
 
             if (component.isDrawn()){
                 if (component instanceof Sprite) {

@@ -1,4 +1,6 @@
-package ar.edu.utn.mdp;
+package ar.edu.utn.mdp.frames;
+
+import ar.edu.utn.mdp.utils.Input;
 
 import javax.swing.*;
 

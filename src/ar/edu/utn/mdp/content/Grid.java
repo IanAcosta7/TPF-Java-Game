@@ -1,4 +1,6 @@
-package ar.edu.utn.mdp;
+package ar.edu.utn.mdp.content;
+
+import ar.edu.utn.mdp.content.component.*;
 
 import java.util.ArrayList;
 

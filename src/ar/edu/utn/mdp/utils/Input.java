@@ -1,4 +1,4 @@
-package ar.edu.utn.mdp;
+package ar.edu.utn.mdp.utils;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
