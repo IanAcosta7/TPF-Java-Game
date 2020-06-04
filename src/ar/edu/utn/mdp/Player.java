@@ -40,6 +40,11 @@ public class Player extends Car {
 
     public void setScore(int score) { this.score = score; }
 
+    @Override
+    public HitBox getHitBox() {
+        return super.getHitBox();
+    }
+
     //***************************Metods******************************************
 
     public void editSpeed(){

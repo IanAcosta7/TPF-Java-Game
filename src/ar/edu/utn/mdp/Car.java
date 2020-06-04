@@ -8,9 +8,15 @@ public class Car extends Sprite{
         this.hitBox = hitBox;
     }
 
+    public HitBox getHitBox() {
+        return hitBox;
+    }
+
     @Override
     public void setX(int x) {
         super.setX(x);
-        hitBox.setX(x + 50/3);
+        hitBox.setX(x + 50/4);//todo: cambiar esta porcion por una variable
     }
+
+
 }
