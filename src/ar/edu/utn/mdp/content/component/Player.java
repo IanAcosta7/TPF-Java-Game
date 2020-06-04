@@ -64,33 +64,44 @@ public class Player extends Car {
 
     public void move()
     {
-        if(fuel>0)
+        if(speed>0)
         {
             if (Input.getKey(37))
                 setX(getX() - 1);
             if (Input.getKey(39))
                 setX(getX() + 1);
-            if (Input.getKey(38) && (speed < 400))
-                setSpeed(getSpeed() + 0.5);
+        }
+        if(fuel>0)
+        {
+            if (Input.getKey(38) && (speed < 400)){
+                if(speed<=100)
+                    setSpeed(getSpeed() + 0.3);
+                else if(speed>=100 && speed<=200)
+                    setSpeed(getSpeed() + 0.4);
+                else
+                    setSpeed(getSpeed() + 0.5);
+            }
+
             else if (speed > 300)
                 setSpeed(getSpeed() - 1);
             if (Input.getKey(40) && (speed > 100))
                 setSpeed(getSpeed() - 0.75);
-        }
-        else if(speed>=1)
-        {
+        } else if(speed>=1)
             setSpeed(speed-(speed/60));
-        }
         else
-        {
             speed=0;
-        }
-
     }
 
-    public void editSpeed()
+    public void editSpeedCollision()
     {
-
+        if(getHitBox().isCollision()){
+            if(getSpeed()>=100) {
+                setSpeed(getSpeed() * 0.90);
+            }else{
+                setSpeed(getSpeed() * 0.98);
+            }
+            getHitBox().setCollision(false);
+        }
     }
 
     public void editFuel(){
