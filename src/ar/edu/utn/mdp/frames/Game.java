@@ -90,7 +90,7 @@ public class Game extends JPanel {
         g.setColor(Color.WHITE);
         try
         {
-            g.setFont(Font.createFont(Font.TRUETYPE_FONT, new File("C:\\Users\\julian\\IdeaProjects\\TPF-Java-Game\\assets\\game_over.ttf")).deriveFont(50f));
+            g.setFont(Font.createFont(Font.TRUETYPE_FONT, new File("assets\\game_over.ttf")).deriveFont(50f));
             //g.setFont(new Font("Arial", Font.PLAIN,10));
         }
         catch (Exception exception)
