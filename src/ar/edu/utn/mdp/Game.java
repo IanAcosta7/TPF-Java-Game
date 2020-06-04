@@ -68,11 +68,11 @@ public class Game extends JPanel {
             ((Player) components.get(components.size() - 1)).move();
         }
 
-        Text textFuel=(Text)components.get(components.size() - 6);
+        Text textFuel=(Text)components.get(components.size() - 7);
         textFuel.setTexto(Integer.toString(((Player)components.get(components.size()-1)).getFuel()));
-        Text textScore=(Text)components.get(components.size() - 4);
+        Text textScore=(Text)components.get(components.size() - 5);
         textScore.setTexto(Integer.toString(((Player)components.get(components.size()-1)).getScore()));
-        Text textSpeed=(Text)components.get(components.size() - 2);
+        Text textSpeed=(Text)components.get(components.size() - 3);
         textSpeed.setTexto(Integer.toString(((Player)components.get(components.size()-1)).getSpeed()));
     }
 
