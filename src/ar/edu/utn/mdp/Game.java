@@ -63,10 +63,27 @@ public class Game extends JPanel {
 
     private void draw()
     {
-        if(Input.getKey(37))
+        /*if(Input.getKey(37))
             components.get(components.size() - 1).setX(components.get(components.size() - 1).getX() - 1);
         if(Input.getKey(39))
             components.get(components.size() - 1).setX(components.get(components.size() - 1).getX() + 1);
+        if(Input.getKey(38) && ((Player) components.get(components.size() - 1)).getSpeed()<400)
+        {
+            Player player = (Player) components.get(components.size() -1);
+            player.setSpeed(player.getSpeed()+1);
+        }
+        else if(((Player) components.get(components.size() - 1)).getSpeed()>300)
+        {
+            Player player = (Player) components.get(components.size() -1);
+            player.setSpeed(player.getSpeed()-1);
+        }
+        if(Input.getKey(40) && ((Player) components.get(components.size() - 1)).getSpeed()>100)
+        {
+            Player player = (Player) components.get(components.size() - 1);
+            player.setSpeed(player.getSpeed()-1);
+        }*/
+        ((Player) components.get(components.size() - 1)).move();
+
 
         Text textFuel=(Text)components.get(components.size() - 6);
         textFuel.setTexto(Integer.toString(((Player)components.get(components.size()-1)).getFuel()));
@@ -100,6 +117,8 @@ public class Game extends JPanel {
             }
         }
     }
+
+
 
     public void start() {
         running = true;
