@@ -45,11 +45,11 @@ public class Game extends JPanel {
                 components.add(tile);
             }
         }
-      
+
         //TEXTOS
         components.add(new Text("PlayerNombre", width-width/5, height/6, 0, 80, 40,"PLAYER ONE" ));
         components.add(new Text("combustible", width-width/5, height/4, 0, 80, 40,"COMBUSTIBLE:" ));
-        components.add(new Text("NumCombustible", (width-width/5) + 90, height/4, 0, 80, 40,"1000"));
+        components.add(new Text("NumCombustible", (width-width/5) + 90, height/4, 0, 80, 40,""));
         components.add(new Text("score", width-width/5,height/2-40, 0, 80, 40,"SCORE:" ));
         components.add(new Text("NumScore", (width-width/5) + 50, height/2 - 40, 0, 80, 40,"500"));
         components.add(new Text("velocidad", width-width/5, height-height/3, 0, 80, 40,"VELOCIDAD:"));
@@ -61,18 +61,19 @@ public class Game extends JPanel {
 
     }
 
+
     private void draw() {
         HitBox.hitboxCollision(((Player)components.get(components.size() - 1)).getHitBox(), ((Car)components.get(components.size() - 2)).getHitBox());
         if(!((Player) components.get(components.size() - 1)).getHitBox().isCollision()){
-            if(Input.getKey(37))
-                components.get(components.size() - 1).setX(components.get(components.size() - 1).getX() - 1);
-            if(Input.getKey(39))
-                components.get(components.size() - 1).setX(components.get(components.size() - 1).getX() + 1);
+            ((Player) components.get(components.size() - 1)).move();
         }
 
-        
-        Text text=(Text)components.get(components.size() - 6);
-        //text.setTexto(Integer.toString(sumador));
+        Text textFuel=(Text)components.get(components.size() - 6);
+        textFuel.setTexto(Integer.toString(((Player)components.get(components.size()-1)).getFuel()));
+        Text textScore=(Text)components.get(components.size() - 4);
+        textScore.setTexto(Integer.toString(((Player)components.get(components.size()-1)).getScore()));
+        Text textSpeed=(Text)components.get(components.size() - 2);
+        textSpeed.setTexto(Integer.toString(((Player)components.get(components.size()-1)).getSpeed()));
     }
 
     public void paintComponent(Graphics g) {
@@ -98,9 +99,12 @@ public class Game extends JPanel {
             }
         }
 
-        g.drawRect(((Player)components.get(components.size() - 1)).getHitBox().getX(), ((Player)components.get(components.size() - 1)).getHitBox().getY(), ((Player)components.get(components.size() - 1)).getHitBox().getWidth(), ((Player)components.get(components.size() - 1)).getHitBox().getHeight());
+        // Ver hitbox del player
+        //g.drawRect(((Player)components.get(components.size() - 1)).getHitBox().getX(), ((Player)components.get(components.size() - 1)).getHitBox().getY(), ((Player)components.get(components.size() - 1)).getHitBox().getWidth(), ((Player)components.get(components.size() - 1)).getHitBox().getHeight());
 
     }
+
+
 
     public void start() {
         running = true;
