@@ -41,8 +41,23 @@ public class Player extends Car {
     public void setScore(int score) { this.score = score; }
 
     //***************************Metods******************************************
+    public void move()
+    {
+        if(Input.getKey(37))
+            setX(getX() - 1);
+        if(Input.getKey(39))
+            setX(getX() + 1);
+        if(Input.getKey(38) && (speed<400))
+            setSpeed(getSpeed()+1);
+        else if(speed>300)
+            setSpeed(getSpeed()-1);
+        if(Input.getKey(40) && (speed>100))
+            setSpeed(getSpeed()-1);
 
-    public void editSpeed(){
+    }
+
+    public void editSpeed()
+    {
 
     }
 

@@ -63,10 +63,8 @@ public class Game extends JPanel {
 
     private void draw()
     {
-        if(Input.getKey(37))
-            components.get(components.size() - 1).setX(components.get(components.size() - 1).getX() - 1);
-        if(Input.getKey(39))
-            components.get(components.size() - 1).setX(components.get(components.size() - 1).getX() + 1);
+        ((Player) components.get(components.size() - 1)).move();
+
 
         Text textFuel=(Text)components.get(components.size() - 6);
         textFuel.setTexto(Integer.toString(((Player)components.get(components.size()-1)).getFuel()));
@@ -100,6 +98,8 @@ public class Game extends JPanel {
             }
         }
     }
+
+
 
     public void start() {
         running = true;
