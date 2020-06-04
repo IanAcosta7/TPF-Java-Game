@@ -77,9 +77,9 @@ public class Player extends Car {
                 else
                     setSpeed(getSpeed()+getSpeed()/150);
 
-            } else if (speed > 300)
+            } else if (speed > 301)
                 setSpeed(getSpeed() - 1);
-            if (Input.getKey(40) && (speed > 100))
+            if (Input.getKey(40) && (speed > 101))
                 setSpeed(getSpeed() - 0.75);
         } else if(speed>=1)
             setSpeed(speed-(speed/60));

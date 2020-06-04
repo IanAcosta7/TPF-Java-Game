@@ -34,9 +34,13 @@ public class Grid {
 
     public void update(double speed) {
 
-        if (counter > 299) {
+        if (counter > 400) {
             moveTiles();
             generateNewSprites();
+            if (speed > 50) {
+                moveTiles();
+                generateNewSprites();
+            }
             counter = 0;
         }
 
