@@ -5,8 +5,10 @@ import ar.edu.utn.mdp.utils.Loader;
 import ar.edu.utn.mdp.content.component.*;
 import ar.edu.utn.mdp.content.component.Component;
 
+import javax.imageio.IIOException;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.util.*;
 
 public class Game extends JPanel {
@@ -54,11 +56,11 @@ public class Game extends JPanel {
         //TEXTOS
         components.add(new Text("PlayerNombre", width-width/5, height/6, 0, 80, 40,"PLAYER ONE" ));
         components.add(new Text("combustible", width-width/5, height/4, 0, 80, 40,"COMBUSTIBLE:" ));
-        components.add(new Text("NumCombustible", (width-width/5) + 90, height/4, 0, 80, 40,""));
+        components.add(new Text("NumCombustible", (width-width/5) + 90, (height/4)+20, 0, 80, 40,""));
         components.add(new Text("score", width-width/5,height/2-40, 0, 80, 40,"SCORE:" ));
-        components.add(new Text("NumScore", (width-width/5) + 50, height/2 - 40, 0, 80, 40,"500"));
+        components.add(new Text("NumScore", (width-width/5) + 50, (height/2)+20 - 40, 0, 80, 40,"500"));
         components.add(new Text("velocidad", width-width/5, height-height/3, 0, 80, 40,"VELOCIDAD:"));
-        components.add(new Text("NumVelocidad", (width-width/5) + 75, height-height/3, 0, 80, 40,"500"));
+        components.add(new Text("NumVelocidad", (width-width/5) + 75, (height-height/3)+20, 0, 80, 40,"500"));
 
         // PLAYER
         components.add(new Car("Car1", width/3 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1", new HitBox("Car1", width/3 - 50/2 + 50/4,height/2 - 50/2, 0, 50/2,50)));
@@ -72,18 +74,29 @@ public class Game extends JPanel {
         if(!((Player) components.get(components.size() - 1)).getHitBox().isCollision()){
             ((Player) components.get(components.size() - 1)).move();
         }
+        ((Player) components.get(components.size() - 1)).fuelConsumed();
+        ((Player) components.get(components.size() - 1)).scoreCounter();
 
         Text textFuel=(Text)components.get(components.size() - 7);
-        textFuel.setTexto(Integer.toString(((Player)components.get(components.size()-1)).getFuel()));
+        textFuel.setTexto(Integer.toString(((int)((Player)components.get(components.size()-1)).getFuel())));
         Text textScore=(Text)components.get(components.size() - 5);
-        textScore.setTexto(Integer.toString(((Player)components.get(components.size()-1)).getScore()));
+        textScore.setTexto(Integer.toString(((int)((Player)components.get(components.size()-1)).getScore()))) ;
         Text textSpeed=(Text)components.get(components.size() - 3);
-        textSpeed.setTexto(Integer.toString(((Player)components.get(components.size()-1)).getSpeed()));
+        textSpeed.setTexto(Integer.toString(((int)((Player)components.get(components.size()-1)).getSpeed())));
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.WHITE);
+        try
+        {
+            g.setFont(Font.createFont(Font.TRUETYPE_FONT, new File("C:\\Users\\julian\\IdeaProjects\\TPF-Java-Game\\assets\\game_over.ttf")).deriveFont(50f));
+            //g.setFont(new Font("Arial", Font.PLAIN,10));
+        }
+        catch (Exception exception)
+        {
+            exception.printStackTrace();
+        }
 
         Iterator iterator = components.iterator();
 
