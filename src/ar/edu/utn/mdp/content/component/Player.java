@@ -64,15 +64,13 @@ public class Player extends Car {
 
     public void move()
     {
-        if(speed>0)
-        {
+        if(speed>0.99){
             if (Input.getKey(37))
                 setX(getX() - 1);
             if (Input.getKey(39))
                 setX(getX() + 1);
         }
-        if(fuel>0)
-        {
+        if(fuel>0){
             if (Input.getKey(38) && (speed < 400)){
                 if(speed<=100)
                     setSpeed(getSpeed() + 0.3);
@@ -80,9 +78,7 @@ public class Player extends Car {
                     setSpeed(getSpeed() + 0.4);
                 else
                     setSpeed(getSpeed() + 0.5);
-            }
-
-            else if (speed > 300)
+            } else if (speed > 300)
                 setSpeed(getSpeed() - 1);
             if (Input.getKey(40) && (speed > 100))
                 setSpeed(getSpeed() - 0.75);
