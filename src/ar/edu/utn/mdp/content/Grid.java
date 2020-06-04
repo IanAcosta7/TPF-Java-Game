@@ -1,7 +1,9 @@
 package ar.edu.utn.mdp.content;
 
 import ar.edu.utn.mdp.content.component.*;
+import ar.edu.utn.mdp.utils.Loader;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Grid {
@@ -10,11 +12,14 @@ public class Grid {
     private int tileSize;
     private ArrayList<ArrayList<Sprite>> tiles;
 
+    private double counter;
+
     public Grid(int x, int y, int tileSize, int tileAmountX, int tileAmountY) {
         tiles = new ArrayList<>();
         this.x = x;
         this.y = y;
         this.tileSize = tileSize;
+        this.counter = 0;
         init(tileAmountX, tileAmountY);
     }
 
@@ -24,6 +29,45 @@ public class Grid {
             for (int j = 0; j < tileAmountY; j++) {
                 tiles.get(i).add(new Sprite(Integer.toString(i) + Integer.toString(j), x + i * tileSize, y + j * tileSize, 0, tileSize, tileSize));
             }
+        }
+    }
+
+    public void update(double speed) {
+
+        if (counter >= 10) {
+            moveTiles();
+            generateNewSprites();
+            counter = 0;
+        }
+
+        counter += speed * 0.1;
+    }
+
+    private void moveTiles() {
+        for (int i = 0; i < tiles.size(); i++) {
+            BufferedImage prevImage = null;
+            for (int j = 0; j < tiles.get(i).size(); j++) {
+                BufferedImage aux = tiles.get(i).get(j).getImage();
+
+                if (prevImage != null)
+                    tiles.get(i).get(j).setImage(prevImage);
+
+                prevImage = aux;
+            }
+        }
+    }
+
+    private void generateNewSprites() {
+        String[] spriteNames = {
+                "pastoFinal",
+                "PastoAlter",
+                "PastoAlter2",
+                "PastoFlorAmarilla",
+                "PastoFlorRoja"
+        };
+
+        for (int i = 0; i < tiles.size(); i++) {
+            tiles.get(i).get(0).setImage(Loader.getSprites().get(spriteNames[(int)(Math.random() * 5)]));
         }
     }
 

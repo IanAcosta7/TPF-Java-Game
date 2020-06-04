@@ -17,6 +17,7 @@ public class Game extends JPanel {
     private final int maxFrameRate = 60;
     private Loader loader;
     private boolean running;
+    private Grid grid;
     private ComponentCollection<Component> components;
 
     public Game (int width, int height) {
@@ -24,6 +25,7 @@ public class Game extends JPanel {
         this.height = height;
         this.loader = new Loader();
         this.components = new ComponentCollection<>();
+        this.grid = new Grid(200, 0, 16, 20, 35);
         init();
     }
 
@@ -35,10 +37,18 @@ public class Game extends JPanel {
 
     private void setup() {
         // GRID
-        Grid grid = new Grid(0, 0, 50, 10, 10);
+        for (ArrayList<Sprite> tiles : grid.getTiles()) {
+            String[] spriteNames = {
+                    "pastoFinal",
+                    "PastoAlter",
+                    "PastoAlter2",
+                    "PastoFlorAmarilla",
+                    "PastoFlorRoja"
+            };
 
-        for (ArrayList<Sprite> tiles : grid.getTiles())
-            tiles.forEach((Sprite tile)-> tile.setImage(Loader.getSprites().get("pastoFinal")));
+            tiles.forEach((Sprite tile)-> tile.setImage(Loader.getSprites().get(spriteNames[(int)(Math.random() * 5)])));
+        }
+
 
         for (int i = 0; i < grid.getTiles().size(); i++) {
             ArrayList<Sprite> tiles = grid.getTiles().get(i);
@@ -81,6 +91,8 @@ public class Game extends JPanel {
         textFuel.setTexto(Integer.toString((int)player.getFuel()));
         textScore.setTexto(Integer.toString((int)player.getScore()));
         textSpeed.setTexto(Integer.toString((int)player.getSpeed()));
+
+        grid.update(player.getSpeed());
     }
 
     public void paintComponent(Graphics g) {
