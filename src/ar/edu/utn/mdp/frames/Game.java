@@ -60,11 +60,12 @@ public class Game extends JPanel {
         //TEXTOS
         components.set(new Text("PlayerNombre", width-width/5, height/6, 0, 80, 40,"PLAYER ONE" ));
         components.set(new Text("combustible", width-width/5, height/4, 0, 80, 40,"COMBUSTIBLE:" ));
-        components.set(new Text("NumCombustible", (width-width/5) + 90, (height/4)+20, 0, 80, 40,""));
+        components.set(new Text("NumCombustible", (width-width/5) + 40, (height/4)+30, 0, 80, 40,""));
         components.set(new Text("score", width-width/5,height/2-40, 0, 80, 40,"SCORE:" ));
-        components.set(new Text("NumScore", (width-width/5) + 50, (height/2)+20 - 40, 0, 80, 40,"500"));
+        components.set(new Text("NumScore", (width-width/5) + 70, (height/2)+ - 40, 0, 80, 40,""));
         components.set(new Text("velocidad", width-width/5, height-height/3, 0, 80, 40,"VELOCIDAD:"));
-        components.set(new Text("NumVelocidad", (width-width/5) + 75, (height-height/3)+20, 0, 80, 40,"500"));
+        components.set(new Text("NumVelocidad", (width-width/5) + 45, (height-height/3)+30, 0, 80, 40,""));
+        components.set(new Text("Km/h ", (width-width/5) + 80, (height-height/3)+30, 0, 80, 40,"km/h"));
 
         // PLAYER
         components.set(new Car("Car", width/3 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1", new HitBox("Car", width/3 - 50/2 + 50/4,height/2 - 50/2, 0, 50/2,50)));
