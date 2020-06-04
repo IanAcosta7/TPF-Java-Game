@@ -39,14 +39,13 @@ public class Game extends JPanel {
         // GRID
         for (ArrayList<Sprite> tiles : grid.getTiles()) {
             String[] spriteNames = {
-                    "pastoFinal",
+                    "PastoParejo",
                     "PastoAlter",
-                    "PastoAlter2",
                     "PastoFlorAmarilla",
                     "PastoFlorRoja"
             };
 
-            tiles.forEach((Sprite tile)-> tile.setImage(Loader.getSprites().get(spriteNames[(int)(Math.random() * 5)])));
+            tiles.forEach((Sprite tile)-> tile.setImage(Loader.getSprites().get(spriteNames[(int)(Math.random() * 4)])));
         }
 
 
