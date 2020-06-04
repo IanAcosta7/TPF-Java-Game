@@ -34,13 +34,14 @@ public class Grid {
 
     public void update(double speed) {
 
-        if (counter >= 10) {
+        if (counter > 299) {
             moveTiles();
             generateNewSprites();
             counter = 0;
         }
 
-        counter += speed * 0.1;
+        counter += speed;
+        System.out.println((int)speed);
     }
 
     private void moveTiles() {
