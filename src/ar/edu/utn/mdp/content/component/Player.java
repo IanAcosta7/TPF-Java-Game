@@ -13,7 +13,7 @@ public class Player extends Car {
 
     public Player(String name, int x, int y, int rotation, int width, int height, String image, HitBox hitBox, double speed, double fuel, double score) {
         super(name, x, y, rotation, width, height, image, hitBox);
-        this.speed = speed;
+        this.speed = 1;
         this.fuel = fuel;
         this.score = score;
     }
@@ -73,11 +73,10 @@ public class Player extends Car {
         if(fuel>0){
             if (Input.getKey(38) && (speed < 400)){
                 if(speed<=100)
-                    setSpeed(getSpeed() + 0.3);
-                else if(speed>=100 && speed<=200)
-                    setSpeed(getSpeed() + 0.4);
+                    setSpeed(getSpeed()+getSpeed()/40);
                 else
-                    setSpeed(getSpeed() + 0.5);
+                    setSpeed(getSpeed()+getSpeed()/150);
+
             } else if (speed > 300)
                 setSpeed(getSpeed() - 1);
             if (Input.getKey(40) && (speed > 100))
