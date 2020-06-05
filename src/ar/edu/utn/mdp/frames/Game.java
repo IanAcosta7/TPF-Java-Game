@@ -17,7 +17,6 @@ public class Game extends JPanel {
     private final int maxFrameRate = 60;
     private Loader loader;
     private boolean running;
-    private Grid grid;
     private ComponentCollection<Component> components;
 
     public Game (int width, int height) {
@@ -25,7 +24,6 @@ public class Game extends JPanel {
         this.height = height;
         this.loader = new Loader();
         this.components = new ComponentCollection<>();
-        this.grid = new Grid(100, 0, 16, 30, 35);
         init();
     }
 
@@ -37,10 +35,13 @@ public class Game extends JPanel {
 
     private void setup() {
         // GRID
+        Grid grid = new Grid("Grid", 100, 0, 16, 30, 35);
         grid.setStreetStart(10);
         grid.setStreetEnd(20);
         grid.setTiles();
+        components.set(grid);
 
+        // TODO CAMBIAR LA FORMA EN QUE SE MUESTRA
         for (int i = 0; i < grid.getTiles().size(); i++) {
             ArrayList<Sprite> tiles = grid.getTiles().get(i);
 
@@ -84,7 +85,7 @@ public class Game extends JPanel {
         textScore.setTexto(Integer.toString((int)player.getScore()));
         textSpeed.setTexto(Integer.toString((int)player.getSpeed()));
 
-        grid.update(player.getSpeed());
+        ((Grid)components.get("Grid")).update(player.getSpeed());
     }
 
     public void paintComponent(Graphics g) {

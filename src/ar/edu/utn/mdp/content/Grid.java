@@ -6,9 +6,7 @@ import ar.edu.utn.mdp.utils.Loader;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class Grid {
-    private int x;
-    private int y;
+public class Grid extends Component {
     private int tileSize;
     private ArrayList<ArrayList<Sprite>> tiles;
 
@@ -21,7 +19,8 @@ public class Grid {
     private int lineLength;
     private int streetCounter;
 
-    public Grid(int x, int y, int tileSize, int tileAmountX, int tileAmountY) {
+    public Grid(String name, int x, int y, int tileSize, int tileAmountX, int tileAmountY) {
+        super(name, x, y, 0, tileAmountX * tileSize, tileAmountY * tileSize);
         tiles = new ArrayList<>();
         this.x = x;
         this.y = y;
