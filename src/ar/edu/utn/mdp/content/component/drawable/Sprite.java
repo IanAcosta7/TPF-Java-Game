@@ -1,10 +1,12 @@
-package ar.edu.utn.mdp.content.component;
+package ar.edu.utn.mdp.content.component.drawable;
 
+import ar.edu.utn.mdp.content.component.Component;
 import ar.edu.utn.mdp.utils.Loader;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Sprite extends Component
+public class Sprite extends Component implements Drawable
 {
     private BufferedImage image;
 
@@ -27,5 +29,10 @@ public class Sprite extends Component
 
     public void setImage(BufferedImage img) {
         this.image = img;
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        g.drawImage(image, x, y, width, height, null);
     }
 }

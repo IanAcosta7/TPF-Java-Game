@@ -1,7 +1,7 @@
 package ar.edu.utn.mdp.content.component;
 
 import ar.edu.utn.mdp.content.Street;
-import ar.edu.utn.mdp.content.component.*;
+import ar.edu.utn.mdp.content.component.drawable.Sprite;
 import ar.edu.utn.mdp.utils.Loader;
 
 import java.awt.image.BufferedImage;

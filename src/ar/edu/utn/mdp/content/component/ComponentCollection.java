@@ -1,5 +1,9 @@
 package ar.edu.utn.mdp.content.component;
 
+import ar.edu.utn.mdp.content.component.drawable.Drawable;
+import ar.edu.utn.mdp.content.component.drawable.Sprite;
+import ar.edu.utn.mdp.content.component.drawable.Text;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -58,18 +62,8 @@ public class ComponentCollection <T extends Component> {
         while (iterator.hasNext()) {
             ar.edu.utn.mdp.content.component.Component component = (Component) iterator.next();
 
-            if (component.isDrawn()){
-                if (component instanceof Sprite) {
-                    Sprite sprite = (Sprite) component;
-
-                    g.drawImage(sprite.getImage(), sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), null);
-                }
-                if(component  instanceof Text)
-                {
-                    Text text =(Text)component;
-                    g.drawString(text.getTexto(), text.getX(), text.getY());
-                }
-            }
+            if (component instanceof Drawable && component.isDrawn())
+                ((Drawable) component).draw(g);
         }
 
         // Ver hitbox del player

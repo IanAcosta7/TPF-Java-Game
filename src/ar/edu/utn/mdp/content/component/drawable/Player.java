@@ -1,4 +1,4 @@
-package ar.edu.utn.mdp.content.component;
+package ar.edu.utn.mdp.content.component.drawable;
 
 import ar.edu.utn.mdp.utils.Input;
 

@@ -2,6 +2,7 @@ package ar.edu.utn.mdp.frames;
 
 import ar.edu.utn.mdp.content.Street;
 import ar.edu.utn.mdp.content.component.Grid;
+import ar.edu.utn.mdp.content.component.drawable.*;
 import ar.edu.utn.mdp.utils.Loader;
 import ar.edu.utn.mdp.content.component.*;
 import ar.edu.utn.mdp.content.component.Component;

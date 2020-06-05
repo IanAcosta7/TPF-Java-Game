@@ -1,4 +1,4 @@
-package ar.edu.utn.mdp.content.component;
+package ar.edu.utn.mdp.content.component.drawable;
 
 public class Car extends Sprite {
     private HitBox hitBox;
