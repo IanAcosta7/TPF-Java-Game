@@ -12,7 +12,14 @@ public class Grid {
     private int tileSize;
     private ArrayList<ArrayList<Sprite>> tiles;
 
+    private int streetStart;
+    private int streetEnd;
+
     private double counter;
+    private boolean hasLine;
+    private int lineEach;
+    private int lineLength;
+    private int streetCounter;
 
     public Grid(int x, int y, int tileSize, int tileAmountX, int tileAmountY) {
         tiles = new ArrayList<>();
@@ -20,6 +27,12 @@ public class Grid {
         this.y = y;
         this.tileSize = tileSize;
         this.counter = 0;
+        this.streetStart = 0;
+        this.streetEnd = 0;
+        this.hasLine = false;
+        this.lineEach = 12;
+        this.lineLength = 3;
+        this.streetCounter = 0;
         init(tileAmountX, tileAmountY);
     }
 
@@ -32,14 +45,57 @@ public class Grid {
         }
     }
 
+    public void setTiles() {
+        for (ArrayList<Sprite> tile : tiles) {
+            for (int i = 0; i < tile.size(); i++) {
+                setRowImages(i, true);
+            }
+        }
+    }
+
+    private void setRowImages(int row, boolean start) {
+        int i = 0;
+
+        if (streetStart < tiles.size() && streetEnd < tiles.size()) {
+
+            if (start) {
+
+            } else {
+                if (streetCounter > lineEach + lineLength)
+                    streetCounter = 0;
+
+                hasLine = streetCounter >= lineEach && streetCounter < lineEach + lineLength;
+
+                streetCounter++;
+            }
+
+            while (i < streetStart) {
+                tiles.get(i).get(row).setImage(getRandomGrass());
+                i++;
+            }
+
+            while (i < streetEnd) {
+                tiles.get(i).get(row).setImage(getStreetImage(i));
+                i++;
+            }
+
+
+        }
+
+        while (i < tiles.size()) {
+            tiles.get(i).get(row).setImage(getRandomGrass());
+            i++;
+        }
+    }
+
     public void update(double speed) {
 
         if (counter > 400) {
             moveTiles();
-            generateNewSprites();
+            setRowImages(0, false);
             if (speed > 50) {
                 moveTiles();
-                generateNewSprites();
+                setRowImages(0, false);
             }
             counter = 0;
         }
@@ -61,7 +117,7 @@ public class Grid {
         }
     }
 
-    private void generateNewSprites() {
+    private BufferedImage getRandomGrass() {
         String[] spriteNames = {
                 "Pasto/PastoParejo",
                 "Pasto/PastoAlter",
@@ -70,9 +126,24 @@ public class Grid {
                 "Pasto/PastoFlorRoja"
         };
 
-        for (int i = 0; i < tiles.size(); i++) {
-            tiles.get(i).get(0).setImage(Loader.getSprites().get(spriteNames[(int)(Math.random() * 5)]));
-        }
+        return Loader.getSprites().get(spriteNames[(int)(Math.random() * spriteNames.length)]);
+    }
+
+    private BufferedImage getStreetImage(int pos) {
+        BufferedImage street = Loader.getSprites().get("Calle/asfaltoLiso");
+
+        // BORDERS
+        if (pos == streetStart)
+            street = Loader.getSprites().get("Calle/asfaltoLadoIzq");
+        if (pos == streetEnd - 1)
+            street = Loader.getSprites().get("Calle/asfaltoLadoDer");
+
+        //LINES
+        int streetLength = streetEnd - streetStart;
+        if ((pos == (int)(streetStart + streetLength / 3) || pos == (int)((streetEnd - 1) - streetLength / 3)) && hasLine)
+            street = Loader.getSprites().get("Calle/asfaltoConLinea");
+
+        return street;
     }
 
     public int getX() {
@@ -89,6 +160,14 @@ public class Grid {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public void setStreetStart(int streetStart) {
+        this.streetStart = streetStart;
+    }
+
+    public void setStreetEnd(int streetEnd) {
+        this.streetEnd = streetEnd;
     }
 
     public int getTileSize() {

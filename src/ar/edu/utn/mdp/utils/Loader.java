@@ -22,11 +22,17 @@ public class Loader{
         paths.add("Autos/autoN3");
         paths.add("Autos/autoN4");
         paths.add("Autos/autoN5");
+
         paths.add("Pasto/PastoAlter");
         paths.add("Pasto/PastoAlter2");
         paths.add("Pasto/PastoFlorAmarilla");
         paths.add("Pasto/PastoFlorRoja");
         paths.add("Pasto/PastoParejo");
+
+        paths.add("Calle/asfaltoConLinea");
+        paths.add("Calle/asfaltoLadoDer");
+        paths.add("Calle/asfaltoLadoIzq");
+        paths.add("Calle/asfaltoLiso");
 
         for(String path: paths)
         {
