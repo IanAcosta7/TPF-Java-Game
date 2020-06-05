@@ -1,8 +1,10 @@
-package ar.edu.utn.mdp.content.component;
+package ar.edu.utn.mdp.content.component.drawable;
 
 import ar.edu.utn.mdp.content.component.Component;
 
-public class Text extends Component
+import java.awt.*;
+
+public class Text extends Component implements Drawable
 {
     private String texto;
 
@@ -23,4 +25,8 @@ public class Text extends Component
         this.texto = texto;
     }
 
+    @Override
+    public void draw(Graphics g) {
+        g.drawString(texto, x, y);
+    }
 }

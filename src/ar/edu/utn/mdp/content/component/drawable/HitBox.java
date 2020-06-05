@@ -1,4 +1,6 @@
-package ar.edu.utn.mdp.content.component;
+package ar.edu.utn.mdp.content.component.drawable;
+
+import ar.edu.utn.mdp.content.component.Component;
 
 public class HitBox extends Component {
     private boolean collision;

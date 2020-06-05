@@ -1,38 +1,26 @@
-package ar.edu.utn.mdp.content;
+package ar.edu.utn.mdp.content.component;
 
-import ar.edu.utn.mdp.content.component.*;
+import ar.edu.utn.mdp.content.Street;
+import ar.edu.utn.mdp.content.component.drawable.Sprite;
 import ar.edu.utn.mdp.utils.Loader;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class Grid {
-    private int x;
-    private int y;
+public class Grid extends Component {
     private int tileSize;
     private ArrayList<ArrayList<Sprite>> tiles;
-
-    private int streetStart;
-    private int streetEnd;
-
     private double counter;
-    private boolean hasLine;
-    private int lineEach;
-    private int lineLength;
-    private int streetCounter;
+    private Street street;
 
-    public Grid(int x, int y, int tileSize, int tileAmountX, int tileAmountY) {
+    public Grid(String name, int x, int y, int tileSize, int tileAmountX, int tileAmountY, Street street) {
+        super(name, x, y, 0, tileAmountX * tileSize, tileAmountY * tileSize);
         tiles = new ArrayList<>();
         this.x = x;
         this.y = y;
         this.tileSize = tileSize;
         this.counter = 0;
-        this.streetStart = 0;
-        this.streetEnd = 0;
-        this.hasLine = false;
-        this.lineEach = 12;
-        this.lineLength = 3;
-        this.streetCounter = 0;
+        this.street = street;
         init(tileAmountX, tileAmountY);
     }
 
@@ -56,30 +44,22 @@ public class Grid {
     private void setRowImages(int row, boolean start) {
         int i = 0;
 
-        if (streetStart < tiles.size() && streetEnd < tiles.size()) {
-
+        // SI HAY CALLE VALIDA
+        if (street.getStart() < tiles.size() && street.getEnd() < tiles.size()) {
             if (start) {
 
-            } else {
-                if (streetCounter > lineEach + lineLength)
-                    streetCounter = 0;
+            } else
+                street.count();
 
-                hasLine = streetCounter >= lineEach && streetCounter < lineEach + lineLength;
-
-                streetCounter++;
-            }
-
-            while (i < streetStart) {
+            while (i < street.getStart()) {
                 tiles.get(i).get(row).setImage(getRandomGrass());
                 i++;
             }
 
-            while (i < streetEnd) {
-                tiles.get(i).get(row).setImage(getStreetImage(i));
+            while (i < street.getEnd()) {
+                tiles.get(i).get(row).setImage(street.getStreetImage(i));
                 i++;
             }
-
-
         }
 
         while (i < tiles.size()) {
@@ -129,22 +109,7 @@ public class Grid {
         return Loader.getSprites().get(spriteNames[(int)(Math.random() * spriteNames.length)]);
     }
 
-    private BufferedImage getStreetImage(int pos) {
-        BufferedImage street = Loader.getSprites().get("Calle/asfaltoLiso");
 
-        // BORDERS
-        if (pos == streetStart)
-            street = Loader.getSprites().get("Calle/asfaltoLadoIzq");
-        if (pos == streetEnd - 1)
-            street = Loader.getSprites().get("Calle/asfaltoLadoDer");
-
-        //LINES
-        int streetLength = streetEnd - streetStart;
-        if ((pos == (int)(streetStart + streetLength / 3) || pos == (int)((streetEnd - 1) - streetLength / 3)) && hasLine)
-            street = Loader.getSprites().get("Calle/asfaltoConLinea");
-
-        return street;
-    }
 
     public int getX() {
         return x;
@@ -160,14 +125,6 @@ public class Grid {
 
     public void setY(int y) {
         this.y = y;
-    }
-
-    public void setStreetStart(int streetStart) {
-        this.streetStart = streetStart;
-    }
-
-    public void setStreetEnd(int streetEnd) {
-        this.streetEnd = streetEnd;
     }
 
     public int getTileSize() {

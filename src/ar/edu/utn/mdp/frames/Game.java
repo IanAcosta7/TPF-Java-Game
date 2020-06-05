@@ -1,6 +1,8 @@
 package ar.edu.utn.mdp.frames;
 
-import ar.edu.utn.mdp.content.Grid;
+import ar.edu.utn.mdp.content.Street;
+import ar.edu.utn.mdp.content.component.Grid;
+import ar.edu.utn.mdp.content.component.drawable.*;
 import ar.edu.utn.mdp.utils.Loader;
 import ar.edu.utn.mdp.content.component.*;
 import ar.edu.utn.mdp.content.component.Component;
@@ -17,7 +19,6 @@ public class Game extends JPanel {
     private final int maxFrameRate = 60;
     private Loader loader;
     private boolean running;
-    private Grid grid;
     private ComponentCollection<Component> components;
 
     public Game (int width, int height) {
@@ -25,7 +26,6 @@ public class Game extends JPanel {
         this.height = height;
         this.loader = new Loader();
         this.components = new ComponentCollection<>();
-        this.grid = new Grid(100, 0, 16, 30, 35);
         init();
     }
 
@@ -37,10 +37,11 @@ public class Game extends JPanel {
 
     private void setup() {
         // GRID
-        grid.setStreetStart(10);
-        grid.setStreetEnd(20);
+        Grid grid = new Grid("Grid", 100, 0, 16, 30, 35, new Street(10, 20, 12, 3));
         grid.setTiles();
+        components.set(grid);
 
+        // TODO CAMBIAR LA FORMA EN QUE SE MUESTRA
         for (int i = 0; i < grid.getTiles().size(); i++) {
             ArrayList<Sprite> tiles = grid.getTiles().get(i);
 
@@ -84,7 +85,7 @@ public class Game extends JPanel {
         textScore.setTexto(Integer.toString((int)player.getScore()));
         textSpeed.setTexto(Integer.toString((int)player.getSpeed()));
 
-        grid.update(player.getSpeed());
+        ((Grid)components.get("Grid")).update(player.getSpeed());
     }
 
     public void paintComponent(Graphics g) {
