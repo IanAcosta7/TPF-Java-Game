@@ -39,13 +39,14 @@ public class Game extends JPanel {
         // GRID
         for (ArrayList<Sprite> tiles : grid.getTiles()) {
             String[] spriteNames = {
-                    "PastoParejo",
-                    "PastoAlter",
-                    "PastoFlorAmarilla",
-                    "PastoFlorRoja"
+                    "Pasto/PastoParejo",
+                    "Pasto/PastoAlter",
+                    "Pasto/PastoAlter2",
+                    "Pasto/PastoFlorAmarilla",
+                    "Pasto/PastoFlorRoja"
             };
 
-            tiles.forEach((Sprite tile)-> tile.setImage(Loader.getSprites().get(spriteNames[(int)(Math.random() * 4)])));
+            tiles.forEach((Sprite tile)-> tile.setImage(Loader.getSprites().get(spriteNames[(int)(Math.random() * 5)])));
         }
 
 
@@ -67,8 +68,8 @@ public class Game extends JPanel {
         components.set(new Text("Km/h ", (width-width/5) + 80, (height-height/3)+30, 0, 80, 40,"km/h"));
 
         // PLAYER
-        components.set(new Car("Car", width/3 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1", new HitBox("Car", width/3 - 50/2 + 50/4,height/2 - 50/2, 0, 50/2,50)));
-        components.set(new Player("Player", width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "autoN1", new HitBox("Player", width/2 - 50/2 + 50/4,height/2 - 50/2, 0, 50/2,50), 1, 1000, 0));
+        components.set(new Car("Car", width/3 - 50/2, height/2 - 50/2, 0, 50, 50, "Autos/autoN2", new HitBox("Car", width/3 - 50/2 + 50/4,height/2 - 50/2, 0, 50/2,50)));
+        components.set(new Player("Player", width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "Autos/autoN1", new HitBox("Player", width/2 - 50/2 + 50/4,height/2 - 50/2, 0, 50/2,50), 1, 1000, 0));
     }
 
 

@@ -27,7 +27,10 @@ public class Grid {
         for (int i = 0; i < tileAmountX; i++) {
             tiles.add(new ArrayList<>());
             for (int j = 0; j < tileAmountY; j++) {
-                tiles.get(i).add(new Sprite(Integer.toString(i) + Integer.toString(j), x + i * tileSize, y + j * tileSize, 0, tileSize, tileSize));
+                StringBuilder sb = new StringBuilder();
+                sb.append(i);
+                sb.append(j);
+                tiles.get(i).add(new Sprite(sb.toString(), x + i * tileSize, y + j * tileSize, 0, tileSize, tileSize));
             }
         }
     }
@@ -63,14 +66,15 @@ public class Grid {
 
     private void generateNewSprites() {
         String[] spriteNames = {
-                "PastoParejo",
-                "PastoAlter",
-                "PastoFlorAmarilla",
-                "PastoFlorRoja"
+                "Pasto/PastoParejo",
+                "Pasto/PastoAlter",
+                "Pasto/PastoAlter2",
+                "Pasto/PastoFlorAmarilla",
+                "Pasto/PastoFlorRoja"
         };
 
         for (int i = 0; i < tiles.size(); i++) {
-            tiles.get(i).get(0).setImage(Loader.getSprites().get(spriteNames[(int)(Math.random() * 4)]));
+            tiles.get(i).get(0).setImage(Loader.getSprites().get(spriteNames[(int)(Math.random() * 5)]));
         }
     }
 

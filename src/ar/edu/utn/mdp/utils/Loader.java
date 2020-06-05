@@ -17,17 +17,16 @@ public class Loader{
     public void loadAll()
     {
         ArrayList<String> paths= new ArrayList<>();
-        paths.add("autoN1");
-        paths.add("autoN2");
-        paths.add("autoN3");
-        paths.add("autoN4");
-        paths.add("autoN5");
-        paths.add("pastoFinal");
-        paths.add("PastoAlter");
-        paths.add("PastoAlter2");
-        paths.add("PastoFlorAmarilla");
-        paths.add("PastoFlorRoja");
-        paths.add("PastoParejo");
+        paths.add("Autos/autoN1");
+        paths.add("Autos/autoN2");
+        paths.add("Autos/autoN3");
+        paths.add("Autos/autoN4");
+        paths.add("Autos/autoN5");
+        paths.add("Pasto/PastoAlter");
+        paths.add("Pasto/PastoAlter2");
+        paths.add("Pasto/PastoFlorAmarilla");
+        paths.add("Pasto/PastoFlorRoja");
+        paths.add("Pasto/PastoParejo");
 
         for(String path: paths)
         {
