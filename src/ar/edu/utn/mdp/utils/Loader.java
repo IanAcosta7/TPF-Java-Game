@@ -22,6 +22,8 @@ public class Loader{
         paths.add("Autos/autoN3");
         paths.add("Autos/autoN4");
         paths.add("Autos/autoN5");
+        paths.add("Autos/camion");
+
 
         paths.add("Pasto/PastoAlter");
         paths.add("Pasto/PastoAlter2");
