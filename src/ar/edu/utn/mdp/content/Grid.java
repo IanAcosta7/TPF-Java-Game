@@ -27,10 +27,7 @@ public class Grid {
         for (int i = 0; i < tileAmountX; i++) {
             tiles.add(new ArrayList<>());
             for (int j = 0; j < tileAmountY; j++) {
-                StringBuilder sb = new StringBuilder();
-                sb.append(i);
-                sb.append(j);
-                tiles.get(i).add(new Sprite(sb.toString(), x + i * tileSize, y + j * tileSize, 0, tileSize, tileSize));
+                tiles.get(i).add(new Sprite(i + "-" + j, x + i * tileSize, y + j * tileSize, 0, tileSize, tileSize));
             }
         }
     }
