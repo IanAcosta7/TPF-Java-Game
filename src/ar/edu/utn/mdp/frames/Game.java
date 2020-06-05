@@ -1,6 +1,7 @@
 package ar.edu.utn.mdp.frames;
 
-import ar.edu.utn.mdp.content.Grid;
+import ar.edu.utn.mdp.content.Street;
+import ar.edu.utn.mdp.content.component.Grid;
 import ar.edu.utn.mdp.utils.Loader;
 import ar.edu.utn.mdp.content.component.*;
 import ar.edu.utn.mdp.content.component.Component;
@@ -35,9 +36,7 @@ public class Game extends JPanel {
 
     private void setup() {
         // GRID
-        Grid grid = new Grid("Grid", 100, 0, 16, 30, 35);
-        grid.setStreetStart(10);
-        grid.setStreetEnd(20);
+        Grid grid = new Grid("Grid", 100, 0, 16, 30, 35, new Street(10, 20, 12, 3));
         grid.setTiles();
         components.set(grid);
 
