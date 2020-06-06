@@ -47,7 +47,7 @@ public class Grid extends Component {
         // SI HAY CALLE VALIDA
         if (street.getStart() < tiles.size() && street.getEnd() < tiles.size()) {
             if (start) {
-
+                // CODIGO DE COMIENZO DE CARRERA
             } else
                 street.count();
 
@@ -72,10 +72,8 @@ public class Grid extends Component {
 
         if (counter > 400) {
             moveTiles();
-            setRowImages(0, false);
             if (speed > 50) {
                 moveTiles();
-                setRowImages(0, false);
             }
             counter = 0;
         }
@@ -84,13 +82,39 @@ public class Grid extends Component {
     }
 
     private void moveTiles() {
-        for (int i = 0; i < tiles.size(); i++) {
-            BufferedImage prevImage = null;
-            for (int j = 0; j < tiles.get(i).size(); j++) {
-                BufferedImage aux = tiles.get(i).get(j).getImage();
+        boolean move = false;
 
-                if (prevImage != null)
-                    tiles.get(i).get(j).setImage(prevImage);
+        for (ArrayList<Sprite> tile : tiles) {
+
+            for (int j = 0; j < tile.size(); j++) {
+                Sprite sprite = tile.get(j);
+
+
+                if (sprite.getY() < y + tileSize * (j + 1)) {
+                    sprite.setY(sprite.getY() + 1);
+                    move = false;
+                }
+                else {
+                    sprite.setY(y + tileSize * j);
+
+                    // Move the tiles
+                    move = true;
+                }
+            }
+        }
+        if (move)
+            moveImages();
+    }
+
+    private void moveImages() {
+        setRowImages(0, false);
+
+        for (ArrayList<Sprite> tile : tiles) {
+            BufferedImage prevImage = tile.get(0).getImage();
+            for (int j = 1; j < tile.size(); j++) {
+                BufferedImage aux = tile.get(j).getImage();
+
+                tile.get(j).setImage(prevImage);
 
                 prevImage = aux;
             }
