@@ -60,13 +60,16 @@ public class Game extends JPanel {
         components.set(new Text("Km/h ", (width-width/5) + 80, (height-height/3) + 30, 0, 80, 40,"km/h"));
 
         // PLAYER
-        components.set(new Car("Car", width/3 - 50/2, height/2 - 50/2, 0, 50, 50, "Autos/autoN2", new HitBox("Car", width/3 - 50/2 + 50/4,height/2 - 50/2, 0, 50/2,50)));
+        components.set(new CarEnemy("Car", width/3 - 50/2, height/2 - 50/2, 0, 50, 50, "Autos/autoN2", new HitBox("Car", width/3 - 50/2 + 50/4,height/2 - 50/2, 0, 50/2,50),2));
         components.set(new Player("Player", width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "Autos/autoN1", new HitBox("Player", width/2 - 50/2 + 50/4,height/2 - 50/2, 0, 50/2,50), 1, 1000, 0));
     }
 
 
+
     private void draw() {
         Player player = (Player)components.get("Player");
+        CarEnemy carEnemy = (CarEnemy)components.get("Car");
+        carEnemy.moveCar(player.getSpeed());
 
         HitBox.hitboxCollision(player.getHitBox(), ((Car)components.get("Car")).getHitBox());
 
@@ -77,6 +80,7 @@ public class Game extends JPanel {
         player.fuelConsumed();
         player.scoreCounter();
 
+        //System.out.println(((Car) components.get("Car")).getSpeed());
         Text textFuel = (Text)components.get("NumCombustible");
         Text textScore = (Text)components.get("NumScore");
         Text textSpeed = (Text)components.get("NumVelocidad");
