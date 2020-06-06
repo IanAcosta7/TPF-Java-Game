@@ -11,6 +11,7 @@ public class Grid extends Component {
     private int tileSize;
     private ArrayList<ArrayList<Sprite>> tiles;
     private double counter;
+    private int firstRow;
     private Street street;
 
     public Grid(String name, int x, int y, int tileSize, int tileAmountX, int tileAmountY, Street street) {
@@ -20,6 +21,7 @@ public class Grid extends Component {
         this.y = y;
         this.tileSize = tileSize;
         this.counter = 0;
+        this.firstRow = 0;
         this.street = street;
         init(tileAmountX, tileAmountY);
     }
@@ -70,53 +72,26 @@ public class Grid extends Component {
 
     public void update(double speed) {
 
-        if (counter > 400) {
-            moveTiles();
-            if (speed > 50) {
-                moveTiles();
-            }
-            counter = 0;
-        }
-
-        counter += speed;
-    }
-
-    private void moveTiles() {
-        boolean move = false;
-
-        for (ArrayList<Sprite> tile : tiles) {
+        for (int i = 0; i < tiles.size(); i++) {
+            ArrayList<Sprite> tile = tiles.get(i);
 
             for (int j = 0; j < tile.size(); j++) {
                 Sprite sprite = tile.get(j);
+                double pixelPerSpeed = (1d / 10d) * speed;
 
+                if (sprite.getY() + tileSize <= height) {
 
-                if (sprite.getY() < y + tileSize * (j + 1)) {
-                    sprite.setY(sprite.getY() + 1);
-                    move = false;
+                    sprite.setY(sprite.getY() + (int) Math.round(pixelPerSpeed));
+                } else {
+                    sprite.setY(sprite.getY() - height + (int)Math.round(pixelPerSpeed));
+                    //sprite.setY(tile.get(firstRow).getY() - tileSize + (int)Math.round(pixelPerSpeed));
+                    //sprite.setY(y + (int)Math.round(pixelPerSpeed));
+
+                    if (i == tiles.size() - 1) {
+                        setRowImages(j, false);
+                        //firstRow = j;
+                    }
                 }
-                else {
-                    sprite.setY(y + tileSize * j);
-
-                    // Move the tiles
-                    move = true;
-                }
-            }
-        }
-        if (move)
-            moveImages();
-    }
-
-    private void moveImages() {
-        setRowImages(0, false);
-
-        for (ArrayList<Sprite> tile : tiles) {
-            BufferedImage prevImage = tile.get(0).getImage();
-            for (int j = 1; j < tile.size(); j++) {
-                BufferedImage aux = tile.get(j).getImage();
-
-                tile.get(j).setImage(prevImage);
-
-                prevImage = aux;
             }
         }
     }
