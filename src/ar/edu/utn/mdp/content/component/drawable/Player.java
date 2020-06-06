@@ -4,7 +4,6 @@ import ar.edu.utn.mdp.utils.Input;
 
 public class Player extends Car {
 
-    private double speed;
     private double fuel;
     private double score;
 
@@ -12,21 +11,14 @@ public class Player extends Car {
 
 
     public Player(String name, int x, int y, int rotation, int width, int height, String image, HitBox hitBox, double speed, double fuel, double score) {
-        super(name, x, y, rotation, width, height, image, hitBox);
-        this.speed = speed;
+        super(name, x, y, rotation, width, height, image, hitBox, speed);
         this.fuel = fuel;
         this.score = score;
     }
 
     //**************************GetsAndSets**************************************
 
-    public double getSpeed() {
-        return speed;
-    }
 
-    public void setSpeed(double speed) {
-        this.speed = speed;
-    }
 
     public double getFuel() {
         return fuel;
@@ -48,15 +40,15 @@ public class Player extends Car {
     //***************************Metods******************************************
     public void scoreCounter()
     {
-        if(speed>0)
+        if(getSpeed()>0)
         {
-            setScore(score+(speed*0.0005));
+            setScore(score+(getSpeed()*0.0005));
         }
     }
 
     public void fuelConsumed()
     {
-        if(speed>0 && fuel>0)
+        if(getSpeed()>0 && fuel>0)
         {
             setFuel(getFuel()-0.05);
         }
@@ -64,27 +56,27 @@ public class Player extends Car {
 
     public void move()
     {
-        if(speed>0.99){
+        if(getSpeed()>0.99){
             if (Input.getKey(37))
                 setX(getX() - 1);
             if (Input.getKey(39))
                 setX(getX() + 1);
         }
         if(fuel>0){
-            if (Input.getKey(38) && (speed < 400)){
-                if(speed<=100)
+            if (Input.getKey(38) && (getSpeed() < 400)){
+                if(getSpeed()<=100)
                     setSpeed(getSpeed()+getSpeed()/40);
                 else
                     setSpeed(getSpeed()+getSpeed()/150);
 
-            } else if (speed > 301)
+            } else if (getSpeed() > 301)
                 setSpeed(getSpeed() - 1);
-            if (Input.getKey(40) && (speed > 101))
+            if (Input.getKey(40) && (getSpeed() > 101))
                 setSpeed(getSpeed() - 0.75);
-        } else if(speed>=1)
-            setSpeed(speed-(speed/60));
+        } else if(getSpeed()>=1)
+            setSpeed(getSpeed()-(getSpeed()/60));
         else
-            speed=0;
+            setSpeed(0);
     }
 
     public void editSpeedCollision()
