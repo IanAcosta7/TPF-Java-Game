@@ -11,14 +11,8 @@ public class CarEnemy extends Car{
 
 
     public void moveCar(double speedAuto){
+        double var = (1d/20d) * speedAuto - 10;
 
-        double var = 2/(1+Math.pow(1.01,-speedAuto+200))-1;
-
-        setY((int)(getY()+((speedAuto*0.02*var)-getSpeed())));
-
-
-
-
-
+        setY((int)Math.round(getY()+var));
     }
 }

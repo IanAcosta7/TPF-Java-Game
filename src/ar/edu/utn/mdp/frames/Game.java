@@ -60,7 +60,7 @@ public class Game extends JPanel {
         components.set(new Text("Km/h ", (width-width/5) + 80, (height-height/3) + 30, 0, 80, 40,"km/h"));
 
         // PLAYER
-        components.set(new CarEnemy("Car", width/3 - 50/2, height/2 - 50/2, 0, 50, 50, "Autos/autoN2", new HitBox("Car", width/3 - 50/2 + 50/4,height/2 - 50/2, 0, 50/2,50),2));
+        components.set(new CarEnemy("Car", width/3 - 50/2, height/2 - 50/2, 0, 50, 50, "Autos/autoN2", new HitBox("Car", width/3 - 50/2 + 50/4,height/2 - 50/2, 0, 50/2,50),1));
         components.set(new Player("Player", width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "Autos/autoN1", new HitBox("Player", width/2 - 50/2 + 50/4,height/2 - 50/2, 0, 50/2,50), 1, 1000, 0));
     }
 
