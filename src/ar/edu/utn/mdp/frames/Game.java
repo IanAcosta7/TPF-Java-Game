@@ -8,7 +8,10 @@ import ar.edu.utn.mdp.content.component.*;
 import ar.edu.utn.mdp.content.component.Component;
 
 import javax.swing.*;
+import javax.swing.Timer;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.*;
 
@@ -59,18 +62,40 @@ public class Game extends JPanel {
         components.set(new Text("Km/h ", (width-width/5) + 80, (height-height/3) + 30, 0, 80, 40,"km/h"));
 
         // PLAYER
-        components.set(new CarEnemy("Car", width/3 - 50/2, height/2 - 50/2, 0, 50, 50, "Autos/autoN2", new HitBox("Car", width/3 - 50/2 + 50/4,height/2 - 50/2, 0, 50/2,50),1));
+
         components.set(new Player("Player", width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "Autos/autoN1", new HitBox("Player", width/2 - 50/2 + 50/4,height/2 - 50/2, 0, 50/2,50), 1, 1000, 0));
+
+
+        Timer timer = new Timer(5000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            components.set(new CarEnemy("enemy" + CarEnemy.getNumber(),-100, 0, 50, 50, "Autos/autoN2", new HitBox("Car", width / 3 - 50 / 2 + 50 / 4, -100, 0, 50 / 2, 50), 1));
+
+            }
+        });
+        timer.start();
+
+
     }
 
 
 
     private void draw() {
         Player player = (Player)components.get("Player");
-        CarEnemy carEnemy = (CarEnemy)components.get("Car");
-        carEnemy.moveCar(player.getSpeed());
+        ComponentCollection<CarEnemy> enemys = new ComponentCollection<>();
 
-        HitBox.hitboxCollision(player.getHitBox(), ((Car)components.get("Car")).getHitBox());
+        for(int i =0; i< CarEnemy.getNumber(); i++){
+            enemys.set((CarEnemy)components.get("enemy" + i));
+        }
+
+        for(int i =0; i<enemys.size(); i++){
+            CarEnemy carEnemy = (CarEnemy)enemys.get("enemy" + i);
+            if(carEnemy != null){
+                carEnemy.moveCar(player.getSpeed());
+                HitBox.hitboxCollision(player.getHitBox(), carEnemy.getHitBox());
+            }
+        }
+
 
         player.move();
 

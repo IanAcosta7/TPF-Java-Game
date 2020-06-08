@@ -71,4 +71,8 @@ public class ComponentCollection <T extends Component> {
 
     }
 
+    public int size(){
+        return components.size();
+    }
+
 }
