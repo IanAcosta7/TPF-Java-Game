@@ -14,5 +14,7 @@ public class CarEnemy extends Car{
         double var = (1d/20d) * speedAuto - 10;
 
         setY((int)Math.round(getY()+var));
+        getHitBox().setY(getY());
     }
+
 }
