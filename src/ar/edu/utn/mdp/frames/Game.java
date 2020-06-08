@@ -37,8 +37,7 @@ public class Game extends JPanel {
 
     private void setup() {
         // GRID
-        Grid grid = new Grid("Grid", 100, 0, 16, 30, 35, new Street(10, 20, 12, 3));
-        grid.setTiles();
+        Grid grid = new Grid("Grid", 100, -64, 16, 30, 50, new Street(10, 20, 12, 3));
         components.set(grid);
 
         // TODO CAMBIAR LA FORMA EN QUE SE MUESTRA

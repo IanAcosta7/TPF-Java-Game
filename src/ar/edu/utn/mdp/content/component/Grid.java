@@ -9,17 +9,13 @@ import java.util.ArrayList;
 
 public class Grid extends Component {
     private int tileSize;
-    private ArrayList<ArrayList<Sprite>> tiles;
-    private double counter;
-    private Street street;
+    private final ArrayList<ArrayList<Sprite>> tiles;
+    private final Street street;
 
     public Grid(String name, int x, int y, int tileSize, int tileAmountX, int tileAmountY, Street street) {
         super(name, x, y, 0, tileAmountX * tileSize, tileAmountY * tileSize);
         tiles = new ArrayList<>();
-        this.x = x;
-        this.y = y;
         this.tileSize = tileSize;
-        this.counter = 0;
         this.street = street;
         init(tileAmountX, tileAmountY);
     }
@@ -31,14 +27,14 @@ public class Grid extends Component {
                 tiles.get(i).add(new Sprite(i + "-" + j, x + i * tileSize, y + j * tileSize, 0, tileSize, tileSize));
             }
         }
+
+        setAllImages();
     }
 
-    public void setTiles() {
-        for (ArrayList<Sprite> tile : tiles) {
-            for (int i = 0; i < tile.size(); i++) {
+    private void setAllImages() {
+            for (int i = 0; i < tiles.get(0).size(); i++) {
                 setRowImages(i, true);
             }
-        }
     }
 
     private void setRowImages(int row, boolean start) {
@@ -47,7 +43,7 @@ public class Grid extends Component {
         // SI HAY CALLE VALIDA
         if (street.getStart() < tiles.size() && street.getEnd() < tiles.size()) {
             if (start) {
-
+                // Imagenes del comienzo del mapa
             } else
                 street.count();
 
@@ -70,29 +66,23 @@ public class Grid extends Component {
 
     public void update(double speed) {
 
-        if (counter > 400) {
-            moveTiles();
-            setRowImages(0, false);
-            if (speed > 50) {
-                moveTiles();
-                setRowImages(0, false);
-            }
-            counter = 0;
-        }
-
-        counter += speed;
-    }
-
-    private void moveTiles() {
         for (int i = 0; i < tiles.size(); i++) {
-            BufferedImage prevImage = null;
-            for (int j = 0; j < tiles.get(i).size(); j++) {
-                BufferedImage aux = tiles.get(i).get(j).getImage();
+            ArrayList<Sprite> tile = tiles.get(i);
 
-                if (prevImage != null)
-                    tiles.get(i).get(j).setImage(prevImage);
+            for (int j = 0; j < tile.size(); j++) {
+                Sprite sprite = tile.get(j);
 
-                prevImage = aux;
+                final double portion = 0.1;
+                double pixelPerSpeed = portion * speed; // La grid se mueve una porcion de la velocidad del jugador.
+
+                if (sprite.getY() + tileSize <= y + height) {
+                    sprite.setY(sprite.getY() + (int) Math.round(pixelPerSpeed)); // Se mueven los tiles de a N pixeles
+                } else {
+                    sprite.setY((sprite.getY() + tileSize) - height + (int)Math.round(pixelPerSpeed)); // Cuando llegan al limite van al inicio otra vez
+
+                    if (i == tiles.size() - 1) // Si es la ultima columna
+                        setRowImages(j, false); // Se setean nuevas imagenes aleatorias para toda la fila
+                }
             }
         }
     }
@@ -108,8 +98,6 @@ public class Grid extends Component {
 
         return Loader.getSprites().get(spriteNames[(int)(Math.random() * spriteNames.length)]);
     }
-
-
 
     public int getX() {
         return x;
@@ -129,14 +117,6 @@ public class Grid extends Component {
 
     public int getTileSize() {
         return tileSize;
-    }
-
-    public void setTileSize(int tileSize) {
-        this.tileSize = tileSize;
-    }
-
-    public Sprite getTile(int x, int y) {
-        return tiles.get(x).get(y);
     }
 
     public ArrayList<ArrayList<Sprite>> getTiles() {
