@@ -91,14 +91,14 @@ public class Player extends Car {
         }
         else if(girar)
         {
-
             if(counter<paso)
             {
-                if(counter%2==0)
-                {
-                    carSpin(velocidadInicial, paso);
-                }
+
+                carSpin(velocidadInicial, paso);
                 counter=counter+1;
+
+                if (counter == paso - 1)
+                    getHitBox().setCollision(false);
             }
             else
             {
@@ -109,17 +109,16 @@ public class Player extends Car {
         }
         else
         {
-            getHitBox().setCollision(false);
             girar=true;
             velocidadInicial=getSpeed();
         }
     }
 
-    private void carSpin(double velocidadInicial,int paso)
+    private void carSpin(double velocidadInicial, int paso)
     {
             setX(getX()+1);
-            setRotation(getRotation()+(720/paso));
-            setSpeed(getSpeed()-((velocidadInicial*0.5)/paso));
+            setRotation(getRotation()+(720/paso)); // 720 por 2 vueltas
+            setSpeed(getSpeed()-((velocidadInicial*0.9)/paso)); // se frena un 90%
     }
 
     public void editSpeedCollision()
