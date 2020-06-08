@@ -48,6 +48,10 @@ public abstract class Component
         this.height = height;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }
