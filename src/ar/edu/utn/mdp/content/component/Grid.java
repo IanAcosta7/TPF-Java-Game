@@ -9,17 +9,13 @@ import java.util.ArrayList;
 
 public class Grid extends Component {
     private int tileSize;
-    private ArrayList<ArrayList<Sprite>> tiles;
-    private double counter;
-    private int firstRow;
-    private Street street;
+    private final ArrayList<ArrayList<Sprite>> tiles;
+    private final Street street;
 
     public Grid(String name, int x, int y, int tileSize, int tileAmountX, int tileAmountY, Street street) {
         super(name, x, y, 0, tileAmountX * tileSize, tileAmountY * tileSize);
         tiles = new ArrayList<>();
         this.tileSize = tileSize;
-        this.counter = 0;
-        this.firstRow = 0;
         this.street = street;
         init(tileAmountX, tileAmountY);
     }
@@ -121,14 +117,6 @@ public class Grid extends Component {
 
     public int getTileSize() {
         return tileSize;
-    }
-
-    public void setTileSize(int tileSize) {
-        this.tileSize = tileSize;
-    }
-
-    public Sprite getTile(int x, int y) {
-        return tiles.get(x).get(y);
     }
 
     public ArrayList<ArrayList<Sprite>> getTiles() {
