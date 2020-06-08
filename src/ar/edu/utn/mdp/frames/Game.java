@@ -74,7 +74,7 @@ public class Game extends JPanel {
 
         player.move();
 
-        player.editSpeedCollision();
+       //player.editSpeedCollision();
 
         player.fuelConsumed();
         player.scoreCounter();
