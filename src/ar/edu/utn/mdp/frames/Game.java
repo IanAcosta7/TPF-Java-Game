@@ -63,10 +63,10 @@ public class Game extends JPanel {
 
         // PLAYER
 
-        components.set(new Player("Player", width/2 - 50/2, height/2 - 50/2, 0, 50, 50, "Autos/autoN1", new HitBox("Player", width/2 - 50/2 + 50/4,height/2 - 50/2, 0, 50/2,50), 1, 1000, 0));
+        components.set(new Player("Player", width/2 - 85, height/2 + 75, 0, 50, 50, "Autos/autoN1", new HitBox("Player", width/2 - 85 + 50/4,height/2 + 75, 0, 50/2,50), 1, 1000, 0));
 
 
-        Timer timer = new Timer(5000, new ActionListener() {
+        Timer timer = new Timer(2500, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
             components.set(new CarEnemy("enemy" + CarEnemy.getNumber(),-100, 0, 50, 50, "Autos/autoN2", new HitBox("Car", width / 3 - 50 / 2 + 50 / 4, -100, 0, 50 / 2, 50), 1));

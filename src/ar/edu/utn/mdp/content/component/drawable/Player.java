@@ -69,9 +69,9 @@ public class Player extends Car {
         if(!getHitBox().isCollision()&&!girar){
             if (getSpeed() > 0.99) {
                 if (Input.getKey(37))
-                    setX(getX() - 1);
+                    setX(getX() - 3);
                 if (Input.getKey(39))
-                    setX(getX() + 1);
+                    setX(getX() + 3);
             }
             if (fuel > 0) {
                 if (Input.getKey(38) && (getSpeed() < 400)) {
