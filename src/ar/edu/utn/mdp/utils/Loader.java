@@ -36,6 +36,7 @@ public class Loader{
         paths.add("Calle/asfaltoLadoIzq");
         paths.add("Calle/asfaltoLiso");
 
+
         for(String path: paths)
         {
             load(path, "/"+path+".png");
