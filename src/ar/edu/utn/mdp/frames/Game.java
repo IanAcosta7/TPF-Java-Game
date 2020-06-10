@@ -81,8 +81,11 @@ public class Game extends JPanel {
 
 
     private void draw() {
+
+
         Player player = (Player)components.get("Player");
         ComponentCollection<CarEnemy> enemys = new ComponentCollection<>();
+
 
         for(int i =0; i< CarEnemy.getNumber(); i++){
             enemys.set((CarEnemy)components.get("enemy" + i));
@@ -98,6 +101,7 @@ public class Game extends JPanel {
 
 
         player.move();
+        player.invinsible();
 
        //player.editSpeedCollision();
 
