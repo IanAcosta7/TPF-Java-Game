@@ -70,21 +70,25 @@ public class Game extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
             components.set(new CarEnemy("enemy" + CarEnemy.getNumber(),-100, 0, 50, 50, "Autos/autoN2", new HitBox("Car", width / 3 - 50 / 2 + 50 / 4, -100, 0, 50 / 2, 50), 1));
-
+                if(CarEnemy.getNumber() > 5) {
+                    components.remove("enemy" + (CarEnemy.getNumber()-5));
+                }
             }
         });
         timer.start();
-
-
     }
-
 
 
     private void draw() {
         Player player = (Player)components.get("Player");
         ComponentCollection<CarEnemy> enemys = new ComponentCollection<>();
 
-        for(int i =0; i< CarEnemy.getNumber(); i++){
+//        for(int i = 0; i < 5; i++){
+//            if(components.indexOf("enemy" + (CarEnemy.getNumber() - i)) != -1)
+//            enemys.set((CarEnemy)components.get("enemy" + (CarEnemy.getNumber() - i)));
+//        }
+        for(int i = 0; i < CarEnemy.getNumber(); i++){
+            if(components.indexOf("enemy" + i ) != -1)
             enemys.set((CarEnemy)components.get("enemy" + i));
         }
 
@@ -94,6 +98,7 @@ public class Game extends JPanel {
                 carEnemy.moveCar(player.getSpeed());
                 HitBox.hitboxCollision(player.getHitBox(), carEnemy.getHitBox());
             }
+
         }
 
 

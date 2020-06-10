@@ -75,4 +75,9 @@ public class ComponentCollection <T extends Component> {
         return components.size();
     }
 
+
+    public void remove(String name) {
+        components.remove(indexOf(name));
+    }
+
 }
