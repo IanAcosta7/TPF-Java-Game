@@ -11,6 +11,7 @@ public class Player extends Car {
     private double score;
     private int counter;
     private boolean girar;
+    private boolean invinsible;
     double velocidadInicial=0;
     int paso=30;
 
@@ -23,11 +24,21 @@ public class Player extends Car {
         this.score = score;
         counter=0;
         girar=false;
+        invinsible=false;
     }
 
     //**************************GetsAndSets**************************************
 
 
+    public boolean isInvinsible()
+    {
+        return invinsible;
+    }
+
+    public void setInvinsible(boolean invinsible)
+    {
+        this.invinsible = invinsible;
+    }
 
     public double getFuel() {
         return fuel;
@@ -88,6 +99,15 @@ public class Player extends Car {
                 setSpeed(getSpeed() - (getSpeed() / 60));
             else
                 setSpeed(0);
+
+            if(invinsible){
+                if (counter < 100) {
+                    counter++;
+                } else {
+                    counter = 0;
+                    invinsible = false;
+                }
+            }
         }
         else if(girar)
         {
@@ -105,12 +125,31 @@ public class Player extends Car {
                 girar=false;
                 counter=0;
 
+
             }
         }
         else
         {
             girar=true;
+            invinsible=true;
             velocidadInicial=getSpeed();
+        }
+    }
+
+    public void invinsible()
+    {
+        if(invinsible)
+        {
+            getHitBox().setCollidable(false);
+            if(isDrawn())
+                setDrawn(false);
+            else
+                setDrawn(true);
+        }
+        else
+        {
+            getHitBox().setCollidable(true);
+            setDrawn(true);
         }
     }
 
@@ -119,6 +158,10 @@ public class Player extends Car {
             setX(getX()+1);
             setRotation(getRotation()+(720/paso)); // 720 por 2 vueltas
             setSpeed(getSpeed()-((velocidadInicial*0.9)/paso)); // se frena un 90%
+            /*if(isDrawn())
+                setDrawn(false);
+            else
+                setDrawn(true);*/
     }
 
     public void editSpeedCollision()
