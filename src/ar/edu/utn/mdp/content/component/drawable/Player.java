@@ -28,17 +28,32 @@ public class Player extends Car {
     //**************************GetsAndSets**************************************
 
 
-
+    /**
+     *
+     * @return Retorna el combutible
+     */
     public double getFuel() {
         return fuel;
     }
 
+    /**
+     * Setea el combustible
+     * @param fuel parametro para setear
+     */
     public void setFuel(double fuel) {
         this.fuel = fuel;
     }
 
+    /**
+     *
+     * @return Retorna la puntuacion del jugador.
+     */
     public double getScore() { return score; }
 
+    /**
+     *
+     * @param score Parametro para setear el puntaje
+     */
     public void setScore(double score) { this.score = score; }
 
     @Override
@@ -47,6 +62,10 @@ public class Player extends Car {
     }
 
     //***************************Metods******************************************
+
+    /**
+     * El metodo aumenta el puntaje segun la velocidad del jugador.
+     */
     public void scoreCounter()
     {
         if(getSpeed()>0)
@@ -55,6 +74,9 @@ public class Player extends Car {
         }
     }
 
+    /**
+     * El metodo reduce el nivel de combustible
+     */
     public void fuelConsumed()
     {
         if(getSpeed()>0 && fuel>0)
@@ -63,6 +85,9 @@ public class Player extends Car {
         }
     }
 
+    /**
+     * El metodo move determina movimiento del jugador, si puede desplazarce en eje X, velocidad por frenado, y si existe colision, lo hace girar.
+     */
     public void move()
     {
 
@@ -114,23 +139,16 @@ public class Player extends Car {
         }
     }
 
+    /**
+     * Metodo que hace que el auto gire.
+     * @param velocidadInicial Velocidad a la que va el jugador.
+     * @param paso Determina cuantos pasos durara la rotacion del auto.
+     */
     private void carSpin(double velocidadInicial, int paso)
     {
             setX(getX()+1);
             setRotation(getRotation()+(720/paso)); // 720 por 2 vueltas
             setSpeed(getSpeed()-((velocidadInicial*0.9)/paso)); // se frena un 90%
-    }
-
-    public void editSpeedCollision()
-    {
-        if(getHitBox().isCollision()){
-            if(getSpeed()>=100) {
-                setSpeed(getSpeed() * 0.90);
-            }else{
-                setSpeed(getSpeed() * 0.98);
-            }
-            getHitBox().setCollision(false);
-        }
     }
 
     @Override
@@ -141,14 +159,4 @@ public class Player extends Car {
         ((Graphics2D)g).drawImage(super.getImage(), at,null);
 
     }
-
-    public void editFuel(){
-
-    }
-
-    public void editScore(){
-
-    }
-
-
 }
