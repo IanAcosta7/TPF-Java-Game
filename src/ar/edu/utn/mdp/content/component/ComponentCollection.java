@@ -31,6 +31,18 @@ public class ComponentCollection <T extends Component> {
         return found;
     }
 
+    public Component get(int i) {
+        Component found;
+
+        try {
+            found = components.get(i);
+        } catch (IndexOutOfBoundsException e) {
+            found = null;
+        }
+
+        return found;
+    }
+
     public void set(T component) {
         if (indexOf(component.getName()) >= 0) {
             components.set(indexOf(component.getName()), component);
