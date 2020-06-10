@@ -1,22 +1,27 @@
 package ar.edu.utn.mdp.content.component;
 
-import ar.edu.utn.mdp.content.Street;
+import ar.edu.utn.mdp.content.tileset.side.Side;
+import ar.edu.utn.mdp.content.tileset.Street;
 import ar.edu.utn.mdp.content.component.drawable.Sprite;
-import ar.edu.utn.mdp.utils.Loader;
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Grid extends Component {
     private int tileSize;
     private final ArrayList<ArrayList<Sprite>> tiles;
+    private final Side leftSide;
+    private final Side rightSide;
     private final Street street;
 
-    public Grid(String name, int x, int y, int tileSize, int tileAmountX, int tileAmountY, Street street) {
+    public Grid(String name, int x, int y, int tileSize, int tileAmountX, int tileAmountY, Side leftSide, Side rightSide, Street street) {
         super(name, x, y, 0, tileAmountX * tileSize, tileAmountY * tileSize);
+
         tiles = new ArrayList<>();
         this.tileSize = tileSize;
+        this.leftSide = leftSide;
+        this.rightSide = rightSide;
         this.street = street;
+
         init(tileAmountX, tileAmountY);
     }
 
@@ -28,15 +33,25 @@ public class Grid extends Component {
             }
         }
 
-        setAllImages();
+        setImages();
+        //setAllImages();
     }
 
+    private void setImages() {
+        leftSide.setTiles(new ArrayList<>(tiles.subList(0, street.getStart())));
+        rightSide.setTiles(new ArrayList<>(tiles.subList(street.getEnd(), tiles.size())));
+        street.setTiles(new ArrayList<>(tiles.subList(street.getStart(), street.getEnd())));
+    }
+
+    /*
     private void setAllImages() {
-            for (int i = 0; i < tiles.get(0).size(); i++) {
-                setRowImages(i, true);
-            }
+        for (int i = 0; i < tiles.get(0).size(); i++) {
+            setRowImages(i, true);
+        }
     }
+    */
 
+    /*
     private void setRowImages(int row, boolean start) {
         int i = 0;
 
@@ -62,7 +77,7 @@ public class Grid extends Component {
             tiles.get(i).get(row).setImage(getRandomGrass());
             i++;
         }
-    }
+    }*/
 
     public void update(double speed) {
 
@@ -80,23 +95,14 @@ public class Grid extends Component {
                 } else {
                     sprite.setY((sprite.getY() + tileSize) - height + (int)Math.round(pixelPerSpeed)); // Cuando llegan al limite van al inicio otra vez
 
+
+                    /*
                     if (i == tiles.size() - 1) // Si es la ultima columna
                         setRowImages(j, false); // Se setean nuevas imagenes aleatorias para toda la fila
+                     */
                 }
             }
         }
-    }
-
-    private BufferedImage getRandomGrass() {
-        String[] spriteNames = {
-                "Pasto/PastoParejo",
-                "Pasto/PastoAlter",
-                "Pasto/PastoAlter2",
-                "Pasto/PastoFlorAmarilla",
-                "Pasto/PastoFlorRoja"
-        };
-
-        return Loader.getSprites().get(spriteNames[(int)(Math.random() * spriteNames.length)]);
     }
 
     public int getX() {
