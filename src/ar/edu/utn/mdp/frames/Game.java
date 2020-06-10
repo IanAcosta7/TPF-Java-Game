@@ -83,19 +83,19 @@ public class Game extends JPanel {
     private void draw() {
         Player player = (Player)components.get("Player");
         ComponentCollection<CarEnemy> enemys = new ComponentCollection<>();
-        System.out.println(CarEnemy.getNumber());
 
-            for (int i = 0; i < CarEnemy.getNumber(); i++) {
-                enemys.set((CarEnemy) components.get("enemy" + i));
-            }
-            for (int i = 0; i < enemys.size(); i++) {
-                CarEnemy carEnemy = (CarEnemy) enemys.get("enemy" + i);
-                if (carEnemy != null) {
-                    carEnemy.moveCar(player.getSpeed());
-                    HitBox.hitboxCollision(player.getHitBox(), carEnemy.getHitBox());
 
-                }
+        for(int i =0; i< CarEnemy.getNumber(); i++){
+            enemys.set((CarEnemy)components.get("enemy" + i));
+        }
+
+        for(int i =0; i<enemys.size(); i++){
+            CarEnemy carEnemy = (CarEnemy)enemys.get("enemy" + i);
+            if(carEnemy != null){
+                carEnemy.moveCar(player.getSpeed());
+                HitBox.hitboxCollision(player.getHitBox(), carEnemy.getHitBox());
             }
+        }
         player.move();
 
        //player.editSpeedCollision();
