@@ -102,8 +102,8 @@ public class Game extends JPanel {
                 HitBox.hitboxCollision(player.getHitBox(), carEnemy.getHitBox());
             }
         }
-
-
+        
+        
         player.move();
         player.invinsible();
 

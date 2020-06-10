@@ -20,6 +20,10 @@ public class Text extends Component implements Drawable
         return texto;
     }
 
+    /**
+     * Establece el texto pasado por parametro.
+     * @param texto
+     */
     public void setTexto(String texto)
     {
         this.texto = texto;

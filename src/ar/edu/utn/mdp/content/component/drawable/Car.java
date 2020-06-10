@@ -10,18 +10,34 @@ public class Car extends Sprite {
         this.speed = speed;
     }
 
+    /**
+     *
+     * @return Retorna la HitBox del auto
+     */
     public HitBox getHitBox() {
         return hitBox;
     }
 
+    /**
+     *
+     * @return Retorna la velocidad del auto
+     */
     public double getSpeed() {
         return speed;
     }
 
+    /**
+     *
+     * @param speed Establece la velocidad del auto
+     */
     public void setSpeed(double speed) {
         this.speed = speed;
     }
 
+    /**
+     *
+     * @param x Establece en el eje X a el auto
+     */
     @Override
     public void setX(int x) {
         super.setX(x);

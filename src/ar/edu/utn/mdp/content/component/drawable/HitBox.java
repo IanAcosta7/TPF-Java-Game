@@ -12,14 +12,27 @@ public class HitBox extends Component {
         this.collidable = true;
     }
 
+    /**
+     *
+     * @param collision Setea Collision con un boolean
+     */
     public void setCollision(boolean collision) {
         this.collision = collision;
     }
 
+    /**
+     * Determina si se esta colisionando
+     * @return Retorna un boolean
+     */
     public boolean isCollision() {
         return collision;
     }
 
+    /**
+     * El metodo compara dos HitBox y Establece true si hay colision.
+     * @param hitBox1 Parametro de HitBox a comparar
+     * @param hitBox2 Parametro de HitBox a comparar
+     */
     public static void hitboxCollision(HitBox hitBox1, HitBox hitBox2){
 
         if(hitBox1.collidable && hitBox2.collidable){

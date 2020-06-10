@@ -15,6 +15,10 @@ public class CarEnemy extends Car{
         //super.setName(generateRandomWord());
     }
 
+    /**
+     * El metodo determina una velocidad para el auto enemigo
+     * @param speedAuto Se le pasa la velocidad del auto
+     */
     public void moveCar(double speedAuto){
         double var = (1d/20d) * speedAuto - 10;
 
@@ -22,12 +26,20 @@ public class CarEnemy extends Car{
         getHitBox().setY(getY());
     }
 
+    /**
+     * El metodo determina la Creacion de un auto Enemigo en un determinado carril
+     * @return Retorna una posicion en Eje X
+     */
     public int randomRail(){
         int[] arrayRail ={400-25,400-85,400-140};
         int x = new Random().nextInt(arrayRail.length);
         return arrayRail[x];
     }
 
+    /**
+     * El metodo genera palabras Random para ser asignadas luego.
+     * @return Retorna un String Random
+     */
     public String generateRandomWord() {
         int wordLength = 5;
         Random r = new Random();
@@ -39,10 +51,18 @@ public class CarEnemy extends Car{
         return sb.toString();
     }
 
+    /**
+     *
+     * @return Retorna un numero
+     */
     public static int getNumber() {
         return number;
     }
 
+    /**
+     *
+     * @param number Establece un numero para asignarlo a un auto enemigo
+     */
     public static void setNumber(int number) {
         CarEnemy.number = number;
     }

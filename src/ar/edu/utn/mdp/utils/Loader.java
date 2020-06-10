@@ -14,6 +14,9 @@ public class Loader{
         loadAll();
     }
 
+    /**
+     * En este metodo se cargan en un Array las imagenes de autos, pasto y calle.
+     */
     public void loadAll()
     {
         ArrayList<String> paths= new ArrayList<>();
@@ -43,6 +46,11 @@ public class Loader{
 
     }
 
+    /**
+     * Se cargan en un HashMap las imagenes con un nombre.
+     * @param name
+     * @param path
+     */
     public void load(String name, String path)
     {
         BufferedImage img = null;
@@ -60,6 +68,10 @@ public class Loader{
         }
     }
 
+    /**
+     *
+     * @return Retorna una imagen con el nombre.
+     */
     public static HashMap<String, BufferedImage> getSprites() {
         return sprites;
     }
