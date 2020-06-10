@@ -1,6 +1,7 @@
 package ar.edu.utn.mdp.frames;
 
-import ar.edu.utn.mdp.content.Street;
+import ar.edu.utn.mdp.content.tileset.side.Grass;
+import ar.edu.utn.mdp.content.tileset.Street;
 import ar.edu.utn.mdp.content.component.Grid;
 import ar.edu.utn.mdp.content.component.drawable.*;
 import ar.edu.utn.mdp.utils.Loader;
@@ -40,7 +41,10 @@ public class Game extends JPanel {
 
     private void setup() {
         // GRID
-        Grid grid = new Grid("Grid", 100, -64, 16, 30, 50, new Street(10, 20, 12, 3));
+        Street street = new Street(10, 20, 12, 3);
+        Grass grass = new Grass();
+
+        Grid grid = new Grid("Grid", 100, -64, 16, 30, 50, grass, grass, street);
         components.set(grid);
 
         // TODO CAMBIAR LA FORMA EN QUE SE MUESTRA
@@ -81,8 +85,11 @@ public class Game extends JPanel {
 
 
     private void draw() {
+
+
         Player player = (Player)components.get("Player");
         ComponentCollection<CarEnemy> enemys = new ComponentCollection<>();
+
 
         for(int i =0; i< CarEnemy.getNumber(); i++){
             enemys.set((CarEnemy)components.get("enemy" + i));
@@ -98,6 +105,7 @@ public class Game extends JPanel {
         
         
         player.move();
+        player.invinsible();
 
        //player.editSpeedCollision();
 
