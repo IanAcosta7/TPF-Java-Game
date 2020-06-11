@@ -49,7 +49,7 @@ public class Game extends JPanel {
 
         // TODO CAMBIAR LA FORMA EN QUE SE MUESTRA
         for (int i = 0; i < grid.getTiles().size(); i++) {
-            ArrayList<Sprite> tiles = grid.getTiles().get(i);
+            ArrayList<Tile> tiles = grid.getTiles().get(i);
 
             for (Sprite tile : tiles)
                 components.set(tile);

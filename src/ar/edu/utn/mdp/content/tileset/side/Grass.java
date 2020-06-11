@@ -1,6 +1,7 @@
 package ar.edu.utn.mdp.content.tileset.side;
 
 import ar.edu.utn.mdp.content.component.drawable.Sprite;
+import ar.edu.utn.mdp.content.component.drawable.Tile;
 import ar.edu.utn.mdp.utils.Loader;
 
 import java.awt.image.BufferedImage;
@@ -25,11 +26,11 @@ public class Grass extends Side {
     }
 
     @Override
-    public void setTiles(ArrayList<ArrayList<Sprite>> tiles) {
+    public void setTiles(ArrayList<ArrayList<Tile>> tiles) {
 
         for (int i = 0; i < tiles.size(); i++) {
-            ArrayList<Sprite> row = tiles.get(i);
-            for (Sprite tile : row)
+            ArrayList<Tile> row = tiles.get(i);
+            for (Tile tile : row)
                 tile.setImage(getRandomGrass());
         }
     }
