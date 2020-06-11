@@ -16,6 +16,11 @@ public class ComponentCollection <T extends Component> {
         components = new ArrayList<>();
     }
 
+    /**
+     *
+     * @param name Se pasa un nombre por parametro
+     * @return Retorna un nombre si lo encuentra, sino NULL
+     */
     public Component get(String name) {
         Iterator<T> iterator = components.iterator();
         Component found = null;
@@ -43,6 +48,10 @@ public class ComponentCollection <T extends Component> {
         return found;
     }
 
+    /**
+     * Recibe un componente y compara el nombre, si existe, es reemplazado por el mismo.
+     * @param component
+     */
     public void set(T component) {
         if (indexOf(component.getName()) >= 0) {
             components.set(indexOf(component.getName()), component);
@@ -51,6 +60,11 @@ public class ComponentCollection <T extends Component> {
         }
     }
 
+    /**
+     *
+     * @param name Se le pasa un nombre
+     * @return Y retorna la posicion en la coleccion.
+     */
     public int indexOf(String name) {
         Iterator<T> iterator = components.iterator();
         int val = -1;
@@ -68,6 +82,10 @@ public class ComponentCollection <T extends Component> {
         return val;
     }
 
+    /**
+     *
+     * @param g
+     */
     public void drawAll(Graphics g) {
         Iterator iterator = components.iterator();
 
@@ -83,6 +101,10 @@ public class ComponentCollection <T extends Component> {
 
     }
 
+    /**
+     *
+     * @return Retorna los validos de la coleccion.
+     */
     public int size(){
         return components.size();
     }

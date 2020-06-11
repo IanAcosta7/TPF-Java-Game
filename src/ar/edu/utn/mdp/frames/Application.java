@@ -17,6 +17,9 @@ public class Application {
         frame = new JFrame();
     }
 
+    /**
+     * En este metodo se setea lo que se va a ver al inicio de la pantalla principal
+     */
     public void init() {
         //Thread game = new Thread(new Game(height, width));
         input = new Input();
@@ -35,18 +38,33 @@ public class Application {
         game.start();
     }
 
+    /**
+     *
+     * @return Retorna el ancho de la pantalla principal
+     */
     public int getWidth() {
         return width;
     }
 
+    /**
+     *
+     * @return Retorna la altura de la pantalla principal
+     */
     public int getHeight() {
         return height;
     }
 
+    /**
+     *
+     * @param width Setea el ancho de la pantalla principal
+     */
     public void setWidth(int width) {
         this.width = width;
     }
 
+    /**
+     * Setea el alto de la pantalla principal
+     */
     public void setHeight() {
         this.setHeight();
     }

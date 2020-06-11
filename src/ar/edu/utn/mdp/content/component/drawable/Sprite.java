@@ -22,11 +22,19 @@ public class Sprite extends Component implements Drawable
         this.image = null;
     }
 
+    /**
+     *
+     * @return Retorna una imagen.
+     */
     public BufferedImage getImage()
     {
         return image;
     }
 
+    /**
+     * Establece una imagen
+     * @param img Se pasa una imagen por parametro.
+     */
     public void setImage(BufferedImage img) {
         this.image = img;
     }
