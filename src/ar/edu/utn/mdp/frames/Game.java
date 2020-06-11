@@ -67,22 +67,20 @@ public class Game extends JPanel {
 
         // PLAYER
 
-        components.set(new Player("Player", width/2 - 85, height/2 + 75, 0, 50, 50, "Autos/autoN1", new HitBox("Player", width/2 - 85 + 50/4,height/2 + 75, 0, 50/2,50), 1, 1000, 0));
+        components.set(new Player("Player", width/2 - 85, height/2 + 75, 0, 50, 50, "Autos/autoN1", new HitBox("PlayerHB", width/2 - 85 + 50/4,height/2 + 75, 0, 50/2,50), 1, 1000, 0));
 
 
         Timer timer = new Timer(2500, e -> {
             if(CarEnemy.getNumber() >= 5)
                 components.remove("enemy" + (CarEnemy.getNumber() - 5));
 
-            components.set(new CarEnemy("enemy" + CarEnemy.getNumber(), -100, 0, 50, 50, "Autos/autoN2", new HitBox("Car", width / 3 - 50 / 2 + 50 / 4, -100, 0, 50 / 2, 50), 1));
+            components.set(new CarEnemy("enemy" + CarEnemy.getNumber(), -100, 0, 50, 50, "Autos/autoN2", new HitBox("CarHB", width / 3 - 50 / 2 + 50 / 4, -100, 0, 50 / 2, 50), 1));
         });
         timer.start();
     }
 
 
     private void draw() {
-
-
         Player player = (Player)components.get("Player");
         ComponentCollection<CarEnemy> enemys = new ComponentCollection<>();
 
@@ -116,7 +114,18 @@ public class Game extends JPanel {
         textScore.setTexto(Integer.toString((int)player.getScore()));
         textSpeed.setTexto(Integer.toString((int)player.getSpeed()));
 
-        ((Grid)components.get("Grid")).update(player.getSpeed());
+        Grid grid = (Grid)components.get("Grid");
+
+        grid.update(player.getSpeed());
+
+        for(ArrayList<Tile> row : grid.getTiles()) {
+            for (Tile tile : row) {
+                HitBox tileHitBox = tile.getHitBox();
+
+                if (tileHitBox != null)
+                    HitBox.hitboxCollision(player.getHitBox(), tileHitBox);
+            }
+        }
     }
 
     public void paintComponent(Graphics g) {
