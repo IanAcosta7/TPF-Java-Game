@@ -1,5 +1,6 @@
 package ar.edu.utn.mdp.content.component;
 
+import ar.edu.utn.mdp.content.component.drawable.Tile;
 import ar.edu.utn.mdp.content.tileset.side.Side;
 import ar.edu.utn.mdp.content.tileset.Street;
 import ar.edu.utn.mdp.content.component.drawable.Sprite;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 
 public class Grid extends Component {
     private int tileSize;
-    private final ArrayList<ArrayList<Sprite>> tiles;
+    private final ArrayList<ArrayList<Tile>> tiles;
     private final Side leftSide;
     private final Side rightSide;
     private final Street street;
@@ -29,7 +30,7 @@ public class Grid extends Component {
         for (int i = 0; i < tileAmountX; i++) {
             tiles.add(new ArrayList<>());
             for (int j = 0; j < tileAmountY; j++) {
-                tiles.get(i).add(new Sprite(i + "-" + j, x + i * tileSize, y + j * tileSize, 0, tileSize, tileSize));
+                tiles.get(i).add(new Tile(i + "-" + j, x + i * tileSize, y + j * tileSize, 0, tileSize, tileSize, null));
             }
         }
 
@@ -82,7 +83,7 @@ public class Grid extends Component {
     public void update(double speed) {
 
         for (int i = 0; i < tiles.size(); i++) {
-            ArrayList<Sprite> tile = tiles.get(i);
+            ArrayList<Tile> tile = tiles.get(i);
 
             for (int j = 0; j < tile.size(); j++) {
                 Sprite sprite = tile.get(j);
@@ -125,7 +126,7 @@ public class Grid extends Component {
         return tileSize;
     }
 
-    public ArrayList<ArrayList<Sprite>> getTiles() {
+    public ArrayList<ArrayList<Tile>> getTiles() {
         return this.tiles;
     }
 }
