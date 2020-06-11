@@ -70,18 +70,14 @@ public class Game extends JPanel {
         components.set(new Player("Player", width/2 - 85, height/2 + 75, 0, 50, 50, "Autos/autoN1", new HitBox("Player", width/2 - 85 + 50/4,height/2 + 75, 0, 50/2,50), 1, 1000, 0));
 
 
-        Timer timer = new Timer(2500, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            components.set(new CarEnemy("enemy" + CarEnemy.getNumber(),-100, 0, 50, 50, "Autos/autoN2", new HitBox("Car", width / 3 - 50 / 2 + 50 / 4, -100, 0, 50 / 2, 50), 1));
+        Timer timer = new Timer(2500, e -> {
+            if(CarEnemy.getNumber() >= 5)
+                components.remove("enemy" + (CarEnemy.getNumber() - 5));
 
-            }
+            components.set(new CarEnemy("enemy" + CarEnemy.getNumber(), -100, 0, 50, 50, "Autos/autoN2", new HitBox("Car", width / 3 - 50 / 2 + 50 / 4, -100, 0, 50 / 2, 50), 1));
         });
         timer.start();
-
-
     }
-
 
 
     private void draw() {
@@ -90,24 +86,23 @@ public class Game extends JPanel {
         Player player = (Player)components.get("Player");
         ComponentCollection<CarEnemy> enemys = new ComponentCollection<>();
 
-
-        for(int i =0; i< CarEnemy.getNumber(); i++){
-            enemys.set((CarEnemy)components.get("enemy" + i));
+        for(int i = 0; i < 5; i++){
+            if(components.indexOf("enemy" + (CarEnemy.getNumber() - 5 + i)) != -1)
+                enemys.set((CarEnemy)components.get("enemy" + (CarEnemy.getNumber() - 5 + i)));
         }
 
-        for(int i =0; i<enemys.size(); i++){
-            CarEnemy carEnemy = (CarEnemy)enemys.get("enemy" + i);
+        for(int i = 0; i<enemys.size(); i++){
+            CarEnemy carEnemy = (CarEnemy)enemys.get(i);
             if(carEnemy != null){
                 carEnemy.moveCar(player.getSpeed());
                 HitBox.hitboxCollision(player.getHitBox(), carEnemy.getHitBox());
             }
         }
-        
-        
+
         player.move();
         player.invinsible();
 
-       //player.editSpeedCollision();
+        //player.editSpeedCollision();
 
         player.fuelConsumed();
         player.scoreCounter();

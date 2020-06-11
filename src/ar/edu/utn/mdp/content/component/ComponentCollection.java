@@ -36,6 +36,18 @@ public class ComponentCollection <T extends Component> {
         return found;
     }
 
+    public Component get(int i) {
+        Component found;
+
+        try {
+            found = components.get(i);
+        } catch (IndexOutOfBoundsException e) {
+            found = null;
+        }
+
+        return found;
+    }
+
     /**
      * Recibe un componente y compara el nombre, si existe, es reemplazado por el mismo.
      * @param component
@@ -95,6 +107,11 @@ public class ComponentCollection <T extends Component> {
      */
     public int size(){
         return components.size();
+    }
+
+
+    public void remove(String name) {
+        components.remove(indexOf(name));
     }
 
 }
