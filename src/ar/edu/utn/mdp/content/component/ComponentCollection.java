@@ -7,6 +7,7 @@ import ar.edu.utn.mdp.content.component.drawable.Text;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.stream.Collectors;
 
 public class ComponentCollection <T extends Component> {
 
@@ -111,7 +112,10 @@ public class ComponentCollection <T extends Component> {
 
 
     public void remove(String name) {
-        components.remove(indexOf(name));
+        components = new ArrayList(components
+                .stream()
+                .filter(component -> !component.getName().equals(name))
+                .collect(Collectors.toList()));
     }
 
 }
