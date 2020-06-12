@@ -39,6 +39,13 @@ public class Loader{
         paths.add("Calle/asfaltoLadoIzq");
         paths.add("Calle/asfaltoLiso");
 
+        paths.add("Arbol/arbolito_01");
+        paths.add("Arbol/arbolito_02");
+        paths.add("Arbol/arbolito_03");
+        paths.add("Arbol/arbolito_04");
+        paths.add("Arbol/arbolito_05");
+        paths.add("Arbol/arbolito_06");
+
         for(String path: paths)
         {
             load(path, "/"+path+".png");

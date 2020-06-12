@@ -7,7 +7,7 @@ import ar.edu.utn.mdp.utils.Loader;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class  Street implements TileSet {
+public class  Street extends TileSet {
     private int start;
     private int end;
     private boolean hasLine;
@@ -52,7 +52,7 @@ public class  Street implements TileSet {
     }
 
     @Override
-    public void setTiles(ArrayList<ArrayList<Tile>> tiles) {
+    public void modifyTiles() {
 
         for (int i = 0; i < tiles.size(); i++) {
             ArrayList<Tile> row = tiles.get(i);
@@ -76,5 +76,27 @@ public class  Street implements TileSet {
             }
         }
 
+    }
+
+    @Override
+    public void modifyFirstRow(int row) {
+        for (int i = 0; i < tiles.size(); i++) {
+            Tile tile = tiles.get(i).get(row);
+            counter = 0;
+
+            // SI HAY CALLE VALIDA
+            //if (start) {
+            // Imagenes del comienzo del mapa
+            //} else
+            count();
+
+            //tile.setImage(getStreetImage(i));
+            if (i == 0)
+                tile.setImage(Loader.getSprites().get("Calle/asfaltoLadoIzq"));
+            else if (i == tiles.size() - 1)
+                tile.setImage(Loader.getSprites().get("Calle/asfaltoLadoDer"));
+            else
+                tile.setImage(getStreetImage(i, tiles.size()));
+        }
     }
 }

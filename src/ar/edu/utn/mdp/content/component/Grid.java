@@ -4,6 +4,7 @@ import ar.edu.utn.mdp.content.component.drawable.Tile;
 import ar.edu.utn.mdp.content.tileset.side.Side;
 import ar.edu.utn.mdp.content.tileset.Street;
 import ar.edu.utn.mdp.content.component.drawable.Sprite;
+import ar.edu.utn.mdp.utils.Loader;
 
 import java.util.ArrayList;
 
@@ -40,8 +41,13 @@ public class Grid extends Component {
 
     private void setImages() {
         leftSide.setTiles(new ArrayList<>(tiles.subList(0, street.getStart())));
+        leftSide.modifyTiles();
+
         rightSide.setTiles(new ArrayList<>(tiles.subList(street.getEnd(), tiles.size())));
+        rightSide.modifyTiles();
+
         street.setTiles(new ArrayList<>(tiles.subList(street.getStart(), street.getEnd())));
+        street.modifyTiles();
     }
 
     /*
@@ -83,19 +89,32 @@ public class Grid extends Component {
     public void update(double speed) {
 
         for (int i = 0; i < tiles.size(); i++) {
-            ArrayList<Tile> tile = tiles.get(i);
+            ArrayList<Tile> row = tiles.get(i);
 
-            for (int j = 0; j < tile.size(); j++) {
-                Sprite sprite = tile.get(j);
+            for (int j = 0; j < row.size(); j++) {
+                Tile tile = row.get(j);
 
                 final double portion = 0.1;
                 double pixelPerSpeed = portion * speed; // La grid se mueve una porcion de la velocidad del jugador.
 
-                if (sprite.getY() + tileSize <= y + height) {
-                    sprite.setY(sprite.getY() + (int) Math.round(pixelPerSpeed)); // Se mueven los tiles de a N pixeles
+                if (tile.getY() + tileSize <= y + height) {
+                    tile.setY(tile.getY() + (int) Math.round(pixelPerSpeed)); // Se mueven los tiles de a N pixeles
                 } else {
-                    sprite.setY((sprite.getY() + tileSize) - height + (int)Math.round(pixelPerSpeed)); // Cuando llegan al limite van al inicio otra vez
+                    tile.setY((tile.getY() + tileSize) - height + (int)Math.round(pixelPerSpeed)); // Cuando llegan al limite van al inicio otra vez
 
+                    if (i == tiles.size() - 1) {
+                        /*for (int s = 0; s < tiles.size(); s++) {
+                            //tile.setImage(Loader.getSprites().get("Pasto/PastoParejo"));
+                            tiles.get(s).get(j).setImage(null); // W
+                            //tile.setImage(null);
+                            //tiles.get(i).get(j).setImage(null);
+                        }*/
+
+
+                        leftSide.modifyFirstRow(j);
+                        rightSide.modifyFirstRow(j);
+                        street.modifyFirstRow(j);
+                    }
 
                     /*
                     if (i == tiles.size() - 1) // Si es la ultima columna
