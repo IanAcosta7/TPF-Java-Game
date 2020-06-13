@@ -11,8 +11,6 @@ import ar.edu.utn.mdp.content.component.Component;
 import javax.swing.*;
 import javax.swing.Timer;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.*;
 
@@ -20,16 +18,14 @@ public class Game extends JPanel {
 
     private int width;
     private int height;
-    private final int maxFrameRate = 60;
-    private Loader loader;
     private boolean running;
     private ComponentCollection<Component> components;
 
     public Game (int width, int height) {
         this.width = width;
         this.height = height;
-        this.loader = new Loader();
         this.components = new ComponentCollection<>();
+        this.running = true;
         init();
     }
 
@@ -144,16 +140,17 @@ public class Game extends JPanel {
     }
 
     public void start() {
+        final int MAXFRAMERATE = 60;
         running = true;
 
         long actualTime = System.nanoTime(); // Tiempo actual
-        long nextTime = actualTime + 1000000000 / maxFrameRate; // 1 Seg dividido en N cuadros
+        long nextTime = actualTime + 1000000000 / MAXFRAMERATE; // 1 Seg dividido en N cuadros
 
         while (running) {
             if (actualTime >= nextTime) {
                 draw();
                 repaint();
-                nextTime = actualTime + 1000000000 / maxFrameRate;
+                nextTime = actualTime + 1000000000 / MAXFRAMERATE;
             }
             actualTime = System.nanoTime();
         }
