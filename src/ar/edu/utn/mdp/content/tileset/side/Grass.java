@@ -6,6 +6,7 @@ import ar.edu.utn.mdp.utils.Loader;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class Grass extends Side {
 
@@ -103,8 +104,6 @@ public class Grass extends Side {
 
     @Override
     public void modifyFirstRow(int row) {
-        System.out.println();
-
         for (int i = 0; i < tiles.size(); i++) {
             Tile tile = tiles.get(i).get(row);
 
@@ -112,11 +111,45 @@ public class Grass extends Side {
         }
 
         for (int i = 0; i < tiles.size(); i++) {
-            for (int j = 0; j < tiles.get(i).size(); j++) {
+            Tile tile = tiles.get(i).get(row);
 
-                if (Math.random() * 100 < 2)
-                    loadStructure(i, j, Structure.ARBOL);
+            if (Math.random() * 100 < 1 && Structure.getName(tiles.get(i).get(row).getImage()) == null) {
+                structures.add(Structure.ARBOL);
+            }
 
+            for (Structure structure : structures) {
+
+                if (tile.getPartOfStructure() == null && structure.getXPosition() == 0 && structure.getYPosition() == 0)
+                    tile.setPartOfStructure(structure);
+
+                // Si no es una estructura es null
+                if (tile.getPartOfStructure().equals(structure)) {
+                    /*tiles.get(i).get(row).setImage(structure.getImage(
+                            structure.getSizeX() - 1 - structure.getXPosition(),
+                            structure.getSizeY() - 1 - structure.getXPosition()));*/
+                    tile.setImage(null);
+                    System.out.println(i + " " + row);
+
+                    //tiles.get(0).get(row).setImage(null);
+
+                    structure.setYPosition(structure.getYPosition() + 1);
+
+                    /*if (structure.getYPosition() == structure.getSizeY())
+                        structure.setYPosition(0);*/
+                }
+
+                if (structure.getYPosition() == structure.getSizeY() - 1) {
+                    structure.setXPosition(structure.getXPosition() + 1);
+                    structure.setYPosition(0);
+                }
+
+                if (structure.getXPosition() >= structure.getSizeX())
+                    structures = new ArrayList(structures
+                        .stream()
+                        .filter(struct -> !struct.equals(structure))
+                        .collect(Collectors.toList()));
+
+                //tiles.get(i).get(row).setImage(null);
             }
         }
     }

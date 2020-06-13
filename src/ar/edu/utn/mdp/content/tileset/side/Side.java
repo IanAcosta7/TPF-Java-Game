@@ -8,10 +8,10 @@ import java.util.HashSet;
 
 public abstract class Side  extends TileSet {
 
-    protected HashSet<Structure> structures;
+    protected ArrayList<Structure> structures;
 
     public Side() {
-        structures = new HashSet<>();
+        structures = new ArrayList<>();
     }
 
     protected abstract void loadStructure(int x, int y, Structure structure);
