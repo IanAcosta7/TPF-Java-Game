@@ -5,19 +5,13 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Loader{
+public abstract class Loader{
     private static HashMap<String, BufferedImage> sprites;
-
-    public Loader()
-    {
-        this.sprites = new HashMap<>();
-        loadAll();
-    }
 
     /**
      * En este metodo se cargan en un Array las imagenes de autos, pasto y calle.
      */
-    public void loadAll()
+    public static void loadAll()
     {
         ArrayList<String> paths= new ArrayList<>();
         paths.add("Autos/autoN1");
@@ -51,7 +45,7 @@ public class Loader{
      * @param name
      * @param path
      */
-    public void load(String name, String path)
+    private static void load(String name, String path)
     {
         BufferedImage img = null;
         try
@@ -77,4 +71,8 @@ public class Loader{
     }
 
     private BufferedImage loadImage(){ return null; }
+
+    static {
+        sprites = new HashMap<>();
+    }
 }

@@ -27,12 +27,15 @@ public class Game extends JPanel {
         Game.width = width;
         Game.height = height;
         this.running = true;
+        this.scenes = new HashMap<>();
         init();
     }
 
     public void init() {
         setSize(width, height);
         setBackground(Color.BLACK);
+        Loader.loadAll(); // Carga todas las imagenes
+
         setup();
     }
 
