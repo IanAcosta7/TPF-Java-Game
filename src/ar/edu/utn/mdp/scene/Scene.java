@@ -26,7 +26,7 @@ public abstract class Scene {
         return components;
     }
 
-    public void setSize(int width, int height) {
+    public static void setSize(int width, int height) {
         Scene.width = width;
         Scene.height = height;
     }

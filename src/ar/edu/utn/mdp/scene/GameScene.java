@@ -5,7 +5,6 @@ import ar.edu.utn.mdp.content.component.Grid;
 import ar.edu.utn.mdp.content.component.drawable.*;
 import ar.edu.utn.mdp.content.tileset.Street;
 import ar.edu.utn.mdp.content.tileset.side.Grass;
-import ar.edu.utn.mdp.frames.Game;
 
 import javax.swing.*;
 import java.util.ArrayList;

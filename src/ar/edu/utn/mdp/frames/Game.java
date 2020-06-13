@@ -33,6 +33,7 @@ public class Game extends JPanel {
 
     public void init() {
         setSize(width, height);
+        Scene.setSize(width, height);
         setBackground(Color.BLACK);
         Loader.loadAll(); // Carga todas las imagenes
 
@@ -89,7 +90,7 @@ public class Game extends JPanel {
             Scene scene = iterator.next().getValue();
 
             if (scene.isActive())
-                scene.drawScene();
+                scene.paintScene(g);
         }
     }
 
