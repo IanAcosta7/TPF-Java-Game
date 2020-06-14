@@ -1,46 +1,55 @@
 package ar.edu.utn.mdp.frames;
 
-import ar.edu.utn.mdp.content.tileset.side.Grass;
-import ar.edu.utn.mdp.content.tileset.Street;
-import ar.edu.utn.mdp.content.component.Grid;
-import ar.edu.utn.mdp.content.component.drawable.*;
-import ar.edu.utn.mdp.scene.GameScene;
-import ar.edu.utn.mdp.scene.Scene;
+import ar.edu.utn.mdp.scene.*;
 import ar.edu.utn.mdp.utils.Loader;
-import ar.edu.utn.mdp.content.component.*;
-import ar.edu.utn.mdp.content.component.Component;
 
 import javax.swing.*;
-import javax.swing.Timer;
 import java.awt.*;
 import java.io.File;
 import java.util.*;
 
+/**
+ * Es una versión personalizada de <b>javax.swing.JPanel</b>.
+ * Tiene tres métodos que son llamados en distintos tiempos
+ * de ejecución para permitirnos tener control sobre las
+ * distintas etapas de ejecución de nuestro código. Y a su
+ * vez tiene una lista de escenas que son llamadas en distintos
+ * tiempos, dependiendo que es lo que se deba ver en el juego
+ * en cada momento.
+ */
 public class Game extends JPanel {
 
-    private static int width;
-    private static int height;
+    /**
+     * Valor que indica si el juego esta corriendo.
+     */
     private boolean running;
+    /**
+     * Mapa de las escenas que estan o no en ejecución.
+     */
     private HashMap<String, Scene> scenes;
 
-    public Game (int width, int height) {
-        Game.width = width;
-        Game.height = height;
+    /**
+     * Crea una instancia de Game con un array de escenas vacío y el atributo running en true.
+     */
+    public Game () {
+        super();
         this.running = true;
         this.scenes = new HashMap<>();
-        init();
     }
 
-    public void init() {
-        setSize(width, height);
-        Scene.setSize(width, height);
-        setBackground(Color.BLACK);
+    /**
+     * Inicializa las variables y componentes que el juego necesitará.
+     * <p>
+     *     Se ejecuta una sola vez al comienzo del juego, lo que permite instanciar todas las variables
+     *     o arreglos que las escenas necesitaran durante la ejecución del juego. Además permite realizar
+     *     llamados a funciones que solo se deben ejecutar una vez, como por ejemplo la carga de Sprites.
+     * </p>
+     * <i><b>Solamente ejecutará las escenas que se encuentren activas.</b></i>
+     */
+    private void setup() {
+        Scene.setSize(getWidth(), getHeight()); // Setea el tamaño de todas las escenas
         Loader.loadAll(); // Carga todas las imagenes
 
-        setup();
-    }
-
-    private void setup() {
         GameScene gameScene = new GameScene(true);
         gameScene.setupScene();
 
@@ -57,6 +66,14 @@ public class Game extends JPanel {
         }
     }
 
+    /**
+     * Ejecuta toda la lógica de física o movimiento de los componentes.
+     * <p>
+     *     Se ejecuta una vez por cuadro, por lo que en este método se realizan todos los cálculos o cambios
+     *     que se producirán durante el transcurso del juego.
+     * </p>
+     * <i><b>Solamente ejecutará las escenas que se encuentren activas.</b></i>
+     */
     private void draw() {
         // LOGICA POR CUADRO
 
@@ -71,6 +88,16 @@ public class Game extends JPanel {
         }
     }
 
+    /**
+     * Dibuja todos los componentes en pantalla.
+     * <p>
+     *     Este método se ejecuta justo después del método <b>draw</b> y es el encargado de dibujar en la
+     *     pantalla todos los componentes de las escenas.
+     * </p>
+     * <i><b>Solamente ejecutará las escenas que se encuentren activas.</b></i>
+     *
+     * @param g El objeto de tipo <b>Graphics</b> que nos permite dibujar en la pantalla.
+     */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.WHITE);
@@ -94,12 +121,27 @@ public class Game extends JPanel {
         }
     }
 
+    /**
+     * Comienza la ejecución del juego.
+     * <p>
+     *     Tiene un limitador de cuadros por segundo, lo que evita que el juego corra a distintas
+     *     velocidades en distintos dispositivos.
+     * </p>
+     * <p>
+     *     También es el encargado de realizar la llamada a los tres métodos más importantes de esta
+     *     clase donde se encuentra la lógica del juego, primero llama una sola vez a <b>setup</b>
+     *     y luego se queda en un ciclo llamando a <b>draw</b> y a <b>paintComponent</b> en ese orden
+     *     hasta que el atributo <b>running</b> se vuelva falso.
+     * </p>
+     */
     public void start() {
         final int MAXFRAMERATE = 60;
         running = true;
 
         long actualTime = System.nanoTime(); // Tiempo actual
         long nextTime = actualTime + 1000000000 / MAXFRAMERATE; // 1 Seg dividido en N cuadros
+
+        setup();
 
         while (running) {
             if (actualTime >= nextTime) {
@@ -109,15 +151,5 @@ public class Game extends JPanel {
             }
             actualTime = System.nanoTime();
         }
-    }
-
-    @Override
-    public int getWidth() {
-        return width;
-    }
-
-    @Override
-    public int getHeight() {
-        return height;
     }
 }

@@ -1,8 +1,10 @@
 package ar.edu.utn.mdp.frames;
 
+import ar.edu.utn.mdp.scene.Scene;
 import ar.edu.utn.mdp.utils.Input;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Application {
 
@@ -23,7 +25,10 @@ public class Application {
     public void init() {
         //Thread game = new Thread(new Game(height, width));
         input = new Input();
-        game = new Game(width, height);
+
+        game = new Game();
+        game.setSize(width, height);
+        game.setBackground(Color.BLACK);
 
         frame.setTitle("Game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
