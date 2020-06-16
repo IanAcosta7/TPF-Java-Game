@@ -8,9 +8,10 @@ public class CarEnemy extends Car{
 
     private static int number;
 
-    public CarEnemy(String name, int y, int rotation, int width, int height, String image, HitBox hitBox, double speed) {
-        super(name,0 , y, rotation, width, height, image, hitBox, speed);
+    public CarEnemy(String name, int rotation, int width, int height, String image, HitBox hitBox, double speed) {
+        super(name,0 , 0, rotation, width, height, image, hitBox, speed);
         super.setX(randomRail());
+        super.setY(generateRandomY());
         number++;
         //super.setName(generateRandomWord());
     }
@@ -65,5 +66,16 @@ public class CarEnemy extends Car{
      */
     public static void setNumber(int number) {
         CarEnemy.number = number;
+    }
+
+    private int generateRandomY(){
+        int[] arrayRail ={-200,-400,-600,-800,-1000,-700};
+        int x = new Random().nextInt(arrayRail.length);
+        return arrayRail[x];
+    }
+
+    public static void restarCarNumber()
+    {
+        number--;
     }
 }
