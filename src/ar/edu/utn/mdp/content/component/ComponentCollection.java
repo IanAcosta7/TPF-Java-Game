@@ -51,7 +51,7 @@ public class ComponentCollection <T extends Component> {
      * Recibe un componente y compara el nombre, si existe, es reemplazado por el mismo.
      * @param component
      */
-    public void set(T component) {
+    public synchronized void set(T component) {
         if (indexOf(component.getName()) >= 0) {
             components.set(indexOf(component.getName()), component);
         } else {
@@ -85,7 +85,7 @@ public class ComponentCollection <T extends Component> {
      *
      * @param g
      */
-    public void drawAll(Graphics g) {
+    public synchronized void drawAll(Graphics g) {
         Iterator iterator = components.iterator();
 
         while (iterator.hasNext()) {
