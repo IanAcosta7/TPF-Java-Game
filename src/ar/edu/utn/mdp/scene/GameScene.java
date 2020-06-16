@@ -48,7 +48,7 @@ public class GameScene extends Scene {
 
         // PLAYER
 
-        components.set(new Player("Player", width/2 - 85, height/2 + 75, 0, 50, 50, "Autos/autoN1", new HitBox("PlayerHB", width/2 - 85 + 50/4,height/2 + 75, 0, 50/2,50), 1, 1000, 0));
+        components.set(new Player("Player", 315, height/2 + 75, 0, 50, 50, "Autos/autoN1", new HitBox("PlayerHB", width/2 - 85 + 50/4,height/2 + 75, 0, 50/2,50), 1, 1000, 0));
 
 
         Timer timer = new Timer(2500, e -> {
@@ -74,7 +74,7 @@ public class GameScene extends Scene {
             CarEnemy carEnemy = (CarEnemy)enemys.get(i);
             if(carEnemy != null){
                 carEnemy.moveCar(player.getSpeed());
-                HitBox.hitboxCollision(player.getHitBox(), carEnemy.getHitBox());
+                HitBox.hitboxCollision(player, carEnemy);
             }
         }
 
@@ -101,10 +101,8 @@ public class GameScene extends Scene {
 
         for(ArrayList<Tile> row : grid.getTiles()) {
             for (Tile tile : row) {
-                HitBox tileHitBox = tile.getHitBox();
-
-                if (tileHitBox != null)
-                    HitBox.hitboxCollision(player.getHitBox(), tileHitBox);
+                if (tile.getHitBox() != null)
+                    HitBox.hitboxCollision(player, tile);
             }
         }
     }

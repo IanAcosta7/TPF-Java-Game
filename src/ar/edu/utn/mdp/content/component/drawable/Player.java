@@ -19,7 +19,7 @@ public class Player extends Car {
 
 
     public Player(String name, int x, int y, int rotation, int width, int height, String image, HitBox hitBox, double speed, double fuel, double score) {
-        super(name, x, y, rotation, width, height, image, hitBox, speed);
+        super(name, x, y, rotation, width, height, image, speed, hitBox);
         this.fuel = fuel;
         this.score = score;
         counter=0;
@@ -101,8 +101,58 @@ public class Player extends Car {
      */
     public void move()
     {
+        if(getHitBox().getTag() instanceof CarEnemy){
+            girar=true;
+            invinsible=true;
+            velocidadInicial=getSpeed();
+        }else if(getHitBox().getTag() instanceof Tile)
+            editSpeedCollision();
 
-        if(!getHitBox().isCollision()&&!girar){
+        if(!girar){
+            if (getSpeed() > 0.99) {
+                if (Input.getKey(37))
+                    setX(getX() - 4);
+                if (Input.getKey(39))
+                    setX(getX() + 4);
+            }
+            if (fuel > 0) {
+                if (Input.getKey(38) && (getSpeed() < 400)) {
+                    if (getSpeed() <= 100)
+                        setSpeed(getSpeed() + getSpeed() / 40);
+                    else
+                        setSpeed(getSpeed() + getSpeed() / 150);
+
+                } else if (getSpeed() > 301)
+                    setSpeed(getSpeed() - 1);
+                if (Input.getKey(40) && (getSpeed() > 101))
+                    setSpeed(getSpeed() - 0.75);
+            } else if (getSpeed() >= 1)
+                setSpeed(getSpeed() - (getSpeed() / 60));
+            else
+                setSpeed(0);
+
+            if(invinsible){
+                if (counter < 100) {
+                    counter++;
+                } else {
+                    counter = 0;
+                    invinsible = false;
+                }
+            }
+        }else{
+            if(counter<paso) {
+                carSpin(velocidadInicial, paso);
+                counter=counter+1;
+
+                if (counter == paso - 1)
+                    getHitBox().setCollision(false);
+            }
+            else {
+                girar=false;
+                counter=0;
+            }
+        }
+        /*if((!getHitBox().isCollision()&&!girar) || getHitBox().getTag() instanceof Tile){
             if (getSpeed() > 0.99) {
                 if (Input.getKey(37))
                     setX(getX() - 3);
@@ -134,45 +184,46 @@ public class Player extends Car {
                 }
             }
         }
-        else if(girar)
-        {
-            if(counter<paso)
-            {
-
+        else if(girar) {
+            if(counter<paso) {
                 carSpin(velocidadInicial, paso);
                 counter=counter+1;
 
                 if (counter == paso - 1)
                     getHitBox().setCollision(false);
             }
-            else
-            {
+            else {
                 girar=false;
                 counter=0;
-
-
             }
-        }
-        else
-        {
-            girar=true;
-            invinsible=true;
-            velocidadInicial=getSpeed();
+        } else {
+            if(getHitBox().getTag() instanceof CarEnemy){
+                girar=true;
+                invinsible=true;
+                velocidadInicial=getSpeed();
+            }else if(getHitBox().getTag() instanceof Tile){
+                editSpeedCollision();
+            }
+        }*/
+    }
+
+    public void editSpeedCollision()
+    {
+        if(getHitBox().isCollision() && getSpeed()>100){
+            setSpeed(getSpeed() * 0.978);
+            getHitBox().setCollision(false);
         }
     }
 
-    public void invinsible()
-    {
-        if(invinsible)
-        {
+    public void invinsible() {
+        if(invinsible) {
             getHitBox().setCollidable(false);
             if(isDrawn())
                 setDrawn(false);
             else
                 setDrawn(true);
         }
-        else
-        {
+        else {
             getHitBox().setCollidable(true);
             setDrawn(true);
         }
@@ -183,8 +234,7 @@ public class Player extends Car {
     * @param velocidadInicial Velocidad a la que va el jugador.
     * @param paso Determina cuantos pasos durara la rotacion del auto.
     */
-    private void carSpin(double velocidadInicial, int paso)
-    {
+    private void carSpin(double velocidadInicial, int paso) {
             setX(getX()+1);
             setRotation(getRotation()+(720/paso)); // 720 por 2 vueltas
             setSpeed(getSpeed()-((velocidadInicial*0.9)/paso)); // se frena un 90%

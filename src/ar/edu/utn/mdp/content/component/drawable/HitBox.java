@@ -3,6 +3,7 @@ package ar.edu.utn.mdp.content.component.drawable;
 import ar.edu.utn.mdp.content.component.Component;
 
 public class HitBox extends Component {
+    private Sprite tag;
     private boolean collision;
     private boolean collidable;
 
@@ -17,7 +18,10 @@ public class HitBox extends Component {
      * @param collision Setea Collision con un boolean
      */
     public void setCollision(boolean collision) {
+
         this.collision = collision;
+        if(!collision)
+            tag=null;
     }
 
     /**
@@ -33,8 +37,9 @@ public class HitBox extends Component {
      * @param hitBox1 Parametro de HitBox a comparar
      * @param hitBox2 Parametro de HitBox a comparar
      */
-    public static void hitboxCollision(HitBox hitBox1, HitBox hitBox2){
-
+    public static void hitboxCollision(Sprite sprite1, Sprite sprite2){
+        HitBox hitBox1 = sprite1.hitBox;
+        HitBox hitBox2 = sprite2.hitBox;
         if(hitBox1.collidable && hitBox2.collidable){
             if (hitBox1.x < hitBox2.x + hitBox2.width
                     && hitBox1.x + hitBox1.width > hitBox2.x
@@ -42,6 +47,8 @@ public class HitBox extends Component {
                     && hitBox1.y + hitBox1.height > hitBox2.y) {
                 hitBox1.collision = true;
                 hitBox2.collision = true;
+                hitBox1.tag = sprite2;
+                hitBox2.tag = sprite1;
             }
         }
     }
@@ -54,5 +61,9 @@ public class HitBox extends Component {
     public void setCollidable(boolean collidable)
     {
         this.collidable = collidable;
+    }
+
+    public Sprite getTag() {
+        return tag;
     }
 }

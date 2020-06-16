@@ -89,7 +89,7 @@ public class ComponentCollection <T extends Component> {
         Iterator iterator = components.iterator();
 
         while (iterator.hasNext()) {
-            ar.edu.utn.mdp.content.component.Component component = (Component) iterator.next();
+            Component component = (Component) iterator.next();
 
             if (component instanceof Drawable && component.isDrawn())
                 ((Drawable) component).draw(g);
