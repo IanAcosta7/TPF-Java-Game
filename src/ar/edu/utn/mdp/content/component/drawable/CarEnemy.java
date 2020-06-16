@@ -9,7 +9,7 @@ public class CarEnemy extends Car{
     private static int number;
 
     public CarEnemy(String name, int y, int rotation, int width, int height, String image, HitBox hitBox, double speed) {
-        super(name,0 , y, rotation, width, height, image, hitBox, speed);
+        super(name,0 , y, rotation, width, height, image, speed, hitBox);
         super.setX(randomRail());
         number++;
         //super.setName(generateRandomWord());
