@@ -7,18 +7,29 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.stream.Collectors;
 
+/**
+ * Arreglo de componentes personalizado para trabajar como un <b>HashMap</b> y un <b>ArrayList</b> a la vez.
+ * @param <T> Un tipo de dato que extienda de la clase <b>Component</b>.
+ */
 public class ComponentCollection <T extends Component> {
 
+    /**
+     * La lista de Componentes.
+     */
     private ArrayList<T> components;
 
+    /**
+     * Incializa al lista de componentes.
+     */
     public ComponentCollection() {
         components = new ArrayList<>();
     }
 
     /**
+     * Retorna el primer componente cuyo atributo <b>name</b> sea igual al recibido por parametro.
      *
-     * @param name Se pasa un nombre por parametro
-     * @return Retorna un nombre si lo encuentra, sino NULL
+     * @param name nombre del elemento a retornar.
+     * @return el componente con ese nombre.
      */
     public Component get(String name) {
         Iterator<T> iterator = components.iterator();
@@ -35,6 +46,12 @@ public class ComponentCollection <T extends Component> {
         return found;
     }
 
+    /**
+     * Retorna el componente que se encuentre en la posición i.
+     *
+     * @param i posicion del arreglo a retornar.
+     * @return el componente que se encuentra en la posición i.
+     */
     public Component get(int i) {
         Component found;
 
@@ -48,8 +65,9 @@ public class ComponentCollection <T extends Component> {
     }
 
     /**
-     * Recibe un componente y compara el nombre, si existe, es reemplazado por el mismo.
-     * @param component
+     * Guarda el componente en el arreglo. Si en el arreglo ya existe un componente con ese nombre, es reemplazado por el recibido por parámetro.
+     *
+     * @param component componente a guardar en el arreglo.
      */
     public void set(T component) {
         if (indexOf(component.getName()) >= 0) {
@@ -60,9 +78,10 @@ public class ComponentCollection <T extends Component> {
     }
 
     /**
+     * Retorna el índice del primer elemento encontrado con el nombre <b>name</b>.
      *
-     * @param name Se le pasa un nombre
-     * @return Y retorna la posicion en la coleccion.
+     * @param name nombre a buscar en el arreglo.
+     * @return el índice del componente en la colección, o -1 si el componente no se encuentra en ella.
      */
     public int indexOf(String name) {
         Iterator<T> iterator = components.iterator();
@@ -82,14 +101,15 @@ public class ComponentCollection <T extends Component> {
     }
 
     /**
+     * Recorre toda la colección y dibuja todos sus componentes haciendo uso de la instancia de <b>Graphics</b> recibida.
      *
-     * @param g
+     * @param g un objeto de tipo <b>Graphics</b> que será utilizado para dibujar los componentes.
      */
     public void drawAll(Graphics g) {
         Iterator iterator = components.iterator();
 
         while (iterator.hasNext()) {
-            ar.edu.utn.mdp.content.component.Component component = (Component) iterator.next();
+            Component component = (Component) iterator.next();
 
             if (component instanceof Drawable && component.isDrawn())
                 ((Drawable) component).draw(g);
@@ -97,14 +117,19 @@ public class ComponentCollection <T extends Component> {
     }
 
     /**
+     * Retorna el número de componentes en la colección
      *
-     * @return Retorna los validos de la coleccion.
+     * @return el número de componentes en la colección.
      */
     public int size(){
         return components.size();
     }
 
-
+    /**
+     * Remueve todos los componentes cuyo atributo <b>name</b> sea igual al recibido por parámetro.
+     *
+     * @param name el nombre a remover.
+     */
     public void remove(String name) {
         components = new ArrayList(components
                 .stream()
