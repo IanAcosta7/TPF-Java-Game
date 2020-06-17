@@ -50,11 +50,12 @@ public class Game extends JPanel {
         Scene.setGame(this);
         Loader.loadAll(); // Carga todas las imagenes
 
+        // Escenas
         GameScene gameScene = new GameScene();
         Scoreboard scoreboard = new Scoreboard(true);
 
         scenes.put("Game", gameScene);
-        scenes.put("Scores", scoreboard);
+        scenes.put("Scoreboard", scoreboard);
 
         // INICIALIZA TODAS LAS ESCENAS ACTIVAS
         Iterator<Map.Entry<String, Scene>> iterator = scenes.entrySet().iterator();
@@ -77,6 +78,22 @@ public class Game extends JPanel {
      */
     private void draw() {
         // LOGICA POR CUADRO
+        GameScene gameScene = (GameScene)scenes.get("Game");
+        Scoreboard scoreboard = (Scoreboard) scenes.get("Scoreboard");
+
+        if (!scoreboard.isActive()) {
+            if (!gameScene.isActive()) {
+                gameScene.setActive(true);
+                gameScene.setupScene();
+            }
+        }
+
+        if (!gameScene.isActive()) {
+            if (!scoreboard.isActive()) {
+                scoreboard.setActive(true);
+                scoreboard.setupScene();
+            }
+        }
 
         // DIBUJA TODAS LAS ESCENAS ACTIVAS
         Iterator<Map.Entry<String, Scene>> iterator = scenes.entrySet().iterator();

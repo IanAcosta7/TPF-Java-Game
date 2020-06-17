@@ -15,8 +15,8 @@ public class GameScene extends Scene {
         super();
     }
 
-    public GameScene(boolean visible) {
-        super(visible);
+    public GameScene(boolean active) {
+        super(active);
     }
 
     @Override

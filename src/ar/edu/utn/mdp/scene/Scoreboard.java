@@ -21,8 +21,8 @@ public class Scoreboard extends Scene {
         this.p = new Persistency<>("data/scores.bin");
     }
 
-    public Scoreboard(boolean visible) {
-        super(visible);
+    public Scoreboard(boolean active) {
+        super(active);
         this.scores = new HashSet<>();
         this.p = new Persistency<>("data/scores.bin");
     }
@@ -33,12 +33,6 @@ public class Scoreboard extends Scene {
 
         components.set(new Text("Title", 10, 20, 0, 0, 0, "SCORES"));
         components.set(new NameSelector("NameSelector", 10, 100, 0, 0, 0));
-
-        /*JTextField tf = new JTextField(20);
-
-        game.add(tf);
-
-        tf.setVisible(true);*/
     }
 
     @Override
@@ -86,7 +80,7 @@ public class Scoreboard extends Scene {
             scores.add(newScore);
             components.remove("NameSelector");
 
-            //p.setData(scores);
+            p.setData(scores);
         }
     }
 }
