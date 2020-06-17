@@ -18,13 +18,13 @@ public class Scoreboard extends Scene {
     public Scoreboard() {
         super();
         this.scores = new HashSet<>();
-        this.p = new Persistency<>("data/scores.bin");
+        this.p = new Persistency<>("scores.bin");
     }
 
     public Scoreboard(boolean active) {
         super(active);
         this.scores = new HashSet<>();
-        this.p = new Persistency<>("data/scores.bin");
+        this.p = new Persistency<>("scores.bin");
     }
 
     @Override

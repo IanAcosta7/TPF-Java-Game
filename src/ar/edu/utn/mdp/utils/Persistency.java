@@ -5,10 +5,11 @@ import java.util.HashSet;
 
 public class Persistency <T extends Serializable> {
 
+    private final String DIR = "data/";
     private File file;
 
     public Persistency(String path) {
-        file = new File(path);
+        file = new File(DIR + path);
     }
 
     private void openFile () {
@@ -25,6 +26,8 @@ public class Persistency <T extends Serializable> {
     }
 
     public HashSet<T> getData() {
+        checkDirectory();
+
         HashSet<T> data = new HashSet<>();
 
         // LEE EL ARCHIVO
@@ -47,6 +50,8 @@ public class Persistency <T extends Serializable> {
     }
 
     public void setData(HashSet<T> data) {
+        checkDirectory();
+
         // ESCRIBE EL ARCHIVO
         ObjectOutputStream oos = null;
         try {
@@ -71,5 +76,10 @@ public class Persistency <T extends Serializable> {
                 }
             }
         }
+    }
+
+    private void checkDirectory() {
+        File dir = new File(DIR);
+        dir.mkdir();
     }
 }

@@ -51,8 +51,8 @@ public class Game extends JPanel {
         Loader.loadAll(); // Carga todas las imagenes
 
         // Escenas
-        GameScene gameScene = new GameScene();
-        Scoreboard scoreboard = new Scoreboard(true);
+        GameScene gameScene = new GameScene(true);
+        Scoreboard scoreboard = new Scoreboard();
 
         scenes.put("Game", gameScene);
         scenes.put("Scoreboard", scoreboard);
