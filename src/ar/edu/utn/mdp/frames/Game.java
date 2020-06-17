@@ -46,14 +46,16 @@ public class Game extends JPanel {
      * </p>
      * <i><b>Solamente ejecutará las escenas que se encuentren activas.</b></i>
      */
-    private void setup() {
-        Scene.setSize(getWidth(), getHeight()); // Setea el tamaño de todas las escenas
+    public void setup() {
+        Scene.setGame(this);
         Loader.loadAll(); // Carga todas las imagenes
 
-        GameScene gameScene = new GameScene(true);
-        gameScene.setupScene();
+        // Escenas
+        GameScene gameScene = new GameScene();
+        Scoreboard scoreboard = new Scoreboard(true);
 
         scenes.put("Game", gameScene);
+        scenes.put("Scoreboard", scoreboard);
 
         // INICIALIZA TODAS LAS ESCENAS ACTIVAS
         Iterator<Map.Entry<String, Scene>> iterator = scenes.entrySet().iterator();
@@ -76,6 +78,22 @@ public class Game extends JPanel {
      */
     private void draw() {
         // LOGICA POR CUADRO
+        GameScene gameScene = (GameScene)scenes.get("Game");
+        Scoreboard scoreboard = (Scoreboard) scenes.get("Scoreboard");
+
+        if (!scoreboard.isActive()) {
+            if (!gameScene.isActive()) {
+                gameScene.setActive(true);
+                gameScene.setupScene();
+            }
+        }
+
+        if (!gameScene.isActive()) {
+            if (!scoreboard.isActive()) {
+                scoreboard.setActive(true);
+                scoreboard.setupScene();
+            }
+        }
 
         // DIBUJA TODAS LAS ESCENAS ACTIVAS
         Iterator<Map.Entry<String, Scene>> iterator = scenes.entrySet().iterator();
@@ -140,8 +158,6 @@ public class Game extends JPanel {
 
         long actualTime = System.nanoTime(); // Tiempo actual
         long nextTime = actualTime + 1000000000 / MAXFRAMERATE; // 1 Seg dividido en N cuadros
-
-        setup();
 
         while (running) {
             if (actualTime >= nextTime) {

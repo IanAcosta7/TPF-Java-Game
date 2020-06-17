@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class Text extends Component implements Drawable
 {
-    private String texto;
+    protected String texto;
 
 
     public Text(String name, int x, int y, int rotation, int width, int height, String texto)

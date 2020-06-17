@@ -15,8 +15,8 @@ public class GameScene extends Scene {
         super();
     }
 
-    public GameScene(boolean visible) {
-        super(visible);
+    public GameScene(boolean active) {
+        super(active);
     }
 
     @Override
@@ -35,6 +35,9 @@ public class GameScene extends Scene {
             for (Sprite tile : tiles)
                 components.set(tile);
         }
+
+        int width = game.getWidth();
+        int height = game.getHeight();
 
         //TEXTOS
         components.set(new Text("PlayerNombre", width-width/5, height/6, 0, 80, 40,"PLAYER ONE" ));
