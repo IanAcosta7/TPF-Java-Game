@@ -7,16 +7,16 @@ import ar.edu.utn.mdp.utils.Persistency;
 import java.util.HashSet;
 import java.util.Iterator;
 
-public class Scores extends Scene {
+public class Scoreboard extends Scene {
 
     private HashSet<Score> scores;
 
-    public Scores() {
+    public Scoreboard() {
         super();
         this.scores = new HashSet<>();
     }
 
-    public Scores(boolean visible) {
+    public Scoreboard(boolean visible) {
         super(visible);
         this.scores = new HashSet<>();
     }

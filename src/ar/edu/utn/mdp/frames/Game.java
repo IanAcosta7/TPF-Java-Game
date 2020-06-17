@@ -51,10 +51,10 @@ public class Game extends JPanel {
         Loader.loadAll(); // Carga todas las imagenes
 
         GameScene gameScene = new GameScene();
-        Scores scores = new Scores(true);
+        Scoreboard scoreboard = new Scoreboard(true);
 
         scenes.put("Game", gameScene);
-        scenes.put("Scores", scores);
+        scenes.put("Scores", scoreboard);
 
         // INICIALIZA TODAS LAS ESCENAS ACTIVAS
         Iterator<Map.Entry<String, Scene>> iterator = scenes.entrySet().iterator();
