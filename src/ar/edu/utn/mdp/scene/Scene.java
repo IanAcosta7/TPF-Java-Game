@@ -2,13 +2,13 @@ package ar.edu.utn.mdp.scene;
 
 import ar.edu.utn.mdp.content.component.Component;
 import ar.edu.utn.mdp.content.component.ComponentCollection;
+import ar.edu.utn.mdp.frames.Game;
 
 import java.awt.*;
 
 public abstract class Scene {
 
-    protected static int width;
-    protected static int height;
+    protected static Game game;
     protected ComponentCollection<Component> components;
     private boolean active;
 
@@ -26,9 +26,8 @@ public abstract class Scene {
         return components;
     }
 
-    public static void setSize(int width, int height) {
-        Scene.width = width;
-        Scene.height = height;
+    public static void setGame(Game game) {
+        Scene.game = game;
     }
 
     public boolean isActive() {

@@ -36,6 +36,9 @@ public class GameScene extends Scene {
                 components.set(tile);
         }
 
+        int width = game.getWidth();
+        int height = game.getHeight();
+
         //TEXTOS
         components.set(new Text("PlayerNombre", width-width/5, height/6, 0, 80, 40,"PLAYER ONE" ));
         components.set(new Text("combustible", width-width/5, height/4, 0, 80, 40,"COMBUSTIBLE:" ));

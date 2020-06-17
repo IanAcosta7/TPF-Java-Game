@@ -47,7 +47,7 @@ public class Game extends JPanel {
      * <i><b>Solamente ejecutará las escenas que se encuentren activas.</b></i>
      */
     private void setup() {
-        Scene.setSize(getWidth(), getHeight()); // Setea el tamaño de todas las escenas
+        Scene.setGame(this);
         Loader.loadAll(); // Carga todas las imagenes
 
         GameScene gameScene = new GameScene();
