@@ -50,10 +50,13 @@ public class Game extends JPanel {
         Scene.setSize(getWidth(), getHeight()); // Setea el tamaño de todas las escenas
         Loader.loadAll(); // Carga todas las imagenes
 
-        GameScene gameScene = new GameScene(true);
+        GameScene gameScene = new GameScene();
         gameScene.setupScene();
+        Scores scores = new Scores(true);
+        scores.setupScene();
 
         scenes.put("Game", gameScene);
+        scenes.put("Scores", scores);
 
         // INICIALIZA TODAS LAS ESCENAS ACTIVAS
         Iterator<Map.Entry<String, Scene>> iterator = scenes.entrySet().iterator();
