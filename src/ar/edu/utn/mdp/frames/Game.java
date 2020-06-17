@@ -46,7 +46,7 @@ public class Game extends JPanel {
      * </p>
      * <i><b>Solamente ejecutará las escenas que se encuentren activas.</b></i>
      */
-    private void setup() {
+    public void setup() {
         Scene.setGame(this);
         Loader.loadAll(); // Carga todas las imagenes
 
@@ -141,8 +141,6 @@ public class Game extends JPanel {
 
         long actualTime = System.nanoTime(); // Tiempo actual
         long nextTime = actualTime + 1000000000 / MAXFRAMERATE; // 1 Seg dividido en N cuadros
-
-        setup();
 
         while (running) {
             if (actualTime >= nextTime) {

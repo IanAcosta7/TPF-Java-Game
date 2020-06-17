@@ -29,6 +29,7 @@ public class Application {
         game = new Game();
         game.setSize(width, height);
         game.setBackground(Color.BLACK);
+        game.setup();
 
         frame.setTitle("Game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
