@@ -5,7 +5,9 @@ import ar.edu.utn.mdp.content.component.Grid;
 import ar.edu.utn.mdp.content.component.drawable.*;
 import ar.edu.utn.mdp.content.tileset.Street;
 import ar.edu.utn.mdp.content.tileset.side.Grass;
+import ar.edu.utn.mdp.utils.LoaderMusic;
 
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.util.ArrayList;
 
@@ -21,6 +23,10 @@ public class GameScene extends Scene {
 
     @Override
     public void setupScene() {
+
+        Clip song = LoaderMusic.getName("pingFighter");
+        song.start();
+
         // GRID
         Street street = new Street(10, 20, 12, 3);
         Grass grass = new Grass();
