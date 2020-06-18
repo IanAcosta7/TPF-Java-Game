@@ -82,22 +82,7 @@ public class Game extends JPanel {
      */
     private void draw() {
         // LOGICA POR CUADRO
-        GameScene gameScene = (GameScene)scenes.get("Game");
-        Scoreboard scoreboard = (Scoreboard) scenes.get("Scoreboard");
-
-        if (!scoreboard.isActive()) {
-            if (!gameScene.isActive()) {
-                gameScene.setActive(true);
-                gameScene.setupScene();
-            }
-        }
-
-        if (!gameScene.isActive()) {
-            if (!scoreboard.isActive()) {
-                scoreboard.setActive(true);
-                scoreboard.setupScene();
-            }
-        }
+        changeScenes();
 
         // DIBUJA TODAS LAS ESCENAS ACTIVAS
         Iterator<Map.Entry<String, Scene>> iterator = scenes.entrySet().iterator();
@@ -170,6 +155,25 @@ public class Game extends JPanel {
                 nextTime = actualTime + 1000000000 / MAXFRAMERATE;
             }
             actualTime = System.nanoTime();
+        }
+    }
+
+    private void changeScenes() {
+        GameScene gameScene = (GameScene)scenes.get("Game");
+        Scoreboard scoreboard = (Scoreboard) scenes.get("Scoreboard");
+
+        if (gameScene.isChangingScene()) {
+            gameScene.setChangingScene(false);
+            gameScene.setActive(false);
+            scoreboard.setActive(true);
+            scoreboard.setupScene();
+        }
+
+        if (scoreboard.isChangingScene()) {
+            scoreboard.setChangingScene(false);
+            scoreboard.setActive(false);
+            gameScene.setActive(true);
+            gameScene.setupScene();
         }
     }
 }

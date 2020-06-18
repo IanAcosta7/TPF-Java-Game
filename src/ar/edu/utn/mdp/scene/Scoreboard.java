@@ -30,6 +30,10 @@ public class Scoreboard extends Scene {
 
     @Override
     public void setupScene() {
+        scores.clear();
+        components.clear();
+
+
         scores = p.getData();
 
         components.set(new Text("Title", 10, 20, 0, 0, 0, "SCORES"));
@@ -52,7 +56,7 @@ public class Scoreboard extends Scene {
             }
         } else {
             if (petc.update())
-                setActive(false);
+                setChangingScene(true);
         }
 
         showScores();

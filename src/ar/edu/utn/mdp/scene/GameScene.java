@@ -23,6 +23,7 @@ public class GameScene extends Scene {
 
     @Override
     public void setupScene() {
+        components.clear();
 
         Clip song = LoaderMusic.getName("pingFighter");
         song.start();
@@ -117,7 +118,7 @@ public class GameScene extends Scene {
 
         if (player.getFuel() <= 0.5 && player.getSpeed() <=0.5) {
             if (isActive()) {
-                setActive(false);
+                setChangingScene(true);
             }
         }
     }

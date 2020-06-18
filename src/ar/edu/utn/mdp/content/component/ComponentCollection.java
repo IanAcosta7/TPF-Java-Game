@@ -125,6 +125,16 @@ public class ComponentCollection <T extends Component> {
         return components.size();
     }
 
+    public void clear() {
+        Iterator iterator = components.iterator();
+
+        while (iterator.hasNext()) {
+            Component component = (Component) iterator.next();
+
+            remove(component.getName());
+        }
+    }
+
     /**
      * Remueve todos los componentes cuyo atributo <b>name</b> sea igual al recibido por parámetro.
      *
