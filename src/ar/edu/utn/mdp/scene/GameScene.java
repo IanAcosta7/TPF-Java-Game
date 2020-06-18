@@ -51,7 +51,7 @@ public class GameScene extends Scene {
 
         // PLAYER
 
-        components.set(new Player("Player", 315, height/2 + 75, 0, 50, 50, "Autos/autoN1", new HitBox("PlayerHB", width/2 - 85 + 50/4,height/2 + 75, 0, 50/2,50), 1, 1000, 0));
+        components.set(new Player("Player", 315, height/2 + 75, 0, 50, 50, "Autos/autoN1", new HitBox("PlayerHB", width/2 - 85 + 50/4,height/2 + 75, 0, 50/2,50), 1, 50, 0));
 
 
         Timer timer = new Timer(2500, e -> {
@@ -106,6 +106,12 @@ public class GameScene extends Scene {
             for (Tile tile : row) {
                 if (tile.getHitBox() != null)
                     HitBox.hitboxCollision(player, tile);
+            }
+        }
+
+        if (player.getFuel() <= 0.5 && player.getSpeed() <=0.5) {
+            if (isActive()) {
+                setActive(false);
             }
         }
     }

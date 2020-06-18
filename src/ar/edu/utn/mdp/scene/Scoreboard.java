@@ -2,6 +2,7 @@ package ar.edu.utn.mdp.scene;
 
 import ar.edu.utn.mdp.content.component.drawable.NameSelector;
 import ar.edu.utn.mdp.content.component.drawable.PETC;
+import ar.edu.utn.mdp.content.component.drawable.Player;
 import ar.edu.utn.mdp.content.component.drawable.Text;
 import ar.edu.utn.mdp.content.persistent.Score;
 import ar.edu.utn.mdp.utils.Input;
@@ -75,7 +76,7 @@ public class Scoreboard extends Scene {
 
         // Si se presiona ENTER
         if (Input.getKey(10)) {
-            Score newScore = new Score(nameSelector.getTexto(), 30);
+            Score newScore = new Score(nameSelector.getTexto(), (int)Player.score);
 
             scores.add(newScore);
             components.remove("NameSelector");

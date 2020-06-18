@@ -8,7 +8,7 @@ import java.awt.geom.AffineTransform;
 public class Player extends Car {
 
     private double fuel;
-    private double score;
+    public static double score;
     private int counter;
     private boolean girar;
     private boolean invinsible;
