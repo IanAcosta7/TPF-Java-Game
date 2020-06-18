@@ -10,16 +10,19 @@ public abstract class Scene {
 
     protected static Game game;
     protected ComponentCollection<Component> components;
+    private boolean changingScene;
     private boolean active;
 
     public Scene() {
         this.components = new ComponentCollection<>();
         this.active = false;
+        this.changingScene = false;
     }
 
     public Scene(boolean active) {
         this.components = new ComponentCollection<>();
         this.active = active;
+        this.changingScene = false;
     }
 
     public ComponentCollection<Component> getComponents() {
@@ -36,6 +39,14 @@ public abstract class Scene {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public boolean isChangingScene() {
+        return changingScene;
+    }
+
+    public void setChangingScene(boolean changingScene) {
+        this.changingScene = changingScene;
     }
 
     public abstract void setupScene();
