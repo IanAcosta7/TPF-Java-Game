@@ -2,11 +2,13 @@ package ar.edu.utn.mdp.frames;
 
 import ar.edu.utn.mdp.scene.*;
 import ar.edu.utn.mdp.utils.Loader;
+import ar.edu.utn.mdp.utils.LoaderMusic;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.util.*;
+
 
 /**
  * Es una versión personalizada de <b>javax.swing.JPanel</b>.
@@ -49,6 +51,8 @@ public class Game extends JPanel {
     public void setup() {
         Scene.setGame(this);
         Loader.loadAll(); // Carga todas las imagenes
+
+        LoaderMusic.loadAllMusic();
 
         // Escenas
         GameScene gameScene = new GameScene(true);
