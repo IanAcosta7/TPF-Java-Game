@@ -30,9 +30,10 @@ public class GameScene extends Scene {
 
         // GRID
         Street street = new Street(10, 20, 12, 3);
-        Grass grass = new Grass();
+        Grass grass1 = new Grass();
+        Grass grass2 = new Grass();
 
-        Grid grid = new Grid("Grid", 100, -64, 16, 30, 50, grass, grass, street);
+        Grid grid = new Grid("Grid", 100, -64, 16, 30, 50, grass1, grass2, street);
         components.set(grid);
 
         // TODO CAMBIAR LA FORMA EN QUE SE MUESTRA
