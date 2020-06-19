@@ -3,8 +3,6 @@ package ar.edu.utn.mdp.content.component;
 import ar.edu.utn.mdp.content.component.drawable.Tile;
 import ar.edu.utn.mdp.content.tileset.side.Side;
 import ar.edu.utn.mdp.content.tileset.Street;
-import ar.edu.utn.mdp.content.component.drawable.Sprite;
-import ar.edu.utn.mdp.utils.Loader;
 
 import java.util.ArrayList;
 
@@ -36,7 +34,6 @@ public class Grid extends Component {
         }
 
         setImages();
-        //setAllImages();
     }
 
     private void setImages() {
@@ -49,42 +46,6 @@ public class Grid extends Component {
         street.setTiles(new ArrayList<>(tiles.subList(street.getStart(), street.getEnd())));
         street.modifyTiles();
     }
-
-    /*
-    private void setAllImages() {
-        for (int i = 0; i < tiles.get(0).size(); i++) {
-            setRowImages(i, true);
-        }
-    }
-    */
-
-    /*
-    private void setRowImages(int row, boolean start) {
-        int i = 0;
-
-        // SI HAY CALLE VALIDA
-        if (street.getStart() < tiles.size() && street.getEnd() < tiles.size()) {
-            if (start) {
-                // Imagenes del comienzo del mapa
-            } else
-                street.count();
-
-            while (i < street.getStart()) {
-                tiles.get(i).get(row).setImage(getRandomGrass());
-                i++;
-            }
-
-            while (i < street.getEnd()) {
-                tiles.get(i).get(row).setImage(street.getStreetImage(i));
-                i++;
-            }
-        }
-
-        while (i < tiles.size()) {
-            tiles.get(i).get(row).setImage(getRandomGrass());
-            i++;
-        }
-    }*/
 
     public void update(double speed) {
 
@@ -100,26 +61,15 @@ public class Grid extends Component {
                 if (tile.getY() + tileSize <= y + height) {
                     tile.setY(tile.getY() + (int) Math.round(pixelPerSpeed)); // Se mueven los tiles de a N pixeles
                 } else {
-                    tile.setY((tile.getY() + tileSize) - height + (int)Math.round(pixelPerSpeed)); // Cuando llegan al limite van al inicio otra vez
+                    // Si la fila llego al fin de la grid vuelve hacia arriba
+                    tile.setY((tile.getY() + tileSize) - height + (int)Math.round(pixelPerSpeed));
 
+                    // Y se vuelven a dibujar nuevas imagenes aleatorias
                     if (i == tiles.size() - 1) {
-                        /*for (int s = 0; s < tiles.size(); s++) {
-                            //tile.setImage(Loader.getSprites().get("Pasto/PastoParejo"));
-                            tiles.get(s).get(j).setImage(null); // W
-                            //tile.setImage(null);
-                            //tiles.get(i).get(j).setImage(null);
-                        }*/
-
-
                         leftSide.modifyFirstRow(j);
                         rightSide.modifyFirstRow(j);
                         street.modifyFirstRow(j);
                     }
-
-                    /*
-                    if (i == tiles.size() - 1) // Si es la ultima columna
-                        setRowImages(j, false); // Se setean nuevas imagenes aleatorias para toda la fila
-                     */
                 }
             }
         }

@@ -6,25 +6,14 @@ import ar.edu.utn.mdp.utils.Loader;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 public class Grass extends Side {
 
-    private boolean drawTree;
-    private int treePos;
     private int counter;
 
     public Grass() {
         super();
-        this.drawTree = false;
-        this.treePos = 1;
         this.counter = 0;
-
-        init();
-    }
-
-    private void init() {
-        structures.add(Structure.ARBOL);
     }
 
     private BufferedImage getRandomGrass() {
@@ -37,41 +26,6 @@ public class Grass extends Side {
         };
 
         return Loader.getSprites().get(spriteNames[(int)(Math.random() * spriteNames.length)]);
-    }
-
-    private BufferedImage getTreeImage(int pos) {
-        String[] spriteNames = {
-                "Arbol/arbolito_01",
-                "Arbol/arbolito_02",
-                "Arbol/arbolito_03",
-                "Arbol/arbolito_04",
-                "Arbol/arbolito_05",
-                "Arbol/arbolito_06"
-        };
-
-        return Loader.getSprites().get(spriteNames[pos]);
-    }
-
-    /*private Structure getTreeStructure() {
-        ArrayList<ArrayList<Tile>> treeTiles = new ArrayList<>();
-
-        treeTiles.set(0, new ArrayList<>());
-        treeTiles.set(1, new ArrayList<>());
-
-        treeTiles.get(0).set()
-    }*/
-
-    @Override
-    protected void loadStructure(int x, int y, Structure structure) {
-        for (int i = 0; i < structure.getSizeX(); i++) {
-            for (int j = 0; j < structure.getSizeY(); j++) {
-                int newX = x + i;
-                int newY = y + j;
-
-                if (newX < tiles.size() && newY < tiles.get(newX).size())
-                    tiles.get(newX).get(newY).setImage(structure.getImage(i, j));
-            }
-        }
     }
 
     @Override
