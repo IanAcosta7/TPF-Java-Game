@@ -9,36 +9,64 @@ public enum Structure {
     ARBOL(new BufferedImage[][] {
             new BufferedImage[] { Loader.getSprites().get("Arbol/arbolito_02"), Loader.getSprites().get("Arbol/arbolito_04"), Loader.getSprites().get("Arbol/arbolito_06") },
             new BufferedImage[] { Loader.getSprites().get("Arbol/arbolito_01"), Loader.getSprites().get("Arbol/arbolito_03"), Loader.getSprites().get("Arbol/arbolito_05") },
-    }, 0, 0);
+    }, 0);
 
     private BufferedImage[][] images;
-    private int xPosition;
-    private int yPosition;
+    private int count;
 
-    Structure(BufferedImage[][] images, int xPosition, int yPosition) {
+    Structure(BufferedImage[][] images, int count) {
         this.images = images;
-        this.xPosition = xPosition;
-        this.yPosition = yPosition;
+        this.count = count;
     }
 
-    public BufferedImage getImage(int x, int y) {
-        return images[x][y];
+    /**
+     * Retorna la imagen ubicada en la pos <tt>pos</tt> en <i>row-major order</i>.
+     *
+     * @param pos
+     * @return
+     */
+    /*public BufferedImage getImage(int pos) {
+        BufferedImage image = null;
+        int k = 0;
+
+        for (int i = 0; i < images.length; i++) {
+            for (int j = 0; j < images[i].length; i++) {
+                if (k == pos)
+                    image = images[i][j];
+
+                k++;
+            }
+        }
+
+        return image;
+    }*/
+
+    public BufferedImage getNextImage() {
+        int k = 0;
+
+        for (int i = 0; i < images.length; i++) {
+            for (int j = 0; j < images[i].length; j++) {
+                if (k == count) {
+                    count++;
+                    return images[i][j];
+                }
+                k++;
+            }
+        }
+
+        return null;
     }
 
-    public int getXPosition() {
-        return xPosition;
+    public BufferedImage getImage(int i, int j) {
+        return images[i][j];
     }
 
-    public int getYPosition() {
-        return yPosition;
+    public int getCount() {
+        return count;
     }
 
-    public void setXPosition(int xPosition) {
-        this.xPosition = xPosition;
-    }
-
-    public void setYPosition(int yPosition) {
-        this.yPosition = yPosition;
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public int getSizeX() {
