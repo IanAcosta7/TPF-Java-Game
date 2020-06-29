@@ -51,7 +51,6 @@ public class Game extends JPanel {
     public void setup() {
         Scene.setGame(this);
         Loader.loadAll(); // Carga todas las imagenes
-
         LoaderMusic.loadAllMusic();
 
         // Escenas
