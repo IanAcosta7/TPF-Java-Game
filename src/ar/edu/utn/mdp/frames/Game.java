@@ -3,10 +3,12 @@ package ar.edu.utn.mdp.frames;
 import ar.edu.utn.mdp.scene.*;
 import ar.edu.utn.mdp.utils.Loader;
 import ar.edu.utn.mdp.utils.LoaderMusic;
+import org.json.JSONException;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
 
@@ -50,7 +52,13 @@ public class Game extends JPanel {
      */
     public void setup() {
         Scene.setGame(this);
-        Loader.loadAll(); // Carga todas las imagenes
+        try{
+            Loader.loadAll(); // Carga todas las imagenes
+        }catch(JSONException | FileNotFoundException e){
+            e.printStackTrace();
+        }
+
+
         LoaderMusic.loadAllMusic();
 
         // Escenas
