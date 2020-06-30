@@ -52,14 +52,8 @@ public class Game extends JPanel {
      */
     public void setup() {
         Scene.setGame(this);
-        try{
-            Loader.loadAll(); // Carga todas las imagenes
-        }catch(JSONException | FileNotFoundException e){
-            e.printStackTrace();
-        }
-
-
-        LoaderMusic.loadAllMusic();
+        Loader.loadAll(); // Carga todas las imagenes
+        LoaderMusic.loadAllMusic(); // Carga toda la musica
 
         // Escenas
         GameScene gameScene = new GameScene(true);
