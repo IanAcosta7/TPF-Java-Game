@@ -81,8 +81,7 @@ public class GameScene extends Scene {
 
         if( CarEnemy.getNumber()< 5)  //CANTIDAD DE AUTOS INSTANCIABLES
         {
-            components.set(new CarEnemy("enemy" + CarEnemy.getNumber(), 0, 50, 50, "Autos/autoN2", new HitBox("CarHB", width / 3 - 50 / 2 + 50 / 4, -100, 0, 50 / 2, 50), 1));
-
+            components.set(new CarEnemy("enemy" + CarEnemy.getNumber(), 0, 50, 50, "Autos/autoN2", new HitBox("CarHB", game.getWidth() / 3 - 50 / 2 + 50 / 4, -100, 0, 50 / 2, 50), 1));
         }
         else
         {

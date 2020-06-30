@@ -106,11 +106,17 @@ public class Player extends Car {
         Clip crashSound = LoaderMusic.getClip("RUIDO_CHOQUE");
 
         if(getHitBox().getTag() instanceof CarEnemy){
-            crashSound.start();
 
             girar=true;
             invinsible=true;
             velocidadInicial=getSpeed();
+
+            // CRASH SOUND
+            if (!crashSound.isActive())
+                crashSound.setMicrosecondPosition(0);
+
+            crashSound.start();
+
         }else if(getHitBox().getTag() instanceof Tile)
             editSpeedCollision();
 
@@ -158,9 +164,6 @@ public class Player extends Car {
                 counter=0;
             }
         }
-
-        if (!crashSound.isActive())
-            crashSound.setMicrosecondPosition(0);
     }
 
     public void editSpeedCollision()
