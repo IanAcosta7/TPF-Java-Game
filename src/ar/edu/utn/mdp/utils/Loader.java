@@ -1,7 +1,13 @@
 package ar.edu.utn.mdp.utils;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,33 +17,19 @@ public abstract class Loader{
     /**
      * En este metodo se cargan en un Array las imagenes de autos, pasto y calle.
      */
-    public static void loadAll()
-    {
-        ArrayList<String> paths= new ArrayList<>();
-        paths.add("Autos/autoN1");
-        paths.add("Autos/autoN2");
-        paths.add("Autos/autoN3");
-        paths.add("Autos/autoN4");
-        paths.add("Autos/autoN5");
-        paths.add("Autos/camion");
+    public static void loadAll() {
 
+        try {
+            JSONArray jsonArray = new JSONArray(JSONUtils.load("data/assetsPath.JSON"));
 
-        paths.add("Pasto/PastoAlter");
-        paths.add("Pasto/PastoAlter2");
-        paths.add("Pasto/PastoFlorAmarilla");
-        paths.add("Pasto/PastoFlorRoja");
-        paths.add("Pasto/PastoParejo");
+            for (int i = 0; i < jsonArray.length(); i++) {
+                String path = jsonArray.getString(i);
+                load(path, "/"+path+".png");
+            }
 
-        paths.add("Calle/asfaltoConLinea");
-        paths.add("Calle/asfaltoLadoDer");
-        paths.add("Calle/asfaltoLadoIzq");
-        paths.add("Calle/asfaltoLiso");
-
-        for(String path: paths)
-        {
-            load(path, "/"+path+".png");
+        }catch(JSONException e){
+            e.printStackTrace();
         }
-
     }
 
     /**

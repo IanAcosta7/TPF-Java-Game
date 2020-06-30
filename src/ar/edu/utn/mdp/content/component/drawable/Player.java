@@ -1,14 +1,16 @@
 package ar.edu.utn.mdp.content.component.drawable;
 
 import ar.edu.utn.mdp.utils.Input;
+import ar.edu.utn.mdp.utils.LoaderMusic;
 
+import javax.sound.sampled.Clip;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
 public class Player extends Car {
 
     private double fuel;
-    private double score;
+    public static double score;
     private int counter;
     private boolean girar;
     private boolean invinsible;
@@ -19,7 +21,7 @@ public class Player extends Car {
 
 
     public Player(String name, int x, int y, int rotation, int width, int height, String image, HitBox hitBox, double speed, double fuel, double score) {
-        super(name, x, y, rotation, width, height, image, hitBox, speed);
+        super(name, x, y, rotation, width, height, image, speed, hitBox);
         this.fuel = fuel;
         this.score = score;
         counter=0;
@@ -101,13 +103,23 @@ public class Player extends Car {
      */
     public void move()
     {
+        Clip crashSound = LoaderMusic.getClip("RUIDO_CHOQUE");
 
-        if(!getHitBox().isCollision()&&!girar){
+        if(getHitBox().getTag() instanceof CarEnemy){
+            crashSound.start();
+
+            girar=true;
+            invinsible=true;
+            velocidadInicial=getSpeed();
+        }else if(getHitBox().getTag() instanceof Tile)
+            editSpeedCollision();
+
+        if(!girar){
             if (getSpeed() > 0.99) {
                 if (Input.getKey(37))
-                    setX(getX() - 3);
+                    setX(getX() - 4);
                 if (Input.getKey(39))
-                    setX(getX() + 3);
+                    setX(getX() + 4);
             }
             if (fuel > 0) {
                 if (Input.getKey(38) && (getSpeed() < 400)) {
@@ -133,46 +145,41 @@ public class Player extends Car {
                     invinsible = false;
                 }
             }
-        }
-        else if(girar)
-        {
-            if(counter<paso)
-            {
-
+        }else{
+            if(counter<paso) {
                 carSpin(velocidadInicial, paso);
                 counter=counter+1;
 
                 if (counter == paso - 1)
                     getHitBox().setCollision(false);
             }
-            else
-            {
+            else {
                 girar=false;
                 counter=0;
-
-
             }
         }
-        else
-        {
-            girar=true;
-            invinsible=true;
-            velocidadInicial=getSpeed();
+
+        if (!crashSound.isActive())
+            crashSound.setMicrosecondPosition(0);
+    }
+
+    public void editSpeedCollision()
+    {
+        if(getHitBox().isCollision() && getSpeed()>100){
+            setSpeed(getSpeed() * 0.978);
+            getHitBox().setCollision(false);
         }
     }
 
-    public void invinsible()
-    {
-        if(invinsible)
-        {
+    public void invinsible() {
+        if(invinsible) {
             getHitBox().setCollidable(false);
             if(isDrawn())
                 setDrawn(false);
             else
                 setDrawn(true);
         }
-        else
-        {
+        else {
             getHitBox().setCollidable(true);
             setDrawn(true);
         }
@@ -183,15 +190,10 @@ public class Player extends Car {
     * @param velocidadInicial Velocidad a la que va el jugador.
     * @param paso Determina cuantos pasos durara la rotacion del auto.
     */
-    private void carSpin(double velocidadInicial, int paso)
-    {
-            setX(getX()+1);
-            setRotation(getRotation()+(720/paso)); // 720 por 2 vueltas
-            setSpeed(getSpeed()-((velocidadInicial*0.9)/paso)); // se frena un 90%
-            /*if(isDrawn())
-                setDrawn(false);
-            else
-                setDrawn(true);*/
+    private void carSpin(double velocidadInicial, int paso) {
+        setX(getX()+1);
+        setRotation(getRotation()+(720/paso)); // 720 por 2 vueltas
+        setSpeed(getSpeed()-((velocidadInicial*0.9)/paso)); // se frena un 90%
     }
 
     @Override

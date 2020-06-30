@@ -9,8 +9,11 @@ import java.util.ArrayList;
 
 public class Grass extends Side {
 
+    private int counter;
+
     public Grass() {
         super();
+        this.counter = 0;
     }
 
     private BufferedImage getRandomGrass() {
@@ -26,14 +29,41 @@ public class Grass extends Side {
     }
 
     @Override
-    public void setTiles(ArrayList<ArrayList<Tile>> tiles) {
-
+    public void modifyTiles() {
+        // Draw Background Grass
         for (int i = 0; i < tiles.size(); i++) {
             ArrayList<Tile> row = tiles.get(i);
-            for (Tile tile : row) {
+            for (int j = 0; j < row.size(); j++) {
+                Tile tile = row.get(j);
+
                 tile.setImage(getRandomGrass());
                 tile.setHitBox(new HitBox(tile.getName() + "HB", tile.getX(), tile.getY(), tile.getRotation(), tile.getHeight(), tile.getWidth()));
             }
         }
+    }
+
+    @Override
+    public void modifyFirstRow(int rowNumber) {
+        final int treeEach = 10;
+
+        // Draw Background Grass
+        for (int i = 0; i < tiles.size(); i++) {
+            Tile tile = tiles.get(i).get(rowNumber);
+
+            tile.setImage(getRandomGrass());
+        }
+
+        // Draw Tree
+        if (counter < Structure.ARBOL.getSizeY()) {
+            tiles.get(4).get(rowNumber).setImage(Structure.ARBOL.getImage(0, counter));
+            tiles.get(5).get(rowNumber).setImage(Structure.ARBOL.getImage(1, counter));
+        }
+
+        if (counter > Structure.ARBOL.getSizeY() + treeEach) {
+            counter = 0;
+        } else {
+            counter++;
+        }
+
     }
 }

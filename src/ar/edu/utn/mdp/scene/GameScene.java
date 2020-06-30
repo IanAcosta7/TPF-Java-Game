@@ -5,7 +5,9 @@ import ar.edu.utn.mdp.content.component.Grid;
 import ar.edu.utn.mdp.content.component.drawable.*;
 import ar.edu.utn.mdp.content.tileset.Street;
 import ar.edu.utn.mdp.content.tileset.side.Grass;
+import ar.edu.utn.mdp.utils.LoaderMusic;
 
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.util.ArrayList;
 
@@ -15,17 +17,23 @@ public class GameScene extends Scene {
         super();
     }
 
-    public GameScene(boolean visible) {
-        super(visible);
+    public GameScene(boolean active) {
+        super(active);
     }
 
     @Override
     public void setupScene() {
+        components.clear();
+
+        Clip song = LoaderMusic.getClip("pingFighter");
+        song.start();
+
         // GRID
         Street street = new Street(10, 20, 12, 3);
-        Grass grass = new Grass();
+        Grass grass1 = new Grass();
+        Grass grass2 = new Grass();
 
-        Grid grid = new Grid("Grid", 100, -64, 16, 30, 50, grass, grass, street);
+        Grid grid = new Grid("Grid", 100, -64, 16, 30, 50, grass1, grass2, street);
         components.set(grid);
 
         // TODO CAMBIAR LA FORMA EN QUE SE MUESTRA
@@ -35,6 +43,9 @@ public class GameScene extends Scene {
             for (Sprite tile : tiles)
                 components.set(tile);
         }
+
+        int width = game.getWidth();
+        int height = game.getHeight();
 
         //TEXTOS
         components.set(new Text("PlayerNombre", width-width/5, height/6, 0, 80, 40,"PLAYER ONE" ));
@@ -47,7 +58,6 @@ public class GameScene extends Scene {
         components.set(new Text("Km/h ", (width-width/5) + 80, (height-height/3) + 30, 0, 80, 40,"km/h"));
 
         // PLAYER
-
         components.set(new Player("Player", width/2 - 85, height/2 + 75, 0, 50, 50, "Autos/autoN1", new HitBox("PlayerHB", width/2 - 85 + 50/4,height/2 + 75, 0, 50/2,50), 1, 1000, 0));
     }
 
@@ -65,7 +75,7 @@ public class GameScene extends Scene {
             CarEnemy carEnemy = (CarEnemy)enemys.get(i);
             if(carEnemy != null){
                 carEnemy.moveCar(player.getSpeed());
-                HitBox.hitboxCollision(player.getHitBox(), carEnemy.getHitBox());
+                HitBox.hitboxCollision(player, carEnemy);
             }
         }
 
@@ -107,10 +117,14 @@ public class GameScene extends Scene {
 
         for(ArrayList<Tile> row : grid.getTiles()) {
             for (Tile tile : row) {
-                HitBox tileHitBox = tile.getHitBox();
+                if (tile.getHitBox() != null)
+                    HitBox.hitboxCollision(player, tile);
+            }
+        }
 
-                if (tileHitBox != null)
-                    HitBox.hitboxCollision(player.getHitBox(), tileHitBox);
+        if (player.getFuel() <= 0.5 && player.getSpeed() <=0.5) {
+            if (isActive()) {
+                setChangingScene(true);
             }
         }
 

@@ -3,7 +3,6 @@ package ar.edu.utn.mdp.content.component;
 import ar.edu.utn.mdp.content.component.drawable.Tile;
 import ar.edu.utn.mdp.content.tileset.side.Side;
 import ar.edu.utn.mdp.content.tileset.Street;
-import ar.edu.utn.mdp.content.component.drawable.Sprite;
 
 import java.util.ArrayList;
 
@@ -35,72 +34,42 @@ public class Grid extends Component {
         }
 
         setImages();
-        //setAllImages();
     }
 
     private void setImages() {
         leftSide.setTiles(new ArrayList<>(tiles.subList(0, street.getStart())));
+        leftSide.modifyTiles();
+
         rightSide.setTiles(new ArrayList<>(tiles.subList(street.getEnd(), tiles.size())));
+        rightSide.modifyTiles();
+
         street.setTiles(new ArrayList<>(tiles.subList(street.getStart(), street.getEnd())));
+        street.modifyTiles();
     }
-
-    /*
-    private void setAllImages() {
-        for (int i = 0; i < tiles.get(0).size(); i++) {
-            setRowImages(i, true);
-        }
-    }
-    */
-
-    /*
-    private void setRowImages(int row, boolean start) {
-        int i = 0;
-
-        // SI HAY CALLE VALIDA
-        if (street.getStart() < tiles.size() && street.getEnd() < tiles.size()) {
-            if (start) {
-                // Imagenes del comienzo del mapa
-            } else
-                street.count();
-
-            while (i < street.getStart()) {
-                tiles.get(i).get(row).setImage(getRandomGrass());
-                i++;
-            }
-
-            while (i < street.getEnd()) {
-                tiles.get(i).get(row).setImage(street.getStreetImage(i));
-                i++;
-            }
-        }
-
-        while (i < tiles.size()) {
-            tiles.get(i).get(row).setImage(getRandomGrass());
-            i++;
-        }
-    }*/
 
     public void update(double speed) {
 
         for (int i = 0; i < tiles.size(); i++) {
-            ArrayList<Tile> tile = tiles.get(i);
+            ArrayList<Tile> row = tiles.get(i);
 
-            for (int j = 0; j < tile.size(); j++) {
-                Sprite sprite = tile.get(j);
+            for (int j = 0; j < row.size(); j++) {
+                Tile tile = row.get(j);
 
                 final double portion = 0.1;
                 double pixelPerSpeed = portion * speed; // La grid se mueve una porcion de la velocidad del jugador.
 
-                if (sprite.getY() + tileSize <= y + height) {
-                    sprite.setY(sprite.getY() + (int) Math.round(pixelPerSpeed)); // Se mueven los tiles de a N pixeles
+                if (tile.getY() + tileSize <= y + height) {
+                    tile.setY(tile.getY() + (int) Math.round(pixelPerSpeed)); // Se mueven los tiles de a N pixeles
                 } else {
-                    sprite.setY((sprite.getY() + tileSize) - height + (int)Math.round(pixelPerSpeed)); // Cuando llegan al limite van al inicio otra vez
+                    // Si la fila llego al fin de la grid vuelve hacia arriba
+                    tile.setY((tile.getY() + tileSize) - height + (int)Math.round(pixelPerSpeed));
 
-
-                    /*
-                    if (i == tiles.size() - 1) // Si es la ultima columna
-                        setRowImages(j, false); // Se setean nuevas imagenes aleatorias para toda la fila
-                     */
+                    // Y se vuelven a dibujar nuevas imagenes aleatorias
+                    if (i == tiles.size() - 1) {
+                        leftSide.modifyFirstRow(j);
+                        rightSide.modifyFirstRow(j);
+                        street.modifyFirstRow(j);
+                    }
                 }
             }
         }

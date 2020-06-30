@@ -7,7 +7,7 @@ import ar.edu.utn.mdp.utils.Loader;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class  Street implements TileSet {
+public class  Street extends TileSet {
     private int start;
     private int end;
     private boolean hasLine;
@@ -22,15 +22,6 @@ public class  Street implements TileSet {
         this.lineEach = lineEach;
         this.lineLength = lineLength;
         this.counter = 0;
-    }
-
-    private void count() {
-        if (counter > lineEach + lineLength)
-            counter = 0;
-
-        hasLine = counter >= lineEach && counter < lineEach + lineLength;
-
-        counter++;
     }
 
     private BufferedImage getStreetImage(int pos, int streetLength) {
@@ -52,21 +43,12 @@ public class  Street implements TileSet {
     }
 
     @Override
-    public void setTiles(ArrayList<ArrayList<Tile>> tiles) {
+    public void modifyTiles() {
 
         for (int i = 0; i < tiles.size(); i++) {
             ArrayList<Tile> row = tiles.get(i);
 
-            counter = 0;
             for (Sprite tile : row) {
-
-                // SI HAY CALLE VALIDA
-                //if (start) {
-                    // Imagenes del comienzo del mapa
-                //} else
-                    count();
-
-                //tile.setImage(getStreetImage(i));
                 if (i == 0)
                     tile.setImage(Loader.getSprites().get("Calle/asfaltoLadoIzq"));
                 else if (i == tiles.size() - 1)
@@ -76,5 +58,32 @@ public class  Street implements TileSet {
             }
         }
 
+    }
+
+    @Override
+    public void modifyFirstRow(int row) {
+        for (int i = 0; i < tiles.size(); i++) {
+            Tile tile = tiles.get(i).get(row);
+
+            if (counter < lineLength) {
+                hasLine = true;
+            } else {
+                hasLine = false;
+            }
+
+            if (counter == lineLength + lineEach) {
+
+                counter = 0;
+            }
+
+            if (i == 0)
+                tile.setImage(Loader.getSprites().get("Calle/asfaltoLadoIzq"));
+            else if (i == tiles.size() - 1)
+                tile.setImage(Loader.getSprites().get("Calle/asfaltoLadoDer"));
+            else
+                tile.setImage(getStreetImage(i, tiles.size()));
+        }
+
+        counter++;
     }
 }
