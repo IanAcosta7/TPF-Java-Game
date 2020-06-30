@@ -58,17 +58,7 @@ public class GameScene extends Scene {
         components.set(new Text("Km/h ", (width-width/5) + 80, (height-height/3) + 30, 0, 80, 40,"km/h"));
 
         // PLAYER
-
-        components.set(new Player("Player", 315, height/2 + 75, 0, 50, 50, "Autos/autoN1", new HitBox("PlayerHB", width/2 - 85 + 50/4,height/2 + 75, 0, 50/2,50), 1, 50, 0));
-
-
-        Timer timer = new Timer(2500, e -> {
-            if(CarEnemy.getNumber() >= 5)
-                components.remove("enemy" + (CarEnemy.getNumber() - 5));
-
-            components.set(new CarEnemy("enemy" + CarEnemy.getNumber(), -100, 0, 50, 50, "Autos/autoN2", new HitBox("CarHB", width / 3 - 50 / 2 + 50 / 4, -100, 0, 50 / 2, 50), 1));
-        });
-        timer.start();
+        components.set(new Player("Player", width/2 - 85, height/2 + 75, 0, 50, 50, "Autos/autoN1", new HitBox("PlayerHB", width/2 - 85 + 50/4,height/2 + 75, 0, 50/2,50), 1, 1000, 0));
     }
 
     @Override
@@ -86,6 +76,21 @@ public class GameScene extends Scene {
             if(carEnemy != null){
                 carEnemy.moveCar(player.getSpeed());
                 HitBox.hitboxCollision(player, carEnemy);
+            }
+        }
+
+        if( CarEnemy.getNumber()< 5)  //CANTIDAD DE AUTOS INSTANCIABLES
+        {
+            components.set(new CarEnemy("enemy" + CarEnemy.getNumber(), 0, 50, 50, "Autos/autoN2", new HitBox("CarHB", width / 3 - 50 / 2 + 50 / 4, -100, 0, 50 / 2, 50), 1));
+
+        }
+        else
+        {
+            for(int i = 0; i<enemys.size(); i++) {
+                if (enemys.get(i).getY()> 1000 || enemys.get(i).getY()<-1500) //
+                {
+                    CarEnemy.restarCarNumber();
+                }
             }
         }
 
@@ -122,5 +127,7 @@ public class GameScene extends Scene {
                 setChangingScene(true);
             }
         }
+
     }
+
 }
