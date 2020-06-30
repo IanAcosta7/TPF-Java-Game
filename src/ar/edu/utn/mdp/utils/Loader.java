@@ -20,7 +20,7 @@ public abstract class Loader{
     public static void loadAll() {
 
         try {
-            JSONArray jsonArray = new JSONArray(JSONUtils.load("data/assetsPath.JSON"));
+            JSONArray jsonArray = new JSONArray(JSONUtils.load("assets/assetsPath.json"));
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 String path = jsonArray.getString(i);
