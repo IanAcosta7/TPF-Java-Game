@@ -15,7 +15,7 @@ import java.util.Iterator;
 public abstract class JSONUtils {
 
     public static void save(JSONArray jsonArray) {
-        String PATH = "data/scores.JSON";
+        String PATH = "data/scores.json";
         try {
             FileWriter file = new FileWriter(PATH);
             file.write(jsonArray.toString());
