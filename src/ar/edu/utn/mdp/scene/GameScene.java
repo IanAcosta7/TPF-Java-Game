@@ -69,17 +69,16 @@ public class GameScene extends Scene {
             }
         }
 
-        if( CarEnemy.getNumber()< 8)  //CANTIDAD DE AUTOS INSTANCIABLES
+        if( CarEnemy.getNumber()< 5)  //CANTIDAD DE AUTOS INSTANCIABLES
         {
             components.set(new CarEnemy("enemy" + CarEnemy.getNumber(), 0, 50, 50, "Autos/autoN2", new HitBox("CarHB", width / 3 - 50 / 2 + 50 / 4, -100, 0, 50 / 2, 50), 1));
-            System.out.println(CarEnemy.getNumber());
+
         }
         else
         {
             for(int i = 0; i<enemys.size(); i++) {
                 if (enemys.get(i).getY()> 1000 || enemys.get(i).getY()<-1500) //
                 {
-                    //components.remove("enemy" + CarEnemy.getNumber());
                     CarEnemy.restarCarNumber();
                 }
             }
