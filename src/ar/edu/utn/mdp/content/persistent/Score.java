@@ -1,5 +1,8 @@
 package ar.edu.utn.mdp.content.persistent;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 
 public class Score implements Serializable {
@@ -21,6 +24,17 @@ public class Score implements Serializable {
 
     public int getScore() {
         return score;
+    }
+
+    public JSONObject toJSON(){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("name", name);
+            jsonObject.put("score", score);
+        }catch ( JSONException e){
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 
     @Override
@@ -52,4 +66,5 @@ public class Score implements Serializable {
                 ", score=" + score +
                 '}';
     }
+
 }
