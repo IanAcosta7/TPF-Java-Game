@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 
-public abstract class ScoreToJSON {
+public abstract class JSONUtils {
 
     public static void save(JSONArray jsonArray) {
         String PATH = "data/scores.JSON";

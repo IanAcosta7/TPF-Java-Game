@@ -7,7 +7,7 @@ import ar.edu.utn.mdp.content.component.drawable.Text;
 import ar.edu.utn.mdp.content.persistent.Score;
 import ar.edu.utn.mdp.utils.Input;
 import ar.edu.utn.mdp.utils.Persistency;
-import ar.edu.utn.mdp.utils.ScoreToJSON;
+import ar.edu.utn.mdp.utils.JSONUtils;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -89,7 +89,7 @@ public class Scoreboard extends Scene {
             p.setData(scores);
 
             //Pasar a JSON
-            ScoreToJSON.save(ScoreToJSON.toJSON(scores));
+            JSONUtils.save(JSONUtils.toJSON(scores));
 
         }
     }
