@@ -25,7 +25,7 @@ public class GameScene extends Scene {
     public void setupScene() {
         components.clear();
 
-        Clip song = LoaderMusic.getName("pingFighter");
+        Clip song = LoaderMusic.getClip("pingFighter");
         song.start();
 
         // GRID
