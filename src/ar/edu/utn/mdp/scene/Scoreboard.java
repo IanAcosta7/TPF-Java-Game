@@ -38,7 +38,7 @@ public class Scoreboard extends Scene {
         scores = p.getData();
 
         components.set(new Text("Title", 10, 20, 0, 0, 0, "SCORES"));
-        components.set(new NameSelector("NameSelector", 10, 100, 0, 0, 0));
+        components.set(new NameSelector("NameSelector", 10, 50, 0, 0, 0));
     }
 
     @Override
@@ -50,7 +50,7 @@ public class Scoreboard extends Scene {
             if (nameSelector != null) {
                 selectName(nameSelector); // Componente de seleccion de nombre
             } else {
-                petc = new PETC("Advice", 10, 200, 0, 0, 0);
+                petc = new PETC("Advice", game.getHeight()/2, 500, 0, 0, 0);
                 petc.setDrawn(false);
 
                 components.set(petc);
@@ -70,7 +70,7 @@ public class Scoreboard extends Scene {
         while (iterator.hasNext()) {
             Score score = iterator.next();
 
-            components.set(new Text("Score" + i, 10, 20 * i + 40, 0, 0, 0, score.getName() + " " + score.getScore()));
+            components.set(new Text("Score" + i, game.getHeight()/2, 25 * i + 40, 0, 0, 0, score.getName() + " " + score.getScore()));
 
             i++;
         }
