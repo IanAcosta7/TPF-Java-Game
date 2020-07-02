@@ -122,10 +122,10 @@ public class Player extends Car {
 
         if(!girar){
             if (getSpeed() > 0.99) {
-                if (Input.getKey(37))
-                    setX(getX() - 4);
-                if (Input.getKey(39))
-                    setX(getX() + 4);
+                if (Input.getKey(37) && x>200)
+                    setX(getX() - 3);
+                if (Input.getKey(39) && x<430)
+                    setX(getX() + 3);
             }
             if (fuel > 0) {
                 if (Input.getKey(38) && (getSpeed() < 400)) {
