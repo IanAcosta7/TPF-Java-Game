@@ -1,11 +1,13 @@
 package ar.edu.utn.mdp.utils;
 
+import ar.edu.utn.mdp.utils.exception.AssetsFileNotFoundException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -15,9 +17,14 @@ public abstract class Loader{
     private static HashMap<String, BufferedImage> sprites;
 
     /**
-     * En este metodo se cargan en un Array las imagenes de autos, pasto y calle.
+     * En este metodo se lee de un Json las imagenes de autos, pasto y calle.
      */
-    public static void loadAll() {
+    public static void loadAll() throws AssetsFileNotFoundException {
+        File file= new File("assets/assetsPath.json");
+
+        if(!file.exists())
+            throw new AssetsFileNotFoundException("El archivo no existe");
+
 
         try {
             JSONArray jsonArray = new JSONArray(JSONUtils.load("assets/assetsPath.json"));
