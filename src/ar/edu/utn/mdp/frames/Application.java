@@ -59,7 +59,6 @@ public class Application {
         frame.setLocationRelativeTo(null);
         frame.getContentPane().add(game);
         frame.addKeyListener(input);
-        frame.addMouseListener(input);
         frame.setVisible(true);
 
         game.start();
