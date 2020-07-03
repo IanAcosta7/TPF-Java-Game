@@ -5,7 +5,7 @@ import ar.edu.utn.mdp.utils.Input;
 
 import java.awt.*;
 
-public class NameSelector extends Text implements Drawable {
+public class NameSelector extends Text {
 
     private char[] letters;
     private int selectedKey;

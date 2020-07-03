@@ -1,5 +1,7 @@
 package ar.edu.utn.mdp.content.component;
 
+import java.util.Objects;
+
 /**
  * Es la clase padre para todos los objetos que serán utilizados por el videojuego.
  * No todos ellos son dibujados, muchos solamente procesan la lógica de otros
@@ -146,5 +148,18 @@ public abstract class Component {
      */
     public int getHeight() {
         return height;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Component)) return false;
+        Component component = (Component) o;
+        return name.equals(component.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }
