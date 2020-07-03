@@ -1,0 +1,27 @@
+[
+  "Autos/autoN1",
+  "Autos/autoN2",
+  "Autos/autoN3",
+  "Autos/autoN4",
+  "Autos/autoN5",
+  "Autos/camion",
+
+
+  "Pasto/PastoAlter",
+  "Pasto/PastoAlter2",
+  "Pasto/PastoFlorAmarilla",
+  "Pasto/PastoFlorRoja",
+  "Pasto/PastoParejo",
+
+  "Calle/asfaltoConLinea",
+  "Calle/asfaltoLadoDer",
+  "Calle/asfaltoLadoIzq",
+  "Calle/asfaltoLiso",
+
+  "Arbol/Arbol_01",
+  "Arbol/Arbol_02",
+  "Arbol/Arbol_03",
+  "Arbol/Arbol_04",
+  "Arbol/Arbol_05",
+  "Arbol/Arbol_06"
+]
