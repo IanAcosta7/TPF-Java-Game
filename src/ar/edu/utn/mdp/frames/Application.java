@@ -52,7 +52,7 @@ public class Application {
         game.setup();
 
         JFrame frame = new JFrame();
-        frame.setTitle("Game");
+        frame.setTitle("PING FIGHTER");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(INSTANCE.width, INSTANCE.height);
         frame.setResizable(false);
@@ -60,6 +60,7 @@ public class Application {
         frame.getContentPane().add(game);
         frame.addKeyListener(input);
         frame.setVisible(true);
+        frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Application.class.getResource("/pingFighter.png")));
 
         game.start();
     }

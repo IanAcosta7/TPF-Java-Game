@@ -30,6 +30,7 @@ hs_err_pid*
 .idea/**/dictionaries
 .idea/**/shelf
 .idea/misc.xml
+.idea/artifacts
 
 # Custom ignores
 .gradle/

@@ -116,7 +116,7 @@ public class Game extends JPanel {
         g.setColor(Color.WHITE);
         try
         {
-            g.setFont(Font.createFont(Font.TRUETYPE_FONT, new File("assets\\game_over.ttf")).deriveFont(50f));
+            g.setFont(Font.createFont(Font.TRUETYPE_FONT, new File("assets\\font/game_over.ttf")).deriveFont(50f));
         }
         catch (Exception exception)
         {
